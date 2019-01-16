@@ -111,7 +111,7 @@ Refer to [document](LFS201/Preparing Your Computer.pdf) prepared by Linux Founda
 
 ##
 
-[Back to top](#chapter-1-introduction---notes)
+[Back to top](#)
 
 ##
 
