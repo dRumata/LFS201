@@ -78,8 +78,23 @@ Many administrative tasks can be accomplished either from command line or from w
 Variety of graphical desktop environments in Linux. Two most common:
 - GNOME
 - KDE
+
 Each with multiple versions (generations).
 
 Course not involved with graphical interfaces: too much variation, many servers do not have graphical interface installed.
 
 For course, work from command line on local machine using either console or terminal emulator such as **gnome-terminal** running on graphical desktop. Can also work remotely through **ssh** or **vpn** session. Almost everything apply equally well in remote session case, except for when physical access to machine needed, eg. booting into rescue environment.
+
+
+## 1.16 Target Linux Distributions
+Infinite [list](http://lwn.net/Distributions) of Linux distributions.
+
+Course concentrating on Enterprise Linux distributions. Vast majority use:
+1. **Red Hat Enterprise Linux**: RHEL, including derived distributions CentOS and Scientific OS (some differences in package updating for offical RHEL systems). Oracle Linux just copy of RHEL. **Fedora** in Red Hat family, actually be seen as upstream for RHEL. Current versions quite similar to RHEL 7. However, rare to use Fedora in Enterprise deployments, as too cutting edge and changes important features (such as kernel version) too often for comfort where stability is key.
+2. **SUSE**: full-blown Enterprise distribution with significant market share, closely related to openSUSE (Fedora:RHEL, SUSE:openSUSE). No clone like CentOS and RHEL, so openSUSE target system.
+3. **Debian**: also includes Ubuntu, derived from Debian. Most discussion of Ubuntu LTS 16.04, LTS 18.04 or 17.04 release. Other Debian-derivatives, eg. Linux Mint, not much different.
+
+Arch Linux and Gentoo also crop up in Enterprise deployments, but since both rolling distributions (no specific release, constantly updated), best used only by very expert administrators in Enterprise environments.
+
+## 1.17 Installation: What to Use for this Course
+Refer to [document](../Preparing Your Computer.pdf) prepared by Linux Foundation.
