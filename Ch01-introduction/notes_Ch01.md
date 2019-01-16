@@ -1,4 +1,4 @@
-Previous Chapter - [Main Repository](/LFS201) - Next Chapter
+Previous Chapter - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](LFS201/Ch02-filesystemtreelayout/notes_Ch02.md)
 
 # Chapter 1 Introduction - Notes
 
@@ -106,3 +106,11 @@ Refer to [document](LFS201/Preparing Your Computer.pdf) prepared by Linux Founda
 1. Things change in Linux: constantly evolving, both at technical level (including kernel features) and distribution/interface level.
 2. Some repeated things in course material: with comprehensive course, revisit topics previously covered + short reviews are helpful to refresh memory without searching for previous section.
 3. Course avoids *holy wars*: many areas with strong preference disagreements in Linux (and open-source) community. Eg. best editor, **emacs** vs **vi**; best graphical desktop, **GNOME** vs **KDE**, etc. Particular emphasis chosen simply to keep content clean, eg. more on GNOME simply because bigger user base.
+
+##
+
+[Back to top](#chapter-1-introduction---notes)
+
+##
+
+Previous Chapter - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](LFS201/Ch02-filesystemtreelayout/notes_Ch02.md)
