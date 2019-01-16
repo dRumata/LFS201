@@ -1,4 +1,4 @@
-Previous Chapter - [Main Repository](../) - Next Chapter
+Previous Chapter - [Main Repository](/LFS201) - Next Chapter
 
 # Chapter 1 Introduction - Notes
 
