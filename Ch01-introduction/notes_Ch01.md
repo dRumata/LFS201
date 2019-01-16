@@ -101,7 +101,7 @@ Course concentrating on Enterprise Linux distributions. Vast majority use:
 Arch Linux and Gentoo also crop up in Enterprise deployments, but since both rolling distributions (no specific release, constantly updated), best used only by very expert administrators in Enterprise environments.
 
 ## 1.17 Installation: What to Use for this Course
-Refer to [document](LFS201/Preparing Your Computer.pdf) prepared by Linux Foundation.
+Refer to [document](../Preparing Your Computer.pdf) prepared by Linux Foundation.
 
 
 ## 1.19 Change, Repetition, Holy Wars
