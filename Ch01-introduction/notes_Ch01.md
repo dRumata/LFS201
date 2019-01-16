@@ -10,7 +10,7 @@ Course **not** designed primarily for:
 2. Kernel or application developers
 3. Experienced administrators concentrating on performance tuning
 
-If 1, take LFS101x - Introduction to Linux (found on edX)
+If 1, take LFS101x - Introduction to Linux (found on [edX](https://www.edx.org/course/introduction-to-linux))
 If 2, may find material interesting, especially if you have more knowledge regarding:
 - operating system theory
 - kernel internals
