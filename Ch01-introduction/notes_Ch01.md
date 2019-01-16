@@ -1,6 +1,6 @@
 Previous Chapter - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md)
 
-##
+---
 
 # Chapter 1 Introduction - Notes
 
@@ -113,6 +113,6 @@ Refer to [document](LFS201/Preparing Your Computer.pdf) prepared by Linux Founda
 
 [Back to top](#)
 
-##
+---
 
 Previous Chapter - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md)

@@ -1,6 +1,6 @@
 [Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch03-processes/notes_Ch03.md)
 
-##
+---
 
 # Chapter 2 Linux Filesystem Tree Layout - Notes
 
@@ -17,6 +17,6 @@
 
 [Back to top](#)
 
-##
+---
 
 [Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch03-processes/notes_Ch03.md)
