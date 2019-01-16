@@ -1,3 +1,5 @@
+Previous Chapter - [Main Repository](../) - Next Chapter
+
 # Chapter 1 Introduction - Notes
 
 ## 1.3 Introduction
