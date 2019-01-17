@@ -73,7 +73,37 @@ May be additional distribution-specific directories found under root directory:
 
 Note: does not violate FHS to have other directories, does violate to have components in directories *other* than those dictated by standard.
 
-##
+
+## 2.8 The Root (/) Directory and Filesystems
+There may be multiple partitions/filesystems joined together while entire filesystem can be viewed as one big tree.
+
+Partition and filesystem that contains root directory itself: rather special, often in special dedicated partition. Other components mounted later (/home, /var, /opt)
+
+Root partition: must contain all essential files required to boot system and then mount all other filesystems. Needs utilities, configuration files, boot loader info, other essential startup data. It must be able to:
+- Boot system
+- Restore system from system backups on external media, eg. tapes, other removable media, NAS etc
+- Recover/repair system; experienced maintainer must have tools to diagnose + reconstruct damaged system
+
+FHS: "no application or package should create new subdirectories of the root directory".
+
+
+## 2.9 /bin
+Very important:
+- Contains executable programs + scripts needed by both system administrators/unprivileged users, required when no other filesystems have yet been mounted, eg. when booting into **single user** or recovery mode
+- May also contain executables which are used indirectly by scripts
+- May *not* include any subdirectories
+
+![lsbin](/images/lsbin.png)
+
+Required programs in /bin/:
+
+**cat, chgrp, chmod, chown, cp, date, dd, df, dmesg, echo, false, hostname, kill, ln, login, ls, mkdir, mknod, more, mount, mv, ps, pwd, rm, rmdir, sed, sh, stty, su, sync, true, umount, uname** [may include **test**]
+
+Optionally may include: **csh, ed, tar, cpio, gunzip, zcat, netstat, ping**
+
+Nonessential command binaries -> /usr/bin if not good enough to be placed in /bin (eg. programs required only by non-root users)
+
+**Note**: some recent distributions -> no separation between /bin and /usr/bin (also /sbin and /usr/sbin), just one directory with symbolic links (to preserve two directory view). Believe time-honored concept of enabling possibility of placing /usr on separate partition mounted after boot -> obsolete.
 
 [Back to top](#)
 
