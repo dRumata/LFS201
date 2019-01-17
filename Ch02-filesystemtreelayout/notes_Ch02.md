@@ -303,23 +303,58 @@ Directories under `/usr`:
 
 Directory | Purpose
 --------- | -------
-`**/usr/bin` | Non-essential binaries and scripts, not needed for single user mode. Generally, means user applications not needed to start system
-`**/usr/etc` | Non-essential configuration files (usually empty)
-`**/usr/games` | Game data
-`**/usr/include` | Header files used to compile applications
-`**/usr/lib` | Library files
-`**/usr/lib64` | Library files for 64-bit
-`**/usr/local` | Third-level hierarchy (for machine local files)
-`**/usr/sbin` | Non-essential system binaries
-`**/usr/share` | Read-only architecture-independent files
-`**/usr/src` | Source code and headers for the Linux kernel
-`**/usr/tmp` | Secondary temporary directory
+`/usr/bin` | Non-essential binaries and scripts, not needed for single user mode. Generally, means user applications not needed to start system
+`/usr/etc` | Non-essential configuration files (usually empty)
+`/usr/games` | Game data
+`/usr/include` | Header files used to compile applications
+`/usr/lib` | Library files
+`/usr/lib64` | Library files for 64-bit
+`/usr/local` | Third-level hierarchy (for machine local files)
+`/usr/sbin` | Non-essential system binaries
+`/usr/share` | Read-only architecture-independent files
+`/usr/src` | Source code and headers for the Linux kernel
+`/usr/tmp` | Secondary temporary directory
 
 
 ## 2.26 `/var`
+Contains **variable** (or **volatile**) data files that change frequently during system operation, including:
+- Log files
+- Spool directories, files for printing, mail queues, etc
+- Adminsitrative data files
+- Transient/temporary files, eg. cache contents
+
+Cannot be mounted as read-only filesystem (obviously).
+
+Often considered good idea to mount `/var/` as separate file system for security reasons. If directory filled up, should not lock up system.
+
+`/var/log` directory -> most log files located, `/var/spool` directory -> local files for processes such as mail, printing, cron jobs stored while awaiting action.
+
+Directory | Purpose
+--------- | -------
+`/var/ftp` | Used for ftp server base
+`/var/lib` | Persistent data modified by programs as they run
+`/var/lock` | Lock files used to control simultaneous access to resources
+`/var/log` | Log files
+`/var/mail` | User mailboxes
+`/var/run` | Information about the running system since the last boot
+`/var/spool` | Tasks spooled or waiting to be processed, eg. print queues
+`/var/tmp` | Temporary files to be preserved across system reboot, sometimes linked to `/tmp`
+`/var/www` | Root for website hierarchies
+
+![lsvar](/images/lsvar.png)
 
 
-## 2.27
+## 2.27 `/run`
+Not formally accepted by FHS, although proposed. New directory tree mounted at `/run` in use for several years by major Linux distributions.
+
+Purpose: store **transient** files: containing runtime information, need to be written early in system startup, do not need to be preserved when rebooting.
+
+Implemented as empty mount point with **tmpfs** ram disk (like `/dev/shm`) mounted there at runtime. Pseudo-filesystem existing only in memory.
+
+Some existing locations (`/var/run`, `/var/lock`) just symbolic links to directories under `/run`. Other locations, depending on distribution taste, may also just point to locations under `/run`.
+
+![lsrun](/images/lsrun.png)
+
 
 [Back to top](#)
 
