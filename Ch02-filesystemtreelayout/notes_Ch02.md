@@ -7,11 +7,11 @@
 ## 2.3 Learning Objectives:
 - Explain why Linux requires the organization of one big filesystem tree, and what the major considerations are for how it is done.
 - Explain the role played by the Filesystem Hierarchy Standard.
-- Describe what must be available at boot in the root (/) directory, and what can be available only once the system has started.
+- Describe what must be available at boot in the root (```/```) directory, and what can be available only once the system has started.
 - Explore each of the main subdirectory trees, explain their purposes, and examine their contents.
 
 ## 2.4 One Big Filesystem
-Linux: consists of one big filesystem tree (similar to all UNIX-based operating systems) -> usually diagrammed as inverted tree with **root directory**, /, at top of tree.
+Linux: consists of one big filesystem tree (similar to all UNIX-based operating systems) -> usually diagrammed as inverted tree with **root directory**, ```/```, at top of tree.
 
 May be more than one (or even many) distinct file systems **mounted** at various points within this one large logical filesystem -> appear as subdirectories. Distinct filesystems usually on different partitions, which can also be on any number of different devices, including on network.
 
@@ -43,29 +43,29 @@ Distributions -> like to experiment, and some experiments become generally accep
 
 
 ## 2.7 Main Directory Layout
-Linux distributors -> spend lot of time making sure filesystem layout is coherent and evolves correctly over time. List of main directories normally found under **/**:
+Linux distributors -> spend lot of time making sure filesystem layout is coherent and evolves correctly over time. List of main directories normally found under ```/```:
 
 Directory | In FHS? | Purpose
 --------- | ------- | --------
-**/** | Yes | Primary directory of entire file system hierarchy
-**/bin** | Yes | Essential executable programs that much be available in **single user mode**
-**/boot** | Yes | Files needed to boot system, such as kernel, **initrd** or **initramfs** images, boot configuration files, bootloader programs
-**/dev** | Yes | **Device nodes**, used to interact with hardware and software devices
-**/etc** | Yes | System wide configuration files
-**/home** | Yes | Use **home directories** including personal settings, files, etc
-**/lib** | Yes | Libraries required by executable binaries in **/bin** and **/sbin**
-**/lib64** | No | 64-bit libraries required by executable binaries in **/bin** and **/sbin**, for systems which can run both 32-bit/64-bit programs
-**/media** | Yes | Mount points for removable media eg. CDs, DVDs, USB sticks etc
-**/mnt** | Yes | Temporarily mounted filesystems
-**/opt** | Yes | Optional application software packages
-**/proc** | Yes | Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters
-**/sys** | No | Same as **/proc**. Similar to **device tree** and is part of **Unified Device Model**
-**/root** | Yes | Home directory for the **root** user
-**/sbin** | Yes | Essential system binaries
-**/srv** | Yes | Site-specific data served up by system. Seldom used.
-**/tmp** | Yes | Temporary files; on many distributions lost by reboot and may be ramdisk in memory
-**/usr** | Yes | Multi-user applications, utilities, data: theoretically read-only
-**/var** | Yes | Variable data that changes during system operation
+```/``` | Yes | Primary directory of entire file system hierarchy
+```/bin``` | Yes | Essential executable programs that much be available in **single user mode**
+```/boot``` | Yes | Files needed to boot system, such as kernel, **initrd** or **initramfs** images, boot configuration files, bootloader programs
+```/dev``` | Yes | **Device nodes**, used to interact with hardware and software devices
+```/etc``` | Yes | System wide configuration files
+```/home``` | Yes | Use **home directories** including personal settings, files, etc
+```/lib``` | Yes | Libraries required by executable binaries in **/bin** and **/sbin**
+```/lib64``` | No | 64-bit libraries required by executable binaries in **/bin** and **/sbin**, for systems which can run both 32-bit/64-bit programs
+```/media``` | Yes | Mount points for removable media eg. CDs, DVDs, USB sticks etc
+```/mnt``` | Yes | Temporarily mounted filesystems
+```/opt``` | Yes | Optional application software packages
+```/proc``` | Yes | Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters
+```/sys``` | No | Same as **/proc**. Similar to **device tree** and is part of **Unified Device Model**
+```/root``` | Yes | Home directory for the **root** user
+```/sbin``` | Yes | Essential system binaries
+```/srv``` | Yes | Site-specific data served up by system. Seldom used.
+```/tmp``` | Yes | Temporary files; on many distributions lost by reboot and may be ramdisk in memory
+```/usr``` | Yes | Multi-user applications, utilities, data: theoretically read-only
+```/var``` | Yes | Variable data that changes during system operation
 
 May be additional distribution-specific directories found under root directory:
 - /misc, for miscellaneous data
