@@ -66,7 +66,7 @@ Directory | In FHS? | Purpose
 ```/tmp``` | Yes | Temporary files; on many distributions lost by reboot and may be ramdisk in memory
 ```/usr``` | Yes | Multi-user applications, utilities, data: theoretically read-only
 ```/var``` | Yes | Variable data that changes during system operation
-```
+
 
 May be additional distribution-specific directories found under root directory:
 - ```/misc```, for miscellaneous data
@@ -314,7 +314,7 @@ Directory | Purpose
 ```**/usr/share``` | Read-only architecture-independent files
 ```**/usr/src``` | Source code and headers for the Linux kernel
 ```**/usr/tmp``` | Secondary temporary directory
-```
+
 
 ## 2.26 ```/var```
 
