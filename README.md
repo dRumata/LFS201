@@ -6,5 +6,5 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 
 ## Table of Contents
 1. [Introduction](/Ch01-introduction/notes_Ch01.md)
-2. [Linux Filesystem Tree Layout](/Ch03-filesystemtreelayout/notes_Ch02.md)
+2. [Linux Filesystem Tree Layout](/Ch02-filesystemtreelayout/notes_Ch02.md)
 3. [Processes](/Ch03-processes/notes_Ch03.md)

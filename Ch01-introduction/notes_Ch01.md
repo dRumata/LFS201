@@ -1,4 +1,4 @@
-Previous Chapter - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md)
+Previous Chapter - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md)
 
 ---
 
