@@ -93,6 +93,7 @@ Very important:
 - May also contain executables which are used indirectly by scripts
 - May *not* include any subdirectories
 
+Ubuntu
 ![lsbin](/images/lsbin.png)
 
 Required programs in /bin/:
@@ -104,6 +105,41 @@ Optionally may include: **csh, ed, tar, cpio, gunzip, zcat, netstat, ping**
 Nonessential command binaries -> /usr/bin if not good enough to be placed in /bin (eg. programs required only by non-root users)
 
 **Note**: some recent distributions -> no separation between /bin and /usr/bin (also /sbin and /usr/sbin), just one directory with symbolic links (to preserve two directory view). Believe time-honored concept of enabling possibility of placing /usr on separate partition mounted after boot -> obsolete.
+
+
+## 2.10 /boot
+Must contain essential files for booting system in /boot directory and its subdirectories. Two files, absolutely essential:
+- **vmlinuz**: compressed Linux kernel
+- **initramfs**: **initial RAM filesystem**, mounted before real root filesystem becomes available
+
+May have longer names, which depend on kernel version (exact form depends on Linux distribution). **initramfs** may be called **initrd**, **initial RAM disk** (older method but name survives).
+
+/boot -> stores data used before kernel begins executing user-mode programs. May include: saved master boot sectors, sector map files, other data not directly edited by hand. Exact contents vary by distribution + time.
+
+Before, essential files often placed directly in / instead of separate /boot directory (following traditional UNIX practices) -> not considered obsolete.
+
+RHEL
+![lsboot](/images/lsboot.png)
+
+## 2.11 Other Files and Directories in /boot
+Multiple kernel versions available in /boot, with four files available for each version (Choice between kernels make by using GRUB at boot time).
+
+Two other files besides **vmlinuz** and **initramfs**:
+- **config**: configuration file used when compiling kernel, here just for bookkeeping and reference when debugging
+- **System.map**: kernel **symbol table**, very useful for debugging. Gives hexadecimal addresses of all kernel symbols
+
+Neither required for booting or running system.
+
+Distributions may place other files/directories in /boot, eg. saved master boot sectors, other data not hand-edited.
+
+## 2.12 /dev
+Contains **special device files** (**device nodes**) -> represent devices built into or connected to system. Files essential for proper system function.
+
+Device files represent **character** (byte-stream) + **block I/O** devices.
+
+Network devices -> no device nodes in Linux, instead referenced by name, eg. **eth1**, **wlan0**.
+
+![lsdev](/images/lsdev.png)
 
 [Back to top](#)
 
