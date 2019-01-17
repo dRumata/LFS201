@@ -167,7 +167,7 @@ $ ls -l ~/public_html
 
 One exception: home directory for **root** user in Linux systems *always* found under /root. Some older UNIX systems may use **/** instead, causing clutter.
 
-![lshome](/image/lshome.png)
+![lshome](/images/lshome.png)
 
 
 ## 2.15 /lib and /lib64
