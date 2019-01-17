@@ -191,7 +191,7 @@ If more than one partitione and filesystem on media -> more than one entry on /m
 
 
 ## 2.17 /mnt
-Provided so system administrator can temporarily mount filesystem when needed. Common use for network filesystems:
+Provided so system administrator can temporarily mount filesystem when needed. Common use: network filesystems:
 - **NFS**
 - **Samba**
 - **CIFS**
@@ -215,7 +215,110 @@ Reserved for local system administrator use: /opt/bin, /opt/doc, /opt/include, /
 
 
 ## 2.19 /proc
+Mount point for **pseudo-filesystem**, where all info resides only in memory (not on disk). /proc directory empty on non-running system (like /dev).
 
+kernel -> exposes some important data structures through /proc entries. Each active process on system -> has own subdirectory, gives detailed info about state of process, used resources, history.
+
+/proc entries -> often termed **virtual files**, have interesting qualities. Most listed as zero bytes in size, but contain large amount of info when viewed.
+
+Most virtual files time/date settings -> current time/date, reflects constant change. Info in file *only* obtained when viewed, not constantly/periodically updated.
+
+Important pseudo-files provide up-to-date moment glimpse of system's hardware, eg. /proc/interrupts, /proc/meminfo, /proc/mounts, /proc/partitions
+
+Also provide system configuration info + interface, eg. /proc/filesystems, /proc/sys.
+
+Files containing info on similar topic grouped in virtual directories/sub-directories, eg. /proc/scsi -> info for all SCSI devices, **process** directories -> info about each running process on system
+
+Entries in /proc examined throughout course -> detailed look for kernel configuration + system monitoring.
+
+![lsproc](/images/lsproc.png)
+
+
+## 2.20 /sys
+Mount point for **sysfs pseudo-filesystem** where all info resides in memory, not on disk. Empty on non-running system (like /dev, /proc).
+
+**sysf** -> used to gather info about system, modify behavior while running. Resembles proc, but younger + adheres to strict standards about entries contained, eg. almost all pseudo-files in /sys contain only one line or value; no long entries like found in /proc.
+
+Entries in /sys also examined throughout course.
+
+![lssys](/images/lssys.png)
+
+
+## 2.21 /root
+Home directory for root user (pronounced "slash-root")
+
+Root account that owns /root -> *only* use for actions requiring superuser privilege. Use another account for non-privileged user actions.
+
+![lsroot](/images/lsroot.png)
+
+
+## 2.22 /sbin
+Contains binaries essential for booting, restoring, recovering, repairing (in addition to binaries in /bin). Must also be able to mount other filesystems on /usr, /home, other locations if needed (once root filesystem known to be in good health during boot).
+
+Included programs (if subsystems installed):
+
+**fdisk, fsck, getty, halt, ifconfig, init, mkfs, mkswap, reboot, route, swapon, swapoff, update.**
+
+**Note**: some recent distributions -> no separation between /sbin and /usr/sbin (also /bin and /usr/bin), just one directory with symbolic links (to preserve two directory view). Believe time-honored concept of enabling possibility of placing /usr on separate partition mounted after boot -> obsolete.
+
+![lssbin](/images/lssbin.png)
+
+
+## 2.23 /srv
+Contains site-specific date, served by this system.
+
+Main purpose of specifying this: users may find location of data files for particular service, services which require single tree for read-only data writable data, scripts (eg. **cgi** scripts) reasonable placed.
+
+Methodology of /srv subdirectory naming: unspecified, currently no consensus. One method for structuring data: by protocol, eg. **ftp, rsync, www**, and **cvs**.
+
+Often confusion about what is best to go in /var vs. /srv. Some system administrators rely heavily on /srv, others ignore.
+
+
+## 2.24 /tmp
+Used to store temporary files, can be accessed by any user of application. Files on /tmp cannot be depended to stay around long-term. Some distributions:
+- Run automated **cron** jobs -> remove any file older than 10 days typically, unless purge scripts modified to exclude files. RHEL 6 policy.
+- Remove contents of /tmp with every reboot. Ubuntu policy.
+- Modern: utilize virtual filesystem, using /tmp only as mount point for **ram disk** using **tmpfs** filesystem. Default policy of recent Fedora systems. All info lost during system reboot; /tmp indeed temporary.
+
+In last case, avoid creating large files on /tmp: occupy memory instead of disk, easy to hard/crash system through memory exhaustion. Guideline: avoid large files in /tmp, but plenty of applications violating policy. Possible to put them elsewhere (eg. by specifying environment variable), but many users not aware of how to configure + all users have access to /tmp.
+
+Can cancel policy on systems using **systemd**, eg. Fedora, by:
+```shell
+$ sudo systemctl mask tmp.mount
+```
+followed by system reboot.
+
+
+## 2.25 /usr
+Can be thought of as **secondary hierarchy**. Used for files not needed for system booting. Need not reside in same partition as root directory, can be shared among hosts using the same system architecture across network.
+
+Software packages -> should *not* create subdirectories directly under /usr. Some symbolic links to other locations may exist for compatibility purposes.
+
+Typically read-only data. Contains binaries not needed in single user mode. Contains /usr/local (local binaries and such), /usr/share/man (**man** pages)
+
+**Note**: some recent distributions -> no separation between /bin and /usr/bin (also /sbin and /usr/sbin), just one directory with symbolic links (to preserve two directory view). Believe time-honored concept of enabling possibility of placing /usr on separate partition mounted after boot -> obsolete.
+
+Directories under ```/usr```:
+
+Directory | Purpose
+--------- | -------
+**/usr/bin** | Non-essential binaries and scripts, not needed for single user mode. Generally, means user applications not needed to start system
+**/usr/etc** | Non-essential configuration files (usually empty)
+**/usr/games** | Game data
+**/usr/include** | Header files used to compile applications
+**/usr/lib** | Library files
+**/usr/lib64** | Library files for 64-bit
+**/usr/local** | Third-level hierarchy (for machine local files)
+**/usr/sbin** | Non-essential system binaries
+**/usr/share** | Read-only architecture-independent files
+**/usr/src** | Source code and headers for the Linux kernel
+**/usr/tmp** | Secondary temporary directory
+
+
+## 2.26 /var
+
+
+## 2.27
 
 [Back to top](#)
 
