@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch03-processes/notes_Ch03.md)
+[Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch03-processes/notes_Ch03.md)
 
 ---
 
@@ -360,4 +360,4 @@ Some existing locations (`/var/run`, `/var/lock`) just symbolic links to directo
 
 ---
 
-[Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch03-processes/notes_Ch03.md)
+[Previous Chapter](../Ch01-introduction/notes_Ch01.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch03-processes/notes_Ch03.md)

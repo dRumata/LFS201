@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch04-signals/notes_Ch04.md)
+[Previous Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch04-signals/notes_Ch04.md)
 
 ---
 
@@ -20,4 +20,4 @@
 
 ---
 
-[Previous Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md) - [Main Repository](https://github.com/schatto1/LFS201) - [Next Chapter](../Ch04-signals/notes_Ch04.md)
+[Previous Chapter](../Ch02-filesystemtreelayout/notes_Ch02.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch04-signals/notes_Ch04.md)

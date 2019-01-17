@@ -5,6 +5,7 @@ This repo contains all of the downloaded PDFs, some code, and my Markdown notes 
 Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these documents are from the course materials, but some have been added by me. All screenshots are from course materials. I do not own the images.
 
 ## Table of Contents
+0. [Main Repository](https://github.com/schatto1/LFS201)
 1. [Introduction](/Ch01-introduction/notes_Ch01.md)
 2. [Linux Filesystem Tree Layout](/Ch02-filesystemtreelayout/notes_Ch02.md)
 3. [Processes](/Ch03-processes/notes_Ch03.md)
