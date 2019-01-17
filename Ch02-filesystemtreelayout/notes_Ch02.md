@@ -141,6 +141,82 @@ Network devices -> no device nodes in Linux, instead referenced by name, eg. **e
 
 ![lsdev](/images/lsdev.png)
 
+
+## 2.13 /etc
+Contains machine-local configuration files and some startup scripts; *no* executable binary programs. Files and directories include:
+
+**csh.login, exports, fstab, ftpusers, gateways, gettydefs, group, host.conf, hosts.allow, hosts.deny, hosts.equiv, hosts.lpd, inetd.conf, inittab, issue, ld.so.conf, motd, mtab, mtools.conf, networks, passwd, printcap, profile, protocols, resolv.conf, rpc, securetty, services, shells, syslog.conf.**
+
+Configuration files and directories added to /etc by distrbutions. Eg. Red Hat: number of other directories (eg. /etc/sysconfig, where number of system configuration files live).
+
+Other important subdirectories: /etc/skel (contains **skeleton** files used to populate newly created home directories), /etc/init.d (contains start up + shut down scripts when using System V initialization)
+
+
+## 2.14 /home
+User directories conventionally placed under /home on Linux systems (eg. /home/coop, /home/student, etc). All personal configuration, data, executable programs contained in /home hierarchy. May also contain subdirectories for various groups/associations of users (eg. /home/students, /home/staff, /home/aliens, etc).
+
+Other UNIX-like OS -> concept of /home exists, but subtly different. Eg. Solaris: user directories created in /export/home, then **automount** facility eventually mount in /home. Why -> usual situation: home directory may be anywhere on corporate network (probably on NFS server), and home directory mounted automatically upon use.
+
+Linux has same **automount** facilities, but many users not aware + on self-contained systems, concept of NFS mounts -> not apply.
+
+User can always substitute environment variable **$HOME** for their root directory, or shorthand ~; so, following commands equivalent:
+```shell
+$ ls -l $HOME/public_html
+$ ls -l ~/public_html
+```
+
+One exception: home directory for **root** user in Linux systems *always* found under /root. Some older UNIX systems may use **/** instead, causing clutter.
+
+![lshome](/image/lshome.png)
+
+
+## 2.15 /lib and /lib64
+Should contain only libraries needed to execute binaries in /bin and /sbin. Libraries particularly important for booting system + executing commands within root filesystem.
+
+Kernel modules (often device/filesystem drivers) located under /lib/modules/<kernel-version-number>.
+
+**PAM** (**P** luggable **A** uthentication **M** odules) files stored in /lib/security.
+
+Systems supporting both 32-bit/64-bit binaries must keep both libraries on system. On Red Hat-based systems, separate directories for 32-bit (/lib) and 64-bit (/lib64) libraries.
+
+
+## 2.16 /media
+Typically used to mount filesystems on removable media, eg. CDs, DVDs, USB drives, floppies (heh).
+
+Modern Linux systems: mount media dynamically upon insertion. **udev** creates directories under /media + mounts removable filesystems there (names set with **udev** rules specified in configuration files). Directories used as mount points under /media -> disappear upon unmounting + removal.
+
+If more than one partitione and filesystem on media -> more than one entry on /media. On many Linux distributions, file manager (eg. Nautilus) pops up upon media mounting.
+
+**Note**: removable media pop up under /run/media/[username]... for some newer distributions (eg. SUSE, RHEL 7). /run discussed later.
+
+
+## 2.17 /mnt
+Provided so system administrator can temporarily mount filesystem when needed. Common use for network filesystems:
+- **NFS**
+- **Samba**
+- **CIFS**
+- **AFS**
+
+Old systems used /mnt for files now mounted under /media (or /run/media) in modern systems
+
+Generally, shoud *not* be used by installation programs. Another temporary directory not currently used serves better.
+
+
+## 2.18 /opt
+Designed for software packages that wish to keep all/most files in one isolated place, rather than scatter across system in directories shared by other software. Eg. package name **dolphy_app**: all files reside in directories under /opt/dolphy_app, including /opt/dolphy_app/bin for binaries, /opt/dolphy_app/man for **man** pages.
+
+Makes installing/uninstalling software relatively easy -> all files in one convenient isolated location in predictable + structured manner. Also easy for system administrators to determine nature of each file within package.
+
+Note: also easy to install/uninstall with clear sense of manifests/locations without antisocial behavior if using packaging systems eg. **RPM**, **APT**.
+
+In Linux, /opt directory often used by proprietary software providers, or those who like to avoid distribution variance complications. Eg. /opt/skype, /opt/google (containing chrome, earth, talkplugin).
+
+Reserved for local system administrator use: /opt/bin, /opt/doc, /opt/include, /opt/info, /opt/lib, /opt/man. Packages must be able to function without programs being in these special directories (but may also provide files linked/copied to these reserved directories).
+
+
+## 2.19 /proc
+
+
 [Back to top](#)
 
 ---
