@@ -50,13 +50,48 @@ Processes controlled by **scheduling** (completely preemptive). Only kernel has 
 Largest **PID** limited to 16-bit number, 32768, for historical reasons. Possible to alter this value by changing `/proc/sys/kernel/pid_max`, since may be inadequate for larger servers. As processes created, will eventually reach **pid_max**, and then will start again at **PID = 300**.
 
 
-## 3.7
+## 3.7 Process Attributes
+Attributes for all processes:
+- Program being executed
+- Context (state)
+- Permissions
+- Associated resources
+
+Every process -> executing some program.
+
+**Context** of process: snapshot of itself by trapping state of its CPU registers, where it is executing in program, what is in process' memory, and other information.
+
+Processes scheduled in and out when sharing CPU time with other (or put to sleep while waiting for some condition to be fulfilled, such as user request or data arrival) -> ability to store entire context when swapping out process, and restore upon execution resumption *critical* to kernel's ability to do **context switching**.
 
 
-## 3.8
+## 3.8 Controlling Processes with ulimit
+**ulimit**: built-in bash command, displays or sets a number of resource limits associated with processes running under shell.
+
+Screenshot: running **ulimit** with `-a` argument. May get different output if command run as root.
+![ulimit](/images/ulimit.png)
+
+System administrator may need to change some above values in either direction to:
+- **Restrict** capabilities so user/process cannot exhaust system resources (eg. memory, cpu time, max number of processes on system)
+- **Expand** capabilities so process does not run into resource limits, eg. server handling many clients -> default of 1024 open files, impossible to perform work
+
+Two kinds of limits:
+- **Hard**: max value that user can raise resource limit to. Set only by root user
+- **Soft**: current limiting value. Can be modified by user, but cannot exceed hard limit.
+
+Can set any particular limit by:
+```shell
+$ ulimit [options] [limit]
+```
+as in
+```shell
+$ ulimit -n 1600
+```
+which increases max number of file descriptors to 1600.
+
+Note: changes only affect current shell. TO make changes effective for all logged-in users, need to modify `/etc/security/limits.conf` (nicely self-documented file), and reboot.
 
 
-## 3.9
+## 3.9 Process Permissions and setuid
 
 
 ## 3.10
