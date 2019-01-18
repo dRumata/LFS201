@@ -67,8 +67,9 @@ Processes scheduled in and out when sharing CPU time with other (or put to sleep
 ## 3.8 Controlling Processes with ulimit
 **ulimit**: built-in bash command, displays or sets a number of resource limits associated with processes running under shell.
 
-Screenshot: running **ulimit** with `-a` argument. May get different output if command run as root.
+Screenshot: running **ulimit** with `-a` argument.
 ![ulimit](/images/ulimit.png)
+If run as root, result in `Command not found`, since limits shell-specific.
 
 System administrator may need to change some above values in either direction to:
 - **Restrict** capabilities so user/process cannot exhaust system resources (eg. memory, cpu time, max number of processes on system)
@@ -76,7 +77,7 @@ System administrator may need to change some above values in either direction to
 
 Two kinds of limits:
 - **Hard**: max value that user can raise resource limit to. Set only by root user
-- **Soft**: current limiting value. Can be modified by user, but cannot exceed hard limit.
+- **Soft**: current limiting value. Can be modified by user, but cannot exceed hard limit
 
 Can set any particular limit by:
 ```shell
@@ -92,9 +93,21 @@ Note: changes only affect current shell. TO make changes effective for all logge
 
 
 ## 3.9 Process Permissions and setuid
+Every process -> permissions based on which user invoked + on who owns program file.
+
+Programs with **s** execute bit -> have different **effective user id** than their **real user id** (explained later in local security section). Referred to as **setuid** programs. Run with user id of user who **owns** program. Non-**setuid** pgroams run with permissions of user who **runs** them.
+
+**setuid** programs owned by root -> well-known security problem.
+
+**passwd** program -> example of setuid program. Any user can run. When user executes program, process must run with root permission to update write-restricted `/etc/passwd` and `/etc/shadow` files where user passwords maintained.
 
 
-## 3.10
+## 3.10 More on Process States
+Processes can be in on of several possible states. Main ones:
+- **Running**: process currently executing on CPU/ CPU core, or sitting in **run queue** waiting new time slice. Will resume when scheduler decides deserving to occupy CPU, or when another CPU idle and scheduler migrates process to idle CPU.
+- **Sleeping** (ie, **Waiting**): waiting on request (usually I/O) that it has made + cannot proceed until request completed. When request completed, kernel will wake up process, put back on run queue, given time slice on CPU when scheduler decides to do so.
+- **Stopped**: suspended process. Commonly experienced when programmer wants to examine executing program's memory, CPU registers, flags, other attributes. One examination done, process may be resumed. Generally done when process run under debugger or user hits **`Ctrl-Z`**.
+- **Zombie**: states when process terminates, and no other process (usually parent) inquires about its exit state (ie, reaped it). ALso called **defunct** process. Has released all its resources, except exit state and entry in process table. If parent of any process dies, process **adopted** by **init** (**PID = 1**) or **kthreadd** (**PID = 2**).
 
 
 ## 3.11
