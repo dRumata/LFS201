@@ -135,12 +135,28 @@ Even process run by root user or as **setuid** program -> runs in user mode, *ex
 
 
 ## 3.13 Kernel Mode
+Kernel (system) mode -> CPU full access to all hardware on system including peripherals, memory, disks etc. If application needs access to these resources, must issue **system call** -> causes **context switch** from user mode to kernel mode. Must follow this procedure when reading/writing files, creating new process etc.
+
+Application code -> never runs in kernel code, only system call itself (which is kernel code). When system call complete, return value produced -> process returns to user mode with inverse context switch.
+
+Other times when system is in kernel mode that have nothing to do with processes -> handling hardware interrupts, running scheduling routines, other management tasks for system.
 
 
-## 3.14
+## 3.14 Daemons
+**Daemon** process: background process, sole purpose to provide specific service to users of system:
+- Can be quite efficient because only operate when needed
+- Many started at boot time
+- Names often (but not always) end with **d**
+- Examples: **httpd**, **systemd-udevd**
+- May respond to external events (**systemd-udevd**) or elapsed time (**crond**)
+- Generally have no controlling terminal and no standard input/output devices
+- Sometimes provide better security control
+
+When using SysVinit, scripts in `/etc/init.d` directory start various system daemons. These scripts invoke commands as arguments to shell function named **`daemon`**, defined in `/etc/init.d/functions` file.
 
 
-## 3.15
+## 3.15 Creating Processes in a Command Shell
+
 
 
 ## 3.16
