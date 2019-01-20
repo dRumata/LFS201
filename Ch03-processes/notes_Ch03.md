@@ -31,7 +31,7 @@ Linux -> also respects POSIX and other standards for multi-threaded processes, e
 
 
 ## 3.5 The init Process
-First user process on system -> **init**, has **process ID = 1**. Started as soon as kernel initialized + root filesystem mounted.
+First user process on system -> **init**, has **`process ID` = 1**. Started as soon as kernel initialized + root filesystem mounted.
 
 Runs until system shut down -> last user process to be terminated. Serves as ancestral parent of all other user processes, both directly/indirectly.
 
@@ -47,7 +47,7 @@ If parent process dies before child -> **ppid** of child set to 1 (ie. process i
 
 Processes controlled by **scheduling** (completely preemptive). Only kernel has right to preempt process, processes cannot do it to each other.
 
-Largest **PID** limited to 16-bit number, 32768, for historical reasons. Possible to alter this value by changing `/proc/sys/kernel/pid_max`, since may be inadequate for larger servers. As processes created, will eventually reach **pid_max**, and then will start again at **PID = 300**.
+Largest **`PID`** limited to 16-bit number, 32768, for historical reasons. Possible to alter this value by changing `/proc/sys/kernel/pid_max`, since may be inadequate for larger servers. As processes created, will eventually reach **`pid_max`**, and then will start again at **`PID = 300`**.
 
 
 ## 3.7 Process Attributes
@@ -107,16 +107,34 @@ Processes can be in on of several possible states. Main ones:
 - **Running**: process currently executing on CPU/ CPU core, or sitting in **run queue** waiting new time slice. Will resume when scheduler decides deserving to occupy CPU, or when another CPU idle and scheduler migrates process to idle CPU.
 - **Sleeping** (ie, **Waiting**): waiting on request (usually I/O) that it has made + cannot proceed until request completed. When request completed, kernel will wake up process, put back on run queue, given time slice on CPU when scheduler decides to do so.
 - **Stopped**: suspended process. Commonly experienced when programmer wants to examine executing program's memory, CPU registers, flags, other attributes. One examination done, process may be resumed. Generally done when process run under debugger or user hits **`Ctrl-Z`**.
-- **Zombie**: states when process terminates, and no other process (usually parent) inquires about its exit state (ie, reaped it). ALso called **defunct** process. Has released all its resources, except exit state and entry in process table. If parent of any process dies, process **adopted** by **init** (**PID = 1**) or **kthreadd** (**PID = 2**).
+- **Zombie**: states when process terminates, and no other process (usually parent) inquires about its exit state (ie, reaped it). ALso called **defunct** process. Has released all its resources, except exit state and entry in process table. If parent of any process dies, process **adopted** by **init** (**`PID = 1`**) or **kthreadd** (**`PID = 2`**).
 
 
-## 3.11
+## 3.11 Execution Modes
+Process (or any particular thread of multi-threaded process) -> may be executing in **user mode** or **system mode** (usually called **kernel mode** by kernel developers) at any given time.
+
+Instructions that can be executed -> depends on mode + enforced at hardware level (not software).
+
+Mode: state of processor (eg. in multi-core/multi-CPU system, each unit can be in own individual state). *Not* state of system.
+
+Intel parlance:
+- User mode: **Ring 3**
+- System mode: **Ring 0**
 
 
-## 3.12
+## 3.12 User Mode
+Processes execute in **user mode** (lesser privileges than in kernel mode), *except* when executing **system call** (described in next section).
+
+When process started -> isolated in own user space to protect from other processes -> promotes security + greater stability. Sometimes called **process resource isolation**.
+
+Each user mode process -> own memory space, where parts may be shared with other processes. Except shared memory segments, user process not able to read/write into/from memory space of any other process.
+
+Even process run by root user or as **setuid** program -> runs in user mode, *except* when jumping into system call. Has only limited ability to access hardware.
+
+![syscall](/images/syscall.png)
 
 
-## 3.13
+## 3.13 Kernel Mode
 
 
 ## 3.14
