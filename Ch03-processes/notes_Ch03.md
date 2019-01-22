@@ -69,6 +69,7 @@ Processes scheduled in and out when sharing CPU time with other (or put to sleep
 
 Screenshot: running **ulimit** with `-a` argument.
 ![ulimit](/images/ulimit.png)
+
 If run as root, result in `Command not found`, since limits shell-specific.
 
 System administrator may need to change some above values in either direction to:
@@ -104,7 +105,7 @@ Programs with **s** execute bit -> have different **effective user id** than the
 
 ## 3.10 More on Process States
 Processes can be in on of several possible states. Main ones:
-- **Running**: process currently executing on CPU/ CPU core, or sitting in **run queue** waiting new time slice. Will resume when scheduler decides deserving to occupy CPU, or when another CPU idle and scheduler migrates process to idle CPU.
+- **Running**: process currently executing on CPU/CPU core, or sitting in **run queue** waiting new time slice. Will resume when scheduler decides deserving to occupy CPU, or when another CPU idle and scheduler migrates process to idle CPU.
 - **Sleeping** (ie, **Waiting**): waiting on request (usually I/O) that it has made + cannot proceed until request completed. When request completed, kernel will wake up process, put back on run queue, given time slice on CPU when scheduler decides to do so.
 - **Stopped**: suspended process. Commonly experienced when programmer wants to examine executing program's memory, CPU registers, flags, other attributes. One examination done, process may be resumed. Generally done when process run under debugger or user hits **`Ctrl-Z`**.
 - **Zombie**: states when process terminates, and no other process (usually parent) inquires about its exit state (ie, reaped it). ALso called **defunct** process. Has released all its resources, except exit state and entry in process table. If parent of any process dies, process **adopted** by **init** (**`PID = 1`**) or **kthreadd** (**`PID = 2`**).
@@ -156,13 +157,31 @@ When using SysVinit, scripts in `/etc/init.d` directory start various system dae
 
 
 ## 3.15 Creating Processes in a Command Shell
+When user executes command in command shell interpreter such as **bash**:
+- New process created (forked from user's login shell)
+- Wait system call puts parent shell process to sleep
+- Command loaded onto child process' space via **exec** system call (other words, code for command replaces **bash** program in child process' memory space)
+- Command completes executing, child process dies via exit system call
+- Parent shell re-awakened by death of child process, proceeds to issue new shell prompt. Parent shell then waits for next command request from user, at which time cycle repeated
+
+If command issued for **background** processing (by adding ampersand -**`&`**- at end of command line), parent shell skips wait request and free to issue new shell prompt immediately, allowing background process to execute in parallel. Otherwise, for **foreground** requests, shell waits until child process completes or stopped via signal.
+
+Some shell commands (eg. echo, kill) built into shell itself, do not involve loading of program files. For these commands, no **fork** or **exec** issued for execution.
 
 
+## 3.16 Kernel-Created Processes
+Not all processes created, or **forked** from user parents. Linux kernel directly creates two kinds of processes on own initiative:
+- **Internal kernel processes**: take care of maintenance work (eg. making sure buffers get flushed out to disk, load on different CPUs balanced evenly, device drivers handle work queued up for them to do, etc.). Often run as long as system running, sleeping except when they have something to do.
+- **External user processes**: run in user space like normal applications, but started by kernel. Very few, usually short lived.
 
-## 3.16
+Easy to see which processes are of this nature; when you run command such as
+```shell
+$ ps -elf
+```
+to list all processes on system while showing parent process IDs, all will have `PPID = 2` referring to **kthreadd**, internal kernel thread whose job is to create such processes, names will be encapsulated in square brackets such as `[ksoftirqd/0]`.
 
 
-## 3.17
+## 3.17 Process Creating and Forking
 
 
 ## 3.18
