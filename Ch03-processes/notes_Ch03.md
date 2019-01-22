@@ -273,7 +273,7 @@ Some application providers will use static libraries bundled into program to avo
 Shared libraries file extension: **.so**. Typical full name: **`libc.so.N`**, where **`N`** is major version number.
 
 Under Linux, shared libraries carefully versioned:
-```bash
+```shell
 c7:/usr/lib64>ls -lF libgdbm.so*
 lrwxrwxrwx 1 root root 16 Apr 9 2015 libgdbm.so -> libgdbm.so.4.0.0*
 lrwxrwxrwx 1 root root 16 Apr 9 2015 libgdbm.so.4 -> libgdbm.so.4.0.0*
@@ -282,7 +282,24 @@ c7:/usr/lib64>
 ```
 so program that just asks for **`libgdbm`** gets `libgdbm.so` and the others for specific major and minor versions.
 
-## 3.23
+## 3.23 Finding Shared Libraries
+Program which uses shared libraries has to be able to find them at runtime.
+
+**ldd** can be used to ascertain which libraries required by executable. Shows **soname** of library and what files it points to.
+
+![lddvi](/images/lddvi,png)
+
+**ldconfig** generally run at boot time (but can be run anytime). Uses file `/etc/ld.so.conf` which lists directories searched for shared libraries. Must run **ldconfig** as root and shared libraries should be stored in system directories only when stable and useful.
+
+Besides searching data base built up by **ldconfig**, linker will first search any directories specified in environment variable **`LD_LIBRARY_PATH`** (colon separated list of directories, as in **`PATH`** variable):
+```shell
+$ LD_LIBRARY_PATH=$HOME/foo/lib
+$ foo [args]
+```
+or
+```shell
+$ LD_LIBRARY_PATH=$HOME/foo/lib foo [args]
+```
 
 [Back to top](#)
 
