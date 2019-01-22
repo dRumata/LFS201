@@ -287,7 +287,7 @@ Program which uses shared libraries has to be able to find them at runtime.
 
 **ldd** can be used to ascertain which libraries required by executable. Shows **soname** of library and what files it points to.
 
-![lddvi](/images/lddvi,png)
+![lddvi](/images/lddvi.png)
 
 **ldconfig** generally run at boot time (but can be run anytime). Uses file `/etc/ld.so.conf` which lists directories searched for shared libraries. Must run **ldconfig** as root and shared libraries should be stored in system directories only when stable and useful.
 
