@@ -229,7 +229,7 @@ $ nice cat &
 [1] 24908
 
 $ ps -l
-F S UID   PID  PPID C PRI NI ADDR SZ WCHAN  TTY       TIME  CMD
+F S UID   PID  PPID C PRI NI ADDR SZ WCHAN  TTY       TIME CMD
 0 S 500  4670  4603 0 80   0 - 16618 wait   pts/0 00:00:00 bash
 0 S 500 24855  4670 0 80   0 - 16560 wait   pts/0 00:00:00 bash
 0 T 500 24908 24855 0 90  10 - 14738 signal pts/0 00:00:00 cat
@@ -248,17 +248,39 @@ To change niceness of already running process, easy to use **renice** command:
 ```shell
 $ renice +3 13848
 ```
-which will increase niceness by 3 of the process with `**pid = 13848**`. More than one process can be done at same time and also some other options, so see **man renice**.
+which will increase niceness by 3 of the process with **`pid = 13848`**. More than one process can be done at same time and also some other options, so see **man renice**.
 
 
-## 3.20
+## 3.21 Static and Shared Libraries
+Programs built using **libraries** of code, developed for multiple purposes and used/reused in many contexts.
+
+Two types of libraries:
+- **Static**: code for library functions inserted in program at **compile time**. Does not change thereafter even if library updated
+- **Shared**: code for library funcions loaded into program at **run time**. If library changed after, running program runs with new library modifications
+
+Using shared libraries -> more efficient, because then can be used by many applications at once. Memory usage, executable sizes, application load time reduced.
+
+Shared libraries also called **DLL** s (**D** ynamic **L** ink **L** ibraries).
 
 
-## 3.21
+## 3.22 Shared Library Versions
+Shared libraries must be carefully versioned. If significant change to library and program not equipped to handle it, serious problems expected. Sometimes known as **DLL Hell**.
 
+Thus, programs can request specific **major** library version rather than latest one on system. Usually program will always use latest **minor** version available.
 
-## 3.22
+Some application providers will use static libraries bundled into program to avoid problems. Down side: if improvements or bugs/security hole fixes in libraries, may not make it into applications in timely fashion.
 
+Shared libraries file extension: **.so**. Typical full name: **`libc.so.N`**, where **`N`** is major version number.
+
+Under Linux, shared libraries carefully versioned:
+```bash
+c7:/usr/lib64>ls -lF libgdbm.so*
+lrwxrwxrwx 1 root root 16 Apr 9 2015 libgdbm.so -> libgdbm.so.4.0.0*
+lrwxrwxrwx 1 root root 16 Apr 9 2015 libgdbm.so.4 -> libgdbm.so.4.0.0*
+-rwxr-xr-x 1 root root 36720 Jan 24 2014 libgdbm.so.4.0.0*
+c7:/usr/lib64>
+```
+so program that just asks for **`libgdbm`** gets `libgdbm.so` and the others for specific major and minor versions.
 
 ## 3.23
 
