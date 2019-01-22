@@ -4,16 +4,33 @@
 
 # Chapter 4 Signals - Notes
 
-## 3.3 Learning Objectives:
-- Describe a process and the resources associated with it.
-- Describe the role of the **init** process.
-- Distinguish between processes, programs, and threads.
-- Understand process attributes, permissions, and states, and know how to control limits.
-- Explain the difference between running in user and kernel modes.
-- Describe the **daemon** processes.
-- Understand how new processes are forked (created).
-- Use **nice** and **renice** to set and modify priorities.
-- Understand how shared and static libraries are used.
+## 4.2 Introduction
+**Signals**: used to emit notifications for processes to take action in response to often unpredictable events. May be caused from within process itself, or external events such as other processes.
+
+Many signals fatal, resulting in process termination. Death can sometimes be averted if program designers decide to handle (subvert) certain termination signals.
+
+Many signals more benign, just informative or request other kinds of actions. Possible to send signals (including those that induce termination) from command line using **kill**, **killall**, **pkill**.
+
+
+## 4.3 Learning Objectives:
+- Explain what signals are and how they are used.
+- Know the available signals and types of signals available in Linux.
+- Use kill, killall, and pkill to send signals from the command line.
+
+
+## 4.4 What are Signals?
+Signals: one of oldest methods of **Inter-Process Communication** (**IPC**), used to notify processes about **asynchronous** events (or exceptions).
+
+
+
+
+## 4.5
+
+
+## 4.6
+
+
+## 4.7
 
 
 [Back to top](#)
