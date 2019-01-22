@@ -2,18 +2,15 @@
 
 ---
 
-# Chapter 5 Package Managment Systems - Notes
+# Chapter 5 Package Management Systems - Notes
 
 ## 3.3 Learning Objectives:
-- Describe a process and the resources associated with it.
-- Describe the role of the **init** process.
-- Distinguish between processes, programs, and threads.
-- Understand process attributes, permissions, and states, and know how to control limits.
-- Explain the difference between running in user and kernel modes.
-- Describe the **daemon** processes.
-- Understand how new processes are forked (created).
-- Use **nice** and **renice** to set and modify priorities.
-- Understand how shared and static libraries are used.
+- Explain why software package management systems are necessary.
+- Understand the function of both binary and source packages.
+- Enumerate the main available package management systems.
+- Understand why two levels of utilities are needed: one that deals with just bare packages, and one that deals with dependencies among packages.
+- Explain how creating your own package enhances the control you have over exactly what goes in software and how it is installed.
+- Understand the role of source control systems, and git in particular.
 
 
 [Back to top](#)
