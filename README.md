@@ -9,3 +9,5 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 1. [Introduction](/Ch01-introduction/notes_Ch01.md)
 2. [Linux Filesystem Tree Layout](/Ch02-filesystemtreelayout/notes_Ch02.md)
 3. [Processes](/Ch03-processes/notes_Ch03.md)
+4. [Signals](/Ch04-signals/notes_Ch04.md)
+5. [Package Management Systems](/Ch05-packagemanagementsystems/notes_Ch05.md)
