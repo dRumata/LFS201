@@ -176,7 +176,7 @@ Should contain only libraries needed to execute binaries in `/bin` and `/sbin`. 
 
 Kernel modules (often device/filesystem drivers) located under `/lib/modules/<kernel-version-number>`.
 
-**PAM** (**P** luggable **A** uthentication **M** odules) files stored in /lib/security.
+**PAM** (<strong>P</strong>luggable <strong>A</strong>uthentication <strong>M</strong>odules) files stored in /lib/security.
 
 Systems supporting both 32-bit/64-bit binaries must keep both libraries on system. On Red Hat-based systems, separate directories for 32-bit (`/lib`) and 64-bit (`/lib64`) libraries.
 

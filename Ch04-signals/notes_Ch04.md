@@ -45,7 +45,7 @@ TO see list of signals in Linus, along with numbers, do **`kill -l`**, as reflec
 
 ![sigkill](/images/sigkill.png)
 
-Signals from **`SIGRTMIN`** on termed **real0time signals**, relatively recent addition. No predefined purpose, differ in some important ways from normal signals. Can be queued up and handled in **FIFO** (**F** irst **I** n **F** irst **O** ut) order.
+Signals from **`SIGRTMIN`** on termed **real-time signals**, relatively recent addition. No predefined purpose, differ in some important ways from normal signals. Can be queued up and handled in **FIFO** (**F** irst **I** n **F** irst **O** ut) order.
 
 Meaning attached to signal type indicates event that caused signal to be sent. While users can explicitly send any signal type to their processes, meaning attached may not longer be implied by signal number or type, can be used in any way that the process desires.
 

@@ -260,7 +260,7 @@ Two types of libraries:
 
 Using shared libraries -> more efficient, because then can be used by many applications at once. Memory usage, executable sizes, application load time reduced.
 
-Shared libraries also called **DLL** s (**D** ynamic **L** ink **L** ibraries).
+Shared libraries also called **DLL** s (<strong>D</strong>ynamic <strong>L</strong>ink <strong>L</strong>ibraries).
 
 
 ## 3.22 Shared Library Versions
