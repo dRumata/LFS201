@@ -60,7 +60,7 @@ Other package management systems: **portage/emerge** used by Gentoo, **pacman** 
 Another ancient system: supply packages as **tarballs** without any real management or clean removal strategies. Approach still marks Slackware, one of oldest Linux distributions.
 
 Most of time, either **RPM** or **dpkg**, only ones considered in course.
-![RPM_logo](/images/RPM_logo.png)
+![RPM_logo](/images/RPM_Logo.png)
 ![apt](/images/apt.png)
 
 ## 5.8 Packaging Tool Levels and Varieties
