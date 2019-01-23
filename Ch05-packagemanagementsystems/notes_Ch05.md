@@ -69,12 +69,13 @@ Two levels to packaging systems:
     - If another package needs to be installed, first installation will fail
     - If package needed by another package, removal will fail
 
-**rpm** and **dpkg** utilities play this role for packaging systems that use them.
+    **rpm** and **dpkg** utilities play this role for packaging systems that use them.
+
 2. **High Level Utility**: solves dependency problems:
     - If another package/group of packages needs to be installed before software can be installed, such needs will be satisfied
     - If removing package interferes with another installed package, administrator given choice of aborting or removing all affected software
-    
-**yum**, **dnf**, **zypper** and Package Kit utilities take care of dependency resolution for rpm systems, **apt**, **apt-cache** and other utilities take care of it for dpkg systems.
+
+    **yum**, **dnf**, **zypper** and Package Kit utilities take care of dependency resolution for rpm systems, **apt**, **apt-cache** and other utilities take care of it for dpkg systems.
 
 In course, only discuss command line interface to each packaging systems. Graphical frontends used by each Linux distribution *can* be useful, would like to be less tied to any one interface, have more flexibility.
 
