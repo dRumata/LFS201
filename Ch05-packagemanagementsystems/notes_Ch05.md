@@ -83,7 +83,7 @@ In course, only discuss command line interface to each packaging systems. Graphi
 ## 5.9 Package Sources
 Every distribution -> one or more package **repositories** where system utilities go to obtain software, update with new versions. Job of distribution to make sure all packages in repositories play well with each other.
 
-Always other external repositories which can be added to standard distribution-supported list. Sometimes, closely associated with distribution, only rarely produce significant problems (eg. **EPEL** (**E**\xtra **P**\ackages for **E**\nterprise **L**\inux), set of version-dependent repositories, fit well with RHEL since source = Fedora + maintainers close to Red Hat)
+Always other external repositories which can be added to standard distribution-supported list. Sometimes, closely associated with distribution, only rarely produce significant problems (eg. **EPEL** (<strong>E<strong>xtra **P** ackages for **E** nterprise **L** inux), set of version-dependent repositories, fit well with RHEL since source = Fedora + maintainers close to Red Hat)
 
 However, some external repositories not very well constructed or maintained. Eg. when package is updated in main repository, dependent packages may not be updated in external one, can lead to one form of dependency hell.
 
