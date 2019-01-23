@@ -88,22 +88,67 @@ Always other external repositories which can be added to standard distribution-s
 However, some external repositories not very well constructed or maintained. Eg. when package is updated in main repository, dependent packages may not be updated in external one, can lead to one form of dependency hell.
 
 
-## 5.10
+## 5.10 Creating Software Packages
+Building own custom software packages -> easy to distribute/install own software. Almost every version of Linux has some mechanism for doing this.
+
+Building own package -> allows to control exactly what goes in the software + exactly how it is installed. Can create package so installing it runs scripts that perform all tasks needed to install new software and/or remove old software:
+- Creating needed symbolic links
+- Creating directories as needed
+- Setting permissions
+- Anything that can be scripted
+
+No discussion of mechanisms of how to build **.rpm** or **.deb** packages, as that question mostly for developers, rather than administrators.
 
 
-## 5.11
+## 5.11 Revision Control System
+Software projects become more complex to manage as either size of project increases, or number of contributing developers increases.
+
+To organize updates/facilitate cooperation, many different schemes available for source control. Standard features of such programs: ability to keep accurate history (log) of changes, ability to back up to earlier releases, coordinate possibly conflicting updates from more than one developer, etc.
+
+**Source Control Systems** (or Revision Control Systems, as also commonly called) fill role of coordinating cooperative development.
 
 
-## 5.12
+## 5.12 Available Source Control Systems
+No shortage of available products, both proprietary/open. Brief list of products released under **GPL** license includes:
+
+Product | URL
+------- | ---
+**RCS** | https://www.gnu.org/software/rcs
+**CVS** | https://www.nongnu.org/cvs
+**Subversion** | https://subversion.apache.org
+**git** | https://www.kernel.org/pub/software/scm/git
+**GNU Arch** | https://www.gnu.org/software/gnu_arch
+**Monotone** | https://www.monotone.ca
+**Mercurial** | https://mercurial-scm.org
+
+Will only focus on **git**, widely used product which arose from Linux kernel development community. **git** risen to dominant position in use for open source projects in remarkable short time, often used even in closed source environments.
 
 
-## 5.13
+## 5.13 The Linux Kernel and the Birth of git
+Linux kernel development system has special needs -> widely distributed throughout world, with literally thousands of developers involved. All done very publicly, under GPL license.
+
+For long time, no real source revision control system. Then, major kernel developers went over to use of [BitKeeper](https://www.bitkeeper.com), commercial project which granted restricted use license for Linux kernel development.
+
+However, in very public dispute over licensing restrictions in spring of 2005, free use of BitKeeper became unavailable for Linux kernel development.
+
+Response: development of git, original author Linus Torvalds. Source code for git [here](https://www.kernel.org/pub/software/scm/git), full documentation [here](https://www.kernel.org/pub/software/scm/git/docs).
 
 
-## 5.14
+## 5.14 How git Works
+Technically, git not source control management system in usual sense. Basic units it works with are not files. Has two important data structures: object database + directory cache.
 
+Object database contains three objects:
+- Blobs: chunks of binary data containing file contents
+- Trees: sets of blobs including file names/attributes, giving directory structure
+- Commits: changesets describing tree snapshots
 
-## 5.15
+Directory cache captures state of directory tree.
+
+By liberating controls system from file-by-file-based system, better able to handle changesets involving many files.
+
+git always under rapid development,graphical interfaces also under speedy construction. See [kernel.org git repositories webpage](https://git.kernel.org/). Can easily browse particular changes, source trees.
+
+Sites (eg. [Github](https://github.com/)) now host literally millions of git repositories, both public/private. Host of easy-to-find articles, books, online tutorials etc., on how to to profitably use git.
 
 
 [Back to top](#)
