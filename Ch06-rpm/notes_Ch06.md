@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter 6 rpm - Notes
+# Chapter 6 RPM - Notes
 
 ## 6.3 Learning Objectives:
 - Explain why software package management systems are necessary.

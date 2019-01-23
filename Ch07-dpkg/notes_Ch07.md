@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter 7 dpkg - Notes
+# Chapter 7 DPKG - Notes
 
 ## 7.3 Learning Objectives:
 - Explain why software package management systems are necessary.
