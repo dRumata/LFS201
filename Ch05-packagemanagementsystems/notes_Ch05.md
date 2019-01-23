@@ -43,11 +43,38 @@ Several different types of packages:
 - **Architecture-independent** packages contain files, scripts that run under script interpreters, + documentation, configuration files
 - **Meta-packages**: essentially groups of associated packages that collect everything needed to install relatively large subsystem, eg. desktop environement, office suite, etc.
 
+Binary packages -> ones that system administrators have to deal with most of the time.
 
-## 5.7
+On 64-bit systems that can run 32-bit programs, may have two binary packages installed for  given program, one with **x86-64** or **amd64** in name, and other with **i386** or **i686** in name.
+
+Source packages helpful in keeping track of changes and source code used to come up with binary packages. Usually not installed on system by default, but can always be retrieved from vendor.
 
 
-## 5.8
+## 5.7 Available Package Management Systems
+Two very common package management systems:
+1. **RPM** (**Red Hat Package Manager**): system used by all Red Hat-derived distributions (eg. Red Hat Enterprise Linux, CentOS, Scientific Linux, SUSE and its related community openSUSE distribution)
+2. **dpkg** (**Debian Package**): system used by all Debian-derived distributions, including Debian, Ubuntu, Linux Mint.
+
+Other package management systems: **portage/emerge** used by Gentoo, **pacman** used by Arch, specialized ones used by Embedded Linux systems and Android.
+
+Another ancient system: supply packages as **tarballs** without any real management or clean removal strategies. Approach still marks Slackware, one of oldest Linux distributions.
+
+Most of time, either **RPM** or **dpkg**, only ones considered in course.
+![RPM_logo](/images/RPM_logo.png)
+![apt](/images/apt.png)
+
+## 5.8 Packaging Tool Levels and Varieties
+Two levels to packaging systems:
+1. **Low Level Utility**: simply installs/removes single package, or list of packages, each one individually/specifically named. Dependencies not fully handled, only warned about:
+  - If another package needs to be installed, first installation will fail
+  - If package needed by another package, removal will fail
+**rpm** and **dpkg** utilities play this role for packaging systems that use them.
+2. **High Level Utility**: solves dependency problems:
+  - If another package/group of packages needs to be installed before software can be installed, such needs will be satisfied
+  - If removing package interferes with another installed package, administrator given choice of aborting or removing all affected software
+**yum**, **dnf**, **zypper** and Package Kit utilities take care of dependency resolution for rpm systems, **apt**, **apt-cache** and other utilities take care of it for dpkg systems.
+
+In course, only discuss command line interface to each packaging systems. Graphical frontends used by each Linux distribution *can* be useful, would like to be less tied to any one interface, have more flexibility.
 
 
 ## 5.9
