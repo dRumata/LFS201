@@ -182,7 +182,7 @@ $ sudo rpm -e system-config-lvm
 package system-config-lvm is not installed
 ```
 Example of error due to dependencies:
-~[rpme](/images/rpme.png)
+![rpme](/images/rpme.png)
 
 Can use **`--test`** option alone with **`-e`** to determine whether uninstall would succeed or fail, without actually doing uninstall. If operation successful, **rpm** prints no output. Add **`vv`** option to get more information.
 
