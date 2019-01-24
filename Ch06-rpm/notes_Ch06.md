@@ -158,7 +158,32 @@ If specifying one or more package names as argument, examine only that package:
   ```
 
 
-## 6.11
+## 6.11 Installing Packages
+Installing package as simple as:
+```shell
+$ sudo rpm -ivh foo-1.0.0-1.noarch.rpm
+```
+where `-i` for install, `-v` for verbose, `-h` to print hash marks to show progress.
+
+RPM performs number of tasks when installing package:
+- Performs dependency checks:
+
+  Necessary because some packages will not operate properly unless one or more other packages also installed.
+- Performs conflict checks:
+
+  Include attempts to install already-installed package or to install older version over newer version.
+- Executes commands required before installation:
+
+  Developer building package can specify that certain tasks be performed before or after install.
+- Deals intelligently with configuration files:
+
+  When installing configuration file, if file exists and has been changed since previous version of package was installed, RPM saves old version with **`suffix .rpmsave`**. Allows you to integrate changes made to the configuration file into new version of file. Feature depends on properly created RPM packages.
+- Unpacks files from packages, installs them with correct attributes:
+  In addition to installing files in right place, RPM also sets attributes such as permissions, ownership, modification (build) time.
+- Executes commands required after installation:
+  Performs any post-install tasks required for setup or initialization.
+- Updates system RPM database:
+  Every time RPM install package, updates information in system database. Uses information when checking for conflicts.
 
 
 ## 6.12
