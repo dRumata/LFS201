@@ -166,42 +166,99 @@ $ sudo rpm -ivh foo-1.0.0-1.noarch.rpm
 where `-i` for install, `-v` for verbose, `-h` to print hash marks to show progress.
 
 RPM performs number of tasks when installing package:
-- Performs dependency checks:
-
-  Necessary because some packages will not operate properly unless one or more other packages also installed.
-- Performs conflict checks:
-
-  Include attempts to install already-installed package or to install older version over newer version.
-- Executes commands required before installation:
-
-  Developer building package can specify that certain tasks be performed before or after install.
-- Deals intelligently with configuration files:
-
-  When installing configuration file, if file exists and has been changed since previous version of package was installed, RPM saves old version with **`suffix .rpmsave`**. Allows you to integrate changes made to the configuration file into new version of file. Feature depends on properly created RPM packages.
-- Unpacks files from packages, installs them with correct attributes:
-  In addition to installing files in right place, RPM also sets attributes such as permissions, ownership, modification (build) time.
-- Executes commands required after installation:
-  Performs any post-install tasks required for setup or initialization.
-- Updates system RPM database:
-  Every time RPM install package, updates information in system database. Uses information when checking for conflicts.
+- Performs dependency checks: necessary because some packages will not operate properly unless one or more other packages also installed.
+- Performs conflict checks: include attempts to install already-installed package or to install older version over newer version.
+- Executes commands required before installation: developer building package can specify that certain tasks be performed before or after install.
+- Deals intelligently with configuration files: when installing configuration file, if file exists and has been changed since previous version of package was installed, RPM saves old version with **`suffix .rpmsave`**. Allows you to integrate changes made to the configuration file into new version of file. Feature depends on properly created RPM packages.
+- Unpacks files from packages, installs them with correct attributes: in addition to installing files in right place, RPM also sets attributes such as permissions, ownership, modification (build) time.
+- Executes commands required after installation: performs any post-install tasks required for setup or initialization.
+- Updates system RPM database: every time RPM install package, updates information in system database. Uses information when checking for conflicts.
 
 
-## 6.12
+## 6.12 Uninstalling Packages
+**`-e`** option causes **rpm** to uninstall (erase) package. Normally, **`rpm -e`** fails with error message if package attempting to install either not actually installed, or required by other packages on system. Successful uninstall produces no output.
+```shell
+$ sudo rpm -e system-config-lvm
+package system-config-lvm is not installed
+```
+Example of error due to dependencies:
+~[rpme](/images/rpme.png)
+
+Can use **`--test`** option alone with **`-e`** to determine whether uninstall would succeed or fail, without actually doing uninstall. If operation successful, **rpm** prints no output. Add **`vv`** option to get more information.
+
+Remember: package argument for erase is package name, not **rpm** file name.
+
+**Important (but obvious) note**: Never remove (erase/uninstall) **rpm** package itself. Only way to fix this problem to re-install operating system, or booting into rescue environment.
 
 
-## 6.13
+## 6.14 Upgrading Packages
+Upgrading replaces original package (if installed):
+```shell
+$ sudo rpm -Uvh bash-4.2.46-30.el7_0.4.x86_64.rpm
+```
+Can give list of package names, not just one.
+
+When upgrading, already installed package removed after newer version installed. One exception: configuration files from original installation -> kept with **`.rpmsave`** extension.
+
+If **`-U`** option used and package not already installed, simply installed and no error.
+
+**`-i`** option not designed for upgrades. Attempting to install new RPM package over older one fails with error messages, because it tries to overwrite existing system files.
+
+Different versions of same package may be installed if each version of package does not contain same files: kernel packages and library packages from alternative architectures typically only packages that would be commonly installed multiple times.
+
+If want to downgrade with **`rpm -U`** (to replace current version with earlier version), must add **`--oldpackage`** option to command line.
 
 
-## 6.14
+## 6.15 Freshening Packages
+```shell
+$ sudo rpm -Fvh *.rpm
+```
+will attempt to **freshen** all packages in current directory:
+1. If older version of package installed, will be upgraded to newer version in directory
+2. If version on system is same as one in directory, nothing happens
+3. If no version of package installed, package in directory ignored
+
+Freshening useful for applying lot of patches (ie, upgraded packages) at once.
 
 
-## 6.15
+## 6.16 Upgrading the Kernel
+When installing new kernel on system, requires reboot (one of few updates that do) to take effect. Should not do upgrade (**`-U`**) of kernel: upgrade would remove old currently running kernel.
+
+This in and of itself won't stop system, but if, after reboot, have any problems, will no longer be able to reboot into old kernel, since removed from system. However, if install (**`-i`**), both kernels coexist and can choose to boot into either one, ie. can revert back to old one if need be.
+
+To install new kernel:
+```shell
+$ sudo rpm -ivh kernel-{version}.{arch}.rpm
+```
+filling in correct version + architecture names.
+
+When doing this, GRUB configuration file automatically updated to include new version. Will be default choice at boot, unless reconfigure system to do something else.
+
+One new kernel version tested, may remove old version if you wish, though not necessary. Unless short on space, recommended to keep one or more older kernels available.
 
 
-## 6.16
+## 6.17 Using rpm2cpio
+Suppose have need to extract files from **rpm** but do not want to actually install package?
 
+**rpm2cpio** program used to copy files from **rpm** to **cpio** archive + extract files if desired.
 
-## 6.17
+Create **cpio** archive with:
+```shell
+$ rpm2cpio foobar.rpm > foobar.cpio
+```
+To list files in **rpm**:
+```shell
+$ rpm2cpio foobar.rpm | cpio -t
+```
+but better way is to:
+```shell
+$ rpm -qilp foobar.rpm
+```
+To extract on system:
+```shell
+$ rpm2cpio bash-XXXX.rpm | cpio -ivd bin/bash
+$ rpm2cpio foobar.rpm | cpio --extract --make-directories
+```
 
 
 [Back to top](#)
