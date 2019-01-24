@@ -39,6 +39,20 @@ For developers, RPM also offers advantages:
 
 
 ## 6.6 Package File Names
+RPM package file names based on fields representing specific information, as documented in [RPM standard](http://rpm.org/):
+- Standard naming format for binary package:
+
+  `<name>-<version>-<release>.<distro>.<architecture>.rpm`
+
+  `sed-4.2.2-5.el7.x86_64.rpm`
+
+- Standard naming format for source package:
+
+  `<name>-<version>-<release>.<distro>.src.rpm`
+
+  `sed-4.2.2-5.el7.src.rpm`
+
+Note: **distro** field often actually specifies repository that package came from, as given installation may use number of different package repositories, as discussed for **yum**/**zypper** which work above RPM.
 
 
 ## 6.7
