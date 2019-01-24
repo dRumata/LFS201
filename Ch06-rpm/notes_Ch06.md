@@ -100,8 +100,62 @@ All **rpm** inquiries include **`-q`** option, which can be combined with numero
 
   `$ rpm -qa`
 
+Couple of other useful options: `--require`, `--whatprovides`:
+- Return a list of prerequisites for a package:
 
-## 6.10
+  `$ rpm -qp --requires foo-1.0.0-1.noarch.rpm`
+- Show what installed package provides a particular requisite package:
+
+  `$ rpm -q --whatprovides libc.so.6`
+
+
+## 6.10 Verifying Packages
+**`-V`** option to **rpm** allows you to verify whether files from particular package consistent with system's RPM database. To verify all packages installed on system:
+```shell
+$ rpm -Va
+missing /var/run/pluto
+....
+S.5....T. c /etc/hba.conf
+S.5....T. /usr/share/applications/defaults.list
+....L.... c /etc/pam.d/fingerprint-auth
+....L.... c /etc/pam.d/password-auth
+....
+.M....... /var/lib/nfs/rpv-pipefs
+....
+.....UG.. /usr/local/bin
+.....UG.. /usr/local/etc
+```
+showing just few items. (Note: command can take long time, as it examines all files owned by all packages.)
+
+Output generated only when there is problem.
+
+Each characters displayed denotes result of comparison of attribute(s) of file to value of those attribute(s) recorded in database. Single . (period) means test passed, while single ? (question mark) indicates test could not be performed (eg. file permissions prevent reading). Otherwise, character denotes failure of corresponding verification test:
+- **S**: file size differs
+- **M**: file permissions and/or type differs
+- **5**: MD5 checksum differs
+- **D**: device major/minor number mismatch
+- **L**: symbolic link path mismatch
+- **U**: user ownership differs
+- **G**: group ownership differs
+- **T**: modification time differs
+- **P**: capabilities differ
+
+Note: many verification tests do not indicate problem. Eg. many configuration files modified as system evolves.
+
+If specifying one or more package names as argument, examine only that package:
+- No output when everything is OK:
+
+  `$ rpm -V bash`
+- Output indicating that a file's size, checksum, and modification time have changed:
+  ```shell
+  $ rpm -V talk
+  S.5....T in.ntalkd.8
+  ```
+- Output indicating that a file is missing:
+  ```shell
+  $ rpm -V talk
+  missing /usr/bin/talk
+  ```
 
 
 ## 6.11
