@@ -55,13 +55,50 @@ RPM package file names based on fields representing specific information, as doc
 Note: **distro** field often actually specifies repository that package came from, as given installation may use number of different package repositories, as discussed for **yum**/**zypper** which work above RPM.
 
 
-## 6.7
+## 6.7 Database Directory
+`/var/lib/rpm` -> default system directory that holds RPM database files in form of Berkeley DB hash files. Database files should not be manually modified, updated should be done only through use of **rpm** program.
+
+Alternative database directory can be specified with **`--dbpath`** option to **rpm** program. Might do this, for example, to examine RPM database copied from another system.
+
+Can use **`--rebuilddb`** option to rebuild database indices from installed package headers. More of repair, not rebuild from scratch.
 
 
-## 6.8
+## 6.8 Helper Programs and Modifying Settings
+Helper programs and scripts used by RPM reside in `/usr/lib/rpm`. Quite a few, eg. on RHEL 7 system:
+```shell
+$ ls /usr/lib/rpm | wc -l
+73
+```
+where **wc** repoting number of lines of output.
+
+Can create **`rpmrc`** file to specify default settings for **rpm**. By default, **rpm** looks for:
+1. `/usr/lib/rpm/rpmrc`
+2. `/etc/rpmrc`
+3. `~/.rpmrc`
+
+in above order. Note: all these files read; **rpm** does not stop as soon as it finds that one exists. Alternative **`rpmrc`** file can be specified usinr **`--rcfile`** option.
 
 
-## 6.9
+## 6.9 Queries
+All **rpm** inquiries include **`-q`** option, which can be combined with numerous sub-options:
+- Which version of a package is installed?
+
+  `$ rpm -q bash`
+- Which package did this file come from?
+
+  `$ rpm -qf /bin/bash`
+- What files were installed by this package?
+
+  `$ rpm -ql bash`
+- Show information about this package.
+
+  `$ rpm -qi bash`
+- Show information about this package from the package file, not the package database.
+
+  `$ rpm -qip foo-1.0.0-1.noarch.rpm`
+- List all installed packages on this system.
+
+  `$ rpm -qa`
 
 
 ## 6.10
