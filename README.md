@@ -13,3 +13,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 5. [Package Management Systems](/Ch05-packagemanagementsystems/notes_Ch05.md)
 6. [RPM](/Ch06-rpm/notes_Ch06.md)
 7. [DPKG](/Ch07-dpkg/notes_Ch07.md)
+8. [YUM](/Ch08-yum/notes_Ch08.md)
