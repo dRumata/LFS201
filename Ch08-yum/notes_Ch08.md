@@ -52,12 +52,14 @@ Note: on RHEL 6 there is no **`redhat.repo`** file. RHEL 6 + earlier versions ha
 
 ## 8.7 Repository Files
 Very simple repository file may look like:
-**```shell
+<strong>
+```shell
 [repo-name]
     name=Description of the repository
     baseurl=http://somesystem.com/path/to/repo
     enabled=1
-```**
+```
+</strong>
 More complicated examples found in `/etc/yum.repos.d`, would be good idea to examine them.
 
 Can toggle the use of particular repository on/off by changing value of enabled to 1/0, or using **`--disablerepo=somerepo`** and **`--enablerepo=somerepo`** options when using **yum**.
