@@ -82,31 +82,39 @@ in above order. Note: all these files read; **rpm** does not stop as soon as it 
 ## 6.9 Queries
 All **rpm** inquiries include **`-q`** option, which can be combined with numerous sub-options:
 - Which version of a package is installed?
-
-  `$ rpm -q bash`
+  ```shell
+  $ rpm -q bash
+  ```
 - Which package did this file come from?
-
-  `$ rpm -qf /bin/bash`
+  ```shell
+  $ rpm -qf /bin/bash
+  ```
 - What files were installed by this package?
-
-  `$ rpm -ql bash`
+  ```shell
+  $ rpm -ql bash
+  ```
 - Show information about this package.
-
-  `$ rpm -qi bash`
+  ```shell
+  $ rpm -qi bash
+  ```
 - Show information about this package from the package file, not the package database.
-
-  `$ rpm -qip foo-1.0.0-1.noarch.rpm`
+  ```shell
+  $ rpm -qip foo-1.0.0-1.noarch.rpm
+  ```
 - List all installed packages on this system.
-
-  `$ rpm -qa`
+  ```shell
+  $ rpm -qa
+  ```
 
 Couple of other useful options: `--require`, `--whatprovides`:
 - Return a list of prerequisites for a package:
-
-  `$ rpm -qp --requires foo-1.0.0-1.noarch.rpm`
+  ```shell
+  $ rpm -qp --requires foo-1.0.0-1.noarch.rpm
+  ```
 - Show what installed package provides a particular requisite package:
-
-  `$ rpm -q --whatprovides libc.so.6`
+  ```shell
+  $ rpm -q --whatprovides libc.so.6
+  ```
 
 
 ## 6.10 Verifying Packages
@@ -144,8 +152,9 @@ Note: many verification tests do not indicate problem. Eg. many configuration fi
 
 If specifying one or more package names as argument, examine only that package:
 - No output when everything is OK:
-
-  `$ rpm -V bash`
+  ```shell
+  $ rpm -V bash
+  ```
 - Output indicating that a file's size, checksum, and modification time have changed:
   ```shell
   $ rpm -V talk

@@ -54,55 +54,58 @@ Eg. on Ubuntu system, can download source package, then see what files downloade
 ## 7.7 DPKG Queries
 Some examples of queriesL
 - List all packages installed:
-
-  `$ dpkg -l`
-
+  ```shell
+  $ dpkg -l
+  ```
   One can also specify a package name.
 
 - List files installed in `wget` package:
-
-  `$ dpkg -L wget`
-
+  ```shell
+  $ dpkg -L wget
+  ```
 - Show info about an installed package:
-
-  `$ dpkg -s wget`
-
+  ```shell
+  $ dpkg -s wget
+  ```
 - Show info about a package file:
-
-  `$ dpkg -I webfs_1.21+ds1-8_amd64.deb`
-
+  ```shell
+  $ dpkg -I webfs_1.21+ds1-8_amd64.deb
+  ```
 - List files in a package file:
-
-  `$ dpkg -c webfs_1.21+ds1-8_amd64.deb`
-
+  ```shell
+  $ dpkg -c webfs_1.21+ds1-8_amd64.deb
+  ```
 - Show what package owns `/etc/init/networking.conf`:
-
-  `$ dpkg -S /etc/init/networking.conf`
-
+  ```shell
+  $ dpkg -S /etc/init/networking.conf
+  ```
 - Show the status of a package:
-
-  `$ dpkg -s wget`
-
+  ```shell
+  $ dpkg -s wget
+  ```
 - Verify the installed package's integrity:
-
-  `$ dpkg -V package`
-
+  ```shell
+  $ dpkg -V package
+  ```
   Without arguments, this will verify all packages on system. See **man** page to interpret output. Note: only recent versions of **dpkg** (1.17+) support this option.
 
 
 ## 7.8 Installing/Upgrading/Uninstalling Packages
-`$ sudo dpkg -i foobar.deb`
-
+```shell
+$ sudo dpkg -i foobar.deb
+```
 would be used for either installing/upgrading **foobar** package.
 
 If package not currently installed, then will be installed. If package newer than one currently installed, then will be upgraded.
 
-`$ sudo dpkg -r package`
-
+```shell
+$ sudo dpkg -r package
+```
 used to remove all of installed package except for configuration files.
 
-`$ sudo dpkg -P package`
-
+```shell
+$ sudo dpkg -P package
+```
 used to remove all of installed package including configuration files (Note: **`-P`** stands for **purge**).
 
 
