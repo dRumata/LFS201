@@ -17,6 +17,46 @@
 - Understand how to use **dnf**, which has replaced **yum** on Fedora.
 
 
+## 8.4 Package Installers
+Lower-level package utilities (eg. **rpm**, **dpkg**) deal with details of installing specific software package files. managing already installed software.
+
+Higher-level package **management systems** (eg. **yum**, **dnf**, **apt**, **zypper**) work with databases of available software, incorporate tools needed to find, install, update, uninstall software in highly intelligent fashion.
+- Can use both local/remote repositories as source to install/update binary as well as source software packages
+- Used to automate install, upgrade, removal of software packages
+- Resolve dependencies automatically
+- Save time because no need to either download packages manually/search out dependency information separately
+
+Software repositories provided by distributions/other independent software providers. Package installers maintain databases of available software derived from catalogs kept by repositories. Unlike low-level package tools, have ability to find/install dependencies automatically -> critical feature.
+
+In this section, discuss **yum** and **dnf**. **zypper** and **apt** discussed in later chapters.
+
+
+## 8.5 What is yum?
+**yum** provides frontend to **rpm**. Primary task: fetch packages from multiple remote repositories, resolve dependencies among packages. Used by majority (but not all) of distributions using **rpm**, including RHEL, CentOS, Scientific Linux, Fedora.
+
+**yum** caches information + databases to speed up performance. To remove some or all cached information, can run command:
+```shell
+$ yum clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
+```
+**yum** has number of modular expressions (plugins) + companion programs that can be found under `/usr/bin/yum*` and `/usr/sbin/yum*`.
+
+Will concentrate on command line use of **yum**, not consider graphical interfaces distributions provide.
+
+
+## 8.6 Configuring yum to Use Repositories
+Repository configuration files kept in `/etc/yum.repos.d`, have **`.repo`** extension. Eg. on one RHEL 7 system:
+![yumrepos](/images/yumrepos.png)
+
+Note: on RHEL 6 there is no **`redhat.repo`** file. RHEL 6 + earlier versions handled distribution-supplied repos in somewhat different manner, although RHEL clones like CentOS used conventional repos for main distribution packages.
+
+
+## 8.7
+## 8.8
+## 8.9
+## 8.10
+## 8.11
+## 8.12
+
 ##
 
 [Back to top](#)
