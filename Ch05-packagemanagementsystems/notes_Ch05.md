@@ -151,6 +151,8 @@ git always under rapid development,graphical interfaces also under speedy constr
 Sites (eg. [Github](https://github.com/)) now host literally millions of git repositories, both public/private. Host of easy-to-find articles, books, online tutorials etc., on how to to profitably use git.
 
 
+##
+
 [Back to top](#)
 
 ---

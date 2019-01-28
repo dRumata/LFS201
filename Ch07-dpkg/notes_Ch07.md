@@ -109,6 +109,8 @@ $ sudo dpkg -P package
 used to remove all of installed package including configuration files (Note: **`-P`** stands for **purge**).
 
 
+##
+
 [Back to top](#)
 
 ---
