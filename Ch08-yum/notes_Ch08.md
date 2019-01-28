@@ -50,8 +50,36 @@ Repository configuration files kept in `/etc/yum.repos.d`, have **`.repo`** exte
 Note: on RHEL 6 there is no **`redhat.repo`** file. RHEL 6 + earlier versions handled distribution-supplied repos in somewhat different manner, although RHEL clones like CentOS used conventional repos for main distribution packages.
 
 
-## 8.7
-## 8.8
+## 8.7 Repository Files
+Very simple repository file may look like:
+**```shell
+[repo-name]
+    name=Description of the repository
+    baseurl=http://somesystem.com/path/to/repo
+    enabled=1
+```**
+More complicated examples found in `/etc/yum.repos.d`, would be good idea to examine them.
+
+Can toggle the use of particular repository on/off by changing value of enabled to 1/0, or using **`--disablerepo=somerepo`** and **`--enablerepo=somerepo`** options when using **yum**.
+
+Can (but should not) also turn off integrity checking with **`gpgcheck`** variable.
+
+## 8.8 Queries
+Like **rpm**, **yum** can be used for queries such as searches. However, can search not just what is present on local system, but also inquire about remote repositories. Examples:
+- Search for packages with **`keyword`** in name:
+  ```shell
+  $ sudo yum search keyword
+  $ sudo yum list "*keyword*"
+  ```
+  These two commands give somewhat different information. First one tells more about packages, second one makes it clearer what is installed, what else is available.
+
+- Display information about a package:
+  ```shell
+  $ sudo yum info package
+  ```
+  Information includes size, version, what repository it came from, source URL, longer description. Wildcards can be given, eg. **`yum info "libc*"`** for this + most **yum** commands. Note: package need not be installed, unlike queries make with **`rpm -q`**.
+
+
 ## 8.9
 ## 8.10
 ## 8.11
