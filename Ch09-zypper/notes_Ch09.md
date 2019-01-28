@@ -5,27 +5,23 @@
 # Chapter 8 zypper - Notes
 
 ## 9.2 Introduction
-**yum** program provides higher level of intelligent services for using underlying **rpm** program. Can automatically resolve dependencies when installing, updating, removing packages. Accesses external software **repositories**, synchronizing with them, retrieving/installing software as needed.
+For use on SUSE-based systems, **zypper** program provides higher level of intelligent services for using underlying **rpm** program, plays same role as **yum** on Red Hat-based systems. Can automatically resolve dependencies when installing, updating, removing packages. Accesses external software repositories, synchronizing with them, retrieving/installing software as needed.
+
 
 ## 9.3 Learning Objectives:
-- Discuss package installers and their characteristics.
-- Explain how **yum** works as a high level package management system.
-- Configure **yum** to use repositories.
-- Discuss the queries **yum** can be used for.
-- Verify, install, remove, and upgrade packages using **yum**.
-- Learn about additional commands and how to install new repositories.
-- Understand how to use **dnf**, which has replaced **yum** on Fedora.
+- Explain what **zypper** is.
+- Discuss the queries **zypper** can be used for.
+- Install, remove, and upgrade packages using **zypper**.
+- Learn additional and more advanced **zypper** commands.
 
 
-## 8.4
-## 8.5
-## 8.6
-## 8.7
-## 8.8
-## 8.9
-## 8.10
-## 8.11
-## 8.12
+## 9.4
+## 9.5
+## 9.6
+## 9.7
+## 9.8
+## 9.9
+
 
 ##
 
