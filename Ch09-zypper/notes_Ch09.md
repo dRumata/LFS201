@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter 8 Zypper - Notes
+# Chapter 8 zypper - Notes
 
 ## 9.2 Introduction
 **yum** program provides higher level of intelligent services for using underlying **rpm** program. Can automatically resolve dependencies when installing, updating, removing packages. Accesses external software **repositories**, synchronizing with them, retrieving/installing software as needed.

@@ -52,8 +52,8 @@ Strong recommendation: at least take a look at LFS101x. If not completely famili
 Various types of content contained in course, and color coding and formats used to distinguish them:
 - **Bold: names of programs or services (or used for emphasis)**
 - Light blue: hyperlinks
-- Dark blue: text typed at the command line (in notes, shown as distinct code blocks as of 2018/01/17)
-- Green: system output at the command line
+- Dark blue: text typed at the command line (in notes, shown as distinct page-spanning code blocks as of 2018/01/28, unless embedded inline, in which case they are usually bolded)
+- Green: system output at the command line (in notes, shown as part of page-spanning code blocks along with text typed at command line, without $ prefix, as of 2018/01/28)
 - Brown: files names and file content (in notes, shown as inline code blocks as of 2019/01/17)
 
 (Will come back to add actual color to text after learning more about Markdown styles)

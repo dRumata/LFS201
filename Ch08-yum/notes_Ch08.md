@@ -81,11 +81,136 @@ Like **rpm**, **yum** can be used for queries such as searches. However, can sea
   ```
   Information includes size, version, what repository it came from, source URL, longer description. Wildcards can be given, eg. **`yum info "libc*"`** for this + most **yum** commands. Note: package need not be installed, unlike queries make with **`rpm -q`**.
 
+More **yum** examples:
+- List all packages, or just those installed, available, or updates that have not yet been installed:
+  ```shell
+  $ sudo yum list [ installed | updates | available ]
+  ```
 
-## 8.9
-## 8.10
-## 8.11
-## 8.12
+- Show information about package groups installed or available, etc.:
+  ```shell
+  $ sudo yum grouplist [group1] [group2]
+  $ sudo yum groupinfo group1 [group2]
+  ```
+
+- Show packages that contain a certain file name:
+  ```shell
+  $ sudo yum provides
+  ```
+  as in
+  ```shell
+  $ sudo yum provides "/logrotate.conf"
+  ```
+  Note need to use at least one **`/`** in file name, which can be confusing.
+
+
+## 8.9 Verifying Packages
+Package verification requires installation of **yum-plugin-verify** package. Might have to do:
+```shell
+$ sudo yum install yum-plugin-verify
+```
+Note: this is **yum plugin**, not executable. Many other plugins available for **yum**, extends possible set of commands and arguments it can take:
+- To verify package, giving most information:
+  ```shell
+  $ sudo yum verify [package]
+  ```
+
+- To mimic **`rpm -V`** exactly:
+  ```shell
+  $ sudo yum verify-rpm [package]
+  ```
+
+- To list all differences, including configuration files:
+  ```shell
+  $ sudo yum verify-all [package]
+  ```
+
+Without arguments, above commands will verify all packages installed on system.
+
+By default, verification commands ignore configuration files which may change through normal + safe usage. Some other options: see **man yum-verify**.
+
+
+## 8.10 Installing/Removing/Upgrading Packages
+Some examples of commonly performed operations:
+- Install one or more packages from repositories, resolving/installing any necessary dependencies:
+  ```shell
+  $ sudo yum install package1 [package2]
+  ```
+
+- Install from local **rpm**:
+  ```shell
+  $ sudo yum localinstall package-file
+  ```
+  This is not quite the same as
+  ```shell
+  $ rpm -i package-file
+  ```
+  because it will attempt to resolve dependencies by accessing remote repositories.
+
+- Install specific software **group** from repository, resolving/installing any necessary dependencies for each package in group:
+  ```shell
+  $ sudo yum groupinstall group-name
+  ```
+  or
+  ```shell
+  $ sudo yum install @group-name
+  ```
+
+- Remove packages from system:
+  ```shell
+  $ sudo yum remove package1 [package2]
+  ```
+  Must be careful with package removal, as **yum** will not only remove requested packages, but all packages that depend on them! May not be what you want, so never run **`yum remove`** with **`-y`** option, which assumes automatic confirmation of removal.
+
+- Update package from repository:
+  ```shell
+  $ sudo yum update [package]
+  ```
+  If not package name given, all packages updated.
+
+During installation (or update), if package has configuration file which is updated, will rename old configuration file with **`.rpmsave`** extension. If old configuration file will still work with new software, will name new configuration file with **`.rpmnew`** extension. Can search for these filename extensions (almost always in `/etc` subdirectory tree) to see if you need to do any reconciliation, by doing:
+```shell
+$ sudo find /etc -name "*.rpm*"
+```
+Same behavior the more naked underlying **rpm** utility exhibits, but mentioned here for reference.
+
+
+## 8.11 Additional Commands
+No shortage of additional capabilities for **yum**, according to what plugins are installed. Can list them all with:
+```shell
+$ sudo yum list "yum-plugin"
+```
+In particular:
+- Show list of all enabled repositories:
+  ```shell
+  $ sudo yum repolist
+  ```
+
+- Initiate interactive shell in which to run multiple **`YUM`** commands:
+  ```shell
+  $ sudo yum shell [text-file]
+  ```
+  If **`text-file`** given, **yum** will read + execute commands from that file instead of from terminal.
+
+More examples of **yum** commands:
+- Download package, but do not install them; just store them under the `/var/cache/yum` directory, or another directory specified:
+  ```shell
+  $ sudo yum install --downloadonly package
+  ```
+  or can type **`"d"`** instead of **`"y"`** or **`"n"`** when prompted after issuing install command. Package(s) will be downloaded under `/var/cache/yum` in location depending on repository from which download proceeds, unless **`--downloaddir=`** option used. Any other necessary packages will also be downloaded to satisfy dependencies.
+
+- Can view history of **yum** commands, and, with correct options, even undo/redo previous commands:
+  ```shell
+  $ sudo yum history
+  ```
+
+## 8.12 dnf
+**dnf** intended to be next generation replacement for **yum**, will underlie **yum** in RHEL 8.
+
+Can gradually learn to use **dnf** on Fedora systems because it accepts subset of **yum** commands that take care of majority of day-to-day tasks + points out at each use of **yum** that has **dnf** equivalent.
+
+To learn more, see: [Package Management section in the Fedora System Administrator's Guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/System_Administrators_Guide/part-Package_Management.html).
+
 
 ##
 
