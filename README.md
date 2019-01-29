@@ -14,3 +14,5 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 6. [RPM](/Ch06-rpm/notes_Ch06.md)
 7. [DPKG](/Ch07-dpkg/notes_Ch07.md)
 8. [YUM](/Ch08-yum/notes_Ch08.md)
+9. [zypper](/Ch09-zypper/notes_Ch09.md)
+10. [APT](/Ch10-apt/notes_Ch10.md)

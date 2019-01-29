@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter 8 zypper - Notes
+# Chapter 9 zypper - Notes
 
 ## 9.2 Introduction
 For use on SUSE-based systems, **zypper** program provides higher level of intelligent services for using underlying **rpm** program, plays same role as **yum** on Red Hat-based systems. Can automatically resolve dependencies when installing, updating, removing packages. Accesses external software repositories, synchronizing with them, retrieving/installing software as needed.
