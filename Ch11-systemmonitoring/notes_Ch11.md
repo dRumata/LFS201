@@ -22,7 +22,7 @@ Before considering main utilities in detail, can see summary on next few section
 
 Summary of main process monitoring utility tools:
 
-**Process and Load Monitoring Utilities**
+:**Process and Load Monitoring Utilities**:
 
 Utility | Purpose | Package
 ------- | ------- | -------
