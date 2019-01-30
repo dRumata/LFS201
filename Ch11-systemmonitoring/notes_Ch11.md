@@ -65,8 +65,22 @@ Utility | Purpose | Package
 **wireshark** | Detailed network traffic analysis | **wireshark**
 
 
-## 11.5
+## 11.5 System Log Files
+System log files -> essential for monitoring/troubleshooting. In Linux, messages appear in various files under `/var/log`. Exact names vary with Linux distribution.
 
+Ultimate control of how messages dealt with -> controlled by **syslogd** (usually **rsyslogd** on modern systems) daemon, common to many UNIX-like operating systems. Newer **systemd**-based systems can use **journalctl** instead,but usually retain **syslogd** and cooperate with it.
+
+Important messages sent not only to logging files, but also to system console window. If not running **X**, or are at virtual terminal, will see them directly there as well. In addition, messages will be copied to `/var/log` messages (or to `/var/log/syslog` on Ubuntu), but if running **X**, have to take some steps to view them.
+
+Can view new messages continuously as new lines appear with:
+```shell
+$ sudo tail -f /var/log/messages (or /var/log/syslog)
+```
+or
+```shell
+$ dmesg -w
+```
+which shows only kernel-related messages.
 
 
 ## 11.6
