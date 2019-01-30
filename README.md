@@ -16,3 +16,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 8. [YUM](/Ch08-yum/notes_Ch08.md)
 9. [zypper](/Ch09-zypper/notes_Ch09.md)
 10. [APT](/Ch10-apt/notes_Ch10.md)
+11. [System Monitoring](/Ch11-systemmonitoring/notes_Ch11.md)
