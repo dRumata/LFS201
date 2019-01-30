@@ -23,6 +23,7 @@ Before considering main utilities in detail, can see summary on next few section
 Summary of main process monitoring utility tools:
 
 **Process and Load Monitoring Utilities**
+
 Utility | Purpose | Package
 ------- | ------- | -------
 **top** | Process activity, dynamically updated | **procps**
@@ -35,21 +36,27 @@ Utility | Purpose | Package
 **numstat** | Information about **NUMA** (Non-Uniform Memory Architecture) | **numactl**
 **strace** | Information about all system calls a process makes | **strace**
 
+
 **Memory Monitoring Utilities**
+
 Utility | Purpose | Package
 ------- | ------- | -------
 **free** | Brief summary of memory usage | **procps**
 **vmstat** | Detailed virtual memory statistics and block I/O, dynamically updated | **procps**
 **pmap** | Process memory map | **procps**
 
+
 **I/O Monitoring Utilities**
+
 Utility | Purpose | Package
 ------- | ------- | -------
 **iostat** | CPU utilization and I/O statistics | **sysstat**
 **sar** | Display and collect information about system activity | **sysstat**
 **vmstat** | Detailed virtual memory statistics and block I/O, dynamically updated | **procps**
 
+
 **Network Monitoring Utilities**
+
 Utility | Purpose | Package
 ------- | ------- | -------
 **netstat** | Detailed networking statistics | **netstat**
