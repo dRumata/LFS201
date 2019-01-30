@@ -129,7 +129,43 @@ Other entries give system-wide information. Eg. can see **interrupt** statistics
 
 
 ## 11.10 /proc/sys
-## 11.11
+Most tunable system parameters can be found in subdirectory tree rooted at `/proc/sys`:
+![procsys](/images/procsys.png)
+
+Each subdirectory contains information + knobs that can be tuned (with care):
+- **`abi/`**: Contains files with application binary information; rarely used
+- **`debug/`**: Debugging parameters; for now, just some control of exception reporting
+- **`dev/`**: Device parameters, including subdirectories for **cdrom**, **scsi**, **raid**, **parport**
+- **`fs/`**: Filesystem parameters, including quote, files handles used, and maximums, inode and directory information, etc.
+- **`kernel/`**: Kernel parameters. Many important entries here.
+- **`net/`**: Network parameters. Subdirectories for **ipv4**, **netfilter**, etc.
+- **`vm/`**: Virtual memory parameters. Many important entries here.
+
+Viewing/changing parameters can be done with simple commands. Eg. maximum number of threads allowed on system seen by looking at:
+```shell
+$ ls -l /proc/sys/kernel/threads-max
+$ cat /proc/sys/kernel/threads-max
+129498
+```
+
+Can then modify value, verify change was effected:
+```shell
+$ sudo bash -c 'echo 100000 > /proc/sys/kernel/threads-max'
+$ cat /proc/sys/kernel/threads-max
+100000
+```
+
+Remember from discussion of **sysctl**, same effect accomplished by:
+```shell
+$ sudo sysctl kernel.threads-max=100000
+```
+Viewing value can be done as normal user, changing requires superuser privilege.
+
+
+## 11.11 /sys Basics
+`/sys` 
+
+
 ## 11.12
 ## 11.13
 
