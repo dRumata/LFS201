@@ -116,20 +116,25 @@ Over time, grew to contain lot of information about system properties, eg. inter
 
 ## 11.9 A survey of /proc
 What resides in `/proc` pseudo-filesystem:
+
 ![lsprocubuntu](/images/lsprocubuntu.png)
 
 First, see there is subdirectory for each process on system, whether sleeping, running, scheduled out. Looking at random one:
+
 ![lsproc3589](/images/lsproc3589.png)
 
 Directory full of information about status of process and resources it is using. For example:
+
 ![procstatus](/images/procstatus.png)
 
 Other entries give system-wide information. Eg. can see **interrupt** statistics in below screenshot. For each interrupt, see what type it is, how many times it has been handled on each CPU, which devices registered to respond to it. Also get global statistics.
+
 ![procinterrupts](/images/procinterrupts.png)
 
 
 ## 11.10 /proc/sys
 Most tunable system parameters can be found in subdirectory tree rooted at `/proc/sys`:
+
 ![procsys](/images/procsys.png)
 
 Each subdirectory contains information + knobs that can be tuned (with care):
@@ -211,6 +216,7 @@ On Linux systems, backend to **sar** is **sadc** (system activity data collector
 $ sar [ options ] [ interval ] [ count ]
 ```
 where report repeated after interval seconds a total of count times (defaults to 1). With no options, gives report on CPU usage.
+
 ![sar](/images/sar.png)
 
 List of major **sar** options, or modes, each one of which has its own sub-options:
