@@ -163,11 +163,83 @@ Viewing value can be done as normal user, changing requires superuser privilege.
 
 
 ## 11.11 /sys Basics
-`/sys` 
+`/sys` pseudo-filesystem: integral part of **Unified Device Model**. Conceptually, based on **device tree**, one can walk through it and see buses, devices, etc. Also now contains information which may or may not be strictly related to devices, such as kernel modules.
+
+Has more tightly defined structure than `/proc`. Most entries contain only one line of text (although there are exceptions) unlike precursor which has many multi-line entries whose exact contents may change between kernel versions. Thus, interface hopefully more stable.
+
+There are system properties which have display entries in both `/proc` and `/sys`. For compatibility with widely used system utilities, older forms only gradually being whittled down.
 
 
-## 11.12
-## 11.13
+## 11.12 A Survey of /sys
+Support for **sysfs** virtual filesystem built into all modern kernels, should be mounted under `/sys`. However, unified device model does not require mounting **sysfs** in order to function.
+
+Taking look at 3.18 kernel (warning; exact layout of this filesystem tends to mutate). Top level directory command yields:
+```shell
+$ ls -F /sys
+block/ bus/ class/ dev/ devices/ firmware/ fs/ kernel/ module/ power/
+```
+which displays basic device hierarchy. Device model **sysfs** implementation also includes information not strictly related to hardware.
+
+Network devices examined with:
+```shell
+$ ls -lF /sys/class/net
+```
+![sysclassnet](/images/sysclassnet.png)
+
+Below, can see what looking at Ethernet card gives.
+
+Intention with **sysfs** to have one text value per line, although not expected to be rigorously enforced.
+
+![sysclassnetcard](/images/sysclassnetcard.png)
+
+Underlying device and driver for first network interface can be traced through **`device`** and (to be seen shortly) **`driver`** symbolic links. Below shows what can be seen when looking at directory corresponding to first Ethernet card.
+
+To see full spectrum of information available with **sysfs**, will just have to examine.
+
+![sysclassnetcarddevice](/images/sysclassnetcarddevice.png)
+
+
+## 11.13 sar
+**sar**: <strong>S</strong>ystems <strong>A</strong>ctivity <strong>R</strong>eporter. All-purpose tool for gathering system activity + performance data, creating reports readable by humans.
+
+On Linux systems, backend to **sar** is **sadc** (system activity data collector) which actually accumulates statistics. Stores information in `/var/log/sa` directory, with daily frequency by default, but which can be adjusted. Data collection can be started from command line, regular periodic collection usually started as **cron** job stored in `/etc/cron.d/sysstat`.
+
+**sar** then reads in this data (either from default locations or by use of file specified with **`-f`** option), then produces report.
+
+**sar** invoked via:
+```shell
+$ sar [ options ] [ interval ] [ count ]
+```
+where report repeated after interval seconds a total of count times (defaults to 1). With no options, gives report on CPU usage.
+![sar](/images/sar.png)
+
+List of major **sar** options, or modes, each one of which has its own sub-options:
+
+**sar Options**
+
+Option | Meaning
+------ | -------
+**`-A`** | Almost all Information
+**`-b`** | I/O and transfer rate statistics (similar to **iostat**)
+**`-B`** | Paging statistics including page faults
+**`-x`** | Block device activity (similar to **iostat -x**)
+**`-n`** | Network statistics
+**`-P`** | Per CPU statistics (as in **`sar -P ALL 3`**)
+**`-q`** | Queue lengths (run queue, processes, and threads)
+**`-r`** | Swap and memory utilization statistics
+**`-R`** | Memory statistics
+`-u` | CPU utilization (default)
+**`-v`** | Statistics about inodes and files and files handles
+**`-w`** | Context switching statistics
+**`-W`** | Swapping statistics, pages in and out per second
+**`-f`** | Extract information from specified file, created by the **`-o`** option
+**`-o`** | Save readings in the file specified, to be read in later with **`-f`** option
+
+For example, below can take look at getting paging statistics, and then I/O and transfer rate statistics.
+
+**ksar** program -> **java**-based utility for generating nice graphs for **sar** data. Can be downloaded from https://sourceforge.net/projects/ksar/.
+
+![sario](/images/sario.png)
 
 ##
 
