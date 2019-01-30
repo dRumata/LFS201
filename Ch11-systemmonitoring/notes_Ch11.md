@@ -93,17 +93,42 @@ Some important log files found under `/var/log`:
 File | Purpose
 ---- | -------
 **`boot.log`** | System boot messages
-**`dmesg`** Kernel messages saved after boot. To see current contents of kernel message buffer, type **dmesg**.
+**`dmesg`** | Kernel messages saved after boot. To see current contents of kernel message buffer, type **dmesg**.
 **`messages`** or **`syslog`** | All important system messages
 **`secure`** | Security related messages
 
 In order to keep log files from growing without bound, **logrotate** program run periodically, keeps four previous copies (by default) of log files (optionally compressed). Controlled by `/etc/logrotate.conf`.
 
 
-## 11.7
-## 11.8
-## 11.9
-## 11.10
+## 11.7 The /proc and /sys Pseudo-filesystems
+`/proc` and `/sys` pseudo-filesystems contain lot of information about system. Many entries in these directory trees writable, can be used to change system behavior. Most cases, requires **root** user.
+
+Pseudo-filesystems because totally exist in memory. If look at disk partition when system not running, there will be only empty directory which is used as mount point.
+
+Information displayed is gathered only when looked at. No constant/periodic polling to update entries.
+
+
+## 11.8 /proc Basics
+`/proc` pseudo-filesystem: long history. Has roots in other UNIX operating system variants. Originally developed to display information about **processes** on system, each of which has own subdirectory in `/proc` with all important process characteristics available.
+
+Over time, grew to contain lot of information about system properties, eg. interrupts, memory, networking, etc. in somewhat anarchistic way. Still extensively used, will often refer to it.
+
+
+## 11.9 A survey of /proc
+What resides in `/proc` pseudo-filesystem:
+![lsprocubuntu](/images/lsprocubuntu.png)
+
+First, see there is subdirectory for each process on system, whether sleeping, running, scheduled out. Looking at random one:
+![lsproc3589](/images/lsproc3589.png)
+
+Directory full of information about status of process and resources it is using. For example:
+![procstatus](/images/procstatus.png)
+
+Other entries give system-wide information. Eg. can see **interrupt** statistics in below screenshot. For each interrupt, see what type it is, how many times it has been handled on each CPU, which devices registered to respond to it. Also get global statistics.
+![procinterrupts](/images/procinterrupts.png)
+
+
+## 11.10 /proc/sys
 ## 11.11
 ## 11.12
 ## 11.13
