@@ -83,7 +83,23 @@ $ dmesg -w
 which shows only kernel-related messages.
 
 
-## 11.6
+## 11.6 Important Log Files in /var/log
+Besides looking at log messages in terminal window, can see them using graphical interfaces.
+
+On GNOME desktop, can also access messages by clicking on **`System -> Administration -> System Log`** or **`Applications -> System Tools -> Log File`** Viewer in your Desktop menus, and other desktops have similar links you can locate.
+
+Some important log files found under `/var/log`:
+
+File | Purpose
+---- | -------
+**`boot.log`** | System boot messages
+**`dmesg`** Kernel messages saved after boot. To see current contents of kernel message buffer, type **dmesg**.
+**`messages`** or **`syslog`** | All important system messages
+**`secure`** | Security related messages
+
+In order to keep log files from growing without bound, **logrotate** program run periodically, keeps four previous copies (by default) of log files (optionally compressed). Controlled by `/etc/logrotate.conf`.
+
+
 ## 11.7
 ## 11.8
 ## 11.9
