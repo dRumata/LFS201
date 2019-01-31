@@ -102,7 +102,7 @@ Can see example below. Can consult **ps man** page for many other output options
 
 ## 12.10 Using pstree
 **pstree** gives visual description of process ancestry and multi-threaded applications:
-```shell
+```
 $ pstree -aAp 2408
 
 bash,2408
