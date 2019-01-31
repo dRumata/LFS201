@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch11-systemmonitoring/notes_Ch11.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch13-title/notes_Ch13.md)
+[Previous Chapter](../Ch11-systemmonitoring/notes_Ch11.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch13-memory/notes_Ch13.md)
 
 ---
 
@@ -127,10 +127,32 @@ dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18046
 dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18047
 ```
 
+## 12.11 Viewing System Loads with top
+When want to know what system spending time on, first tool often used is **top**. Below shows what can be seen when using **top** without arguments.
+
+BY default, **top** refreshes every 3.0 seconds.
+
+![top1](/images/top1.png)
+
+
+## 12.12 top Options
+**top**: ancient utility and has tons of options, as well as interactive commands triggered when certain keys pressed. Eg. if hit **`1`**, each CPU shown separately, if hit **`i`** only active processes shown. Can see what doing both gives you below.
+
+![top2](/images/top2.png)
+
+Have lot of control over how processes sorted, which fields displayed. Many others besides defaults. Eg. hitting **`h`** or **`?`** gives brief list of interactive commands, **`q`** quits.
+
+Can **kill** task by hitting **`k`**, or **renice** (change its priority) with **`r`**.
+
+**man top** will give extensive documentation on configuration possibilities, options, interactive possibilities.
+
+Note: there are popular alternatives to standard **top** program. Some have more visual interfaces and/or additional information, such as **htop**, **ntop**, **atop**. Most Linux distributions have graphical system monitor (eg. **gnome-system-monitor** or **ksysguard**), which has **top**-like display window that can be shown.
+
+
 ##
 
 [Back to top](#)
 
 ---
 
-[Previous Chapter](../Ch11-systemmonitoring/notes_Ch11.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch13-title/notes_Ch13.md)
+[Previous Chapter](../Ch11-systemmonitoring/notes_Ch11.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch13-memory/notes_Ch13.md)
