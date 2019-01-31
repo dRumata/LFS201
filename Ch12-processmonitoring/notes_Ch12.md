@@ -108,11 +108,11 @@ $ pstree -aAp 2408
 bash,2408
 |-emacs,24998 pmonitor.tex
 |  |-{emacs},25002
-|  \'-{emacs},25002
+|  '-{emacs},25002
 |-evince,18036 LFS201-SLIDES.pdf
 |  |-{evince},18040
 |  |-{evince},18046
-|  \'-{evince},18047
+|  '-{evince},18047
 ```
 Consult **man** page for **pstree** for explanation of many options. In above, have chosen just to show information for **`pid-2408`**.
 
@@ -125,6 +125,7 @@ dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18036
 dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18040
 dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18046
 dr-xr-xr-x 5 coop coop 0 Sep 11 07:15 18047
+```
 
 ##
 
