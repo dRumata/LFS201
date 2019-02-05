@@ -95,6 +95,82 @@ Entry | Purpose
 **`vfs_cache_pressure`** | How aggressively the kernel should reclaim memory used for inode and dentry cache. Default is 100; if 0 this memoery is never reclaimed due to memory pressure
 
 
+## 13.7 vmstat
+**vmstat**: multi-purpose tool that displays information about memory, paging, I/O, processor activity and processes. Has many options. General form of command:
+```shell
+$ vmstat [options] [delay] [count]
+```
+
+If **delay** given in seconds, report repeated at interval count times. If **count** not given, **vmstat** will keep reporting statistics forever, until killed by signal, such as **`Ctrl-C`**.
+
+If no other arguments given, can see what **vmstat** displays, where first line shows averages since last reboot, while succeeding lines show activity during specified interval.
+```shell
+$ vmstat 2 4
+```
+
+![vmstat](/images/vmstat.png)
+
+Fields shown are:
+
+**vmstat Fields**
+
+Field | Subfield | Meaning
+----- | -------- | -------
+Processes | r | Number of processes waiting to be scheduled in
+Processes | b | Number of processes in uninterruptible sleep
+memory | swpd | Virtual memory used (KB)
+memory | free | Free (idle) memory (KB)
+memory | buff | Buffer memory (KB)
+memory | cache | Cached memory (KB)
+swap | si | Memory swapped in (KB)
+swap | so | Memory swapped out (KB)
+I/O | bi | Blocks read from devices (block/sec)
+I/O | bo | Blocks written to devices (block/sec)
+system | in | Interrupts/second
+system | cs | Context switches/second
+CPU | us | CPU time running user code (percentage)
+CPU | sy | CPU time running kernel (system) code (percentage)
+CPU | id | CPU time idle (percentage)
+CPU | wa | Time waiting for I/O (percentage)
+CPU | st | Time "stolen" from virtual machine (percentage)
+
+If option **`-S m`** given, memory statistics will be in MB instead of KB.
+
+With **`-a`** option, **vmstat** displays information about **active** and **inactive** memory, where **active** memory pages are those which have been recently used. May be **clean** (disk contents are up to date) or **dirty** (need to be flushed to disk eventually), By contrast, **inactive memory** pages have not been recently used and are more likely to be clean and are released sooner under memory pressure:
+```shell
+$ vmstat -a 2 4
+```
+Memory can move back and forth between active and inactive lists, as they get newly referenced, or go a long time between uses.
+
+![vmstata](/images/vmstata.png)
+
+To get table of memory statistics and certain event counters, use **`-s`** option:
+
+![vmstats](/images/vmstats.png)
+
+To get table of disk statistics, use **`-d`** option:
+
+![vmstatd](/images/vmstatd.png)
+
+**vmstat** Disk Fields
+
+Field | Subfield | Meaning
+----- | -------- | -------
+reads | total | Total reads completed successfully
+reads | merged | Grouped reads (resulting in one I/O)
+reads | ms | Milliseconds spend reading
+writes | total | total writes completed successfully
+writes | merged | Grouped writes (resulting in one I/O)
+writes | ms | Milliseconds spent writing
+I/O | cur | I/O in progress
+I/O | sec | seconds spent for I/O
+
+If want to just get some quick statistics on only one partition, use **`-p`** option:
+
+![vmstatp](/images/vmstatp.png)
+
+
+
 ##
 
 [Back to top](#)
