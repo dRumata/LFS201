@@ -169,8 +169,6 @@ If want to just get some quick statistics on only one partition, use **`-p`** op
 
 ![vmstatp](/images/vmstatp.png)
 
-
-
 ##
 
 [Back to top](#)
