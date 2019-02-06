@@ -19,3 +19,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 11. [System Monitoring](/Ch11-systemmonitoring/notes_Ch11.md)
 12. [Process Monitoring](/Ch12-processmonitoring/notes_Ch12.md)
 13. [Memory: Monitoring Usage and Tuning](/Ch13-memory/notes_Ch13.md)
+14. [I/O Monitoring and Tuning](/Ch14-io/notes_Ch14.md)

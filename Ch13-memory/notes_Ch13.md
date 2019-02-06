@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch12-processmonitoring/notes_Ch12.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch14-title/notes_Ch14.md)
+[Previous Chapter](../Ch12-processmonitoring/notes_Ch12.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch14-io/notes_Ch14.md)
 
 ---
 
@@ -264,7 +264,7 @@ this malfunction is caused.
 
 In order to make decisions of who gets sacrificed to keep system alive, value called **badness** computed (can be read from `/proc/[pid]/oom_score`) for each process on system and order of killing determined by this value.
 
-
+Two entries in same directory can be used to promote/demote likelihood of extermination. Value of **`oom_adj`**: number of bits points should be adjusted by. Normal users can only increase badness. Decrease (negative value for **`oom_adj`**) can only be specified by superuser. Value of **`oom_adj_score`** directly adjusts point value. Note: use of **`oom_adj`** deprecated.
 
 ##
 
@@ -272,4 +272,4 @@ In order to make decisions of who gets sacrificed to keep system alive, value ca
 
 ---
 
-[Previous Chapter](../Ch12-processmonitoring/notes_Ch12.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch14-title/notes_Ch14.md)
+[Previous Chapter](../Ch12-processmonitoring/notes_Ch12.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch14-io/notes_Ch14.md)
