@@ -152,7 +152,7 @@ To get table of disk statistics, use **`-d`** option:
 
 ![vmstatd](/images/vmstatd.png)
 
-**vmstat** Disk Fields
+**vmstat Disk Fields**
 
 Field | Subfield | Meaning
 ----- | -------- | -------
@@ -168,6 +168,103 @@ I/O | sec | seconds spent for I/O
 If want to just get some quick statistics on only one partition, use **`-p`** option:
 
 ![vmstatp](/images/vmstatp.png)
+
+
+## 13.8 /proc/meminfo
+As noted earlier, relatively lengthy summary of memory statistics in `/proc/meminfo`:
+
+![procmeminfo](/images/procmeminfo.png)
+
+Worthwhile to go through listing and understand most of the entries:
+
+`/proc/meminfo` **Entries**
+
+Entry | Meaning
+----- | -------
+**`MemTotal`** | Total usable RAM (physical minus some kernel reserved memory)
+**`MemFree`** | Free memory in both low and high zones
+**`Buffers`** | Memory used for temporary block I/O storage
+**`Cached`** | Page cache memory, mostly for file I/O
+**`SwapCached`** | Memory that was swapped back in but is still in the swap file
+**`Active`** | Recently used memory, not to be claimed first
+**`Inactive`** | Memory not recently used, more eligible for reclamation
+**`Active (anon)`** | Active memory for **anonymous** pages
+**`Inactive (anon)`** | Inactive memory for **anonymous** pages
+**`Active (file)`** | Active memory for **file**-backed pages
+**`Inactive (file)`** | Inactive memory for **file**-backed pages
+**`Unevictable`** | Pages which can not be swapped out of memory or released
+**`Mlocked`** | Pages which are locked in memory
+**`SwapTotal`** | Total swap space available
+**`SwapFree`** | Swap space not being used
+**`Dirty`** | Memory which needs to be written back to disk
+**`Writeback`** | Memory actively being written back to disk
+**`AnonPages`** | Non-file back pages in cache
+**`Mapped`** | Memory mapped pages, such as libraries
+**`Shmem`** | Pages used for shared memory
+**`Slab`** | Memory used in slabs
+**`SReclaimable`** | Cached memory in slabs that can be reclaimed
+**`SUnreclaim`** | Memory in slabs that can't be reclaimed
+**`KernelStack`** | Memory used in kernel stack
+**`PageTables`** | Memory being used by page table structures
+**`Bounce`** | Memory used for block device bounce buffers
+**`WritebackTmp`** | Memory used by **FUSE** filesystems for writeback buffers
+**`CommitLimit`** | Total memory available to be used, including overcommission
+**`Committed_AS`** | Total memory presently allocated, whether or not it is used
+**`VmallocTotal`** | Total memory available in kernel for **vmalloc** allocations
+**`VmallocUsed`** | Memory actually used by **vmalloc** allocations
+**`VmallocChunk`** | Largest possible contiguous **vmalloc** area
+**`HugePages_Total`** | Total size of the huge page pool
+**`HugePages_Free`** | Huge pages that are not yet allocated
+**`HugePage_Rsvd`** | Huge pages that have been reserved, but not yet used
+**`HugePages_Surp`** | Huge pages that are surplus, used for overcommission
+**`Hugepagesize`** | Size of a huge page
+
+Note: exact entries seen may depend on exact kernel version being run.
+
+
+## 13.9 OOM Killer
+Simplest way to deal with memory pressure -> permit memory allocations to succeed as long as free memory is available, fail when all memory exhausted.
+
+Second simplest way -> use **swap** space on disk to push some resident memory out of core. In this case, total available memory (at least in theory) is actual RAM plus size of **swap** space. Hard part of this is to figure out which pages of memory to swap out when pressure demands. In this approach, once swap space filled, requests for new memory must fail.
+
+Linux, however, goes one better. Permits system to overcommit memory, so that it can grant memory requests that exceed size of RAM plus **swap**. Might seem foolhardy, but many (if not most) processes do not use all requested memory.
+
+Example 1: program that allocates 1 MB buffer, and then uses only few pages of memory. Example 2: every time child process forked, receives copy of entire memory space of parent. Because Linux uses COW (copy on write) technique, unless one of the processes modifies memory, no actual copy needs to be made. However, kernel has to assume that copy might need to be done.
+
+Thus, kernel permits overcommission of memory, but only for pages dedicated to user processes. Pages used within kernel not swappable, and always allocated at request time.
+
+Can modify, and even turn off this overcommission by setting value of `/proc/sys/vm/overcommit_memory`:
+- 0: (default) Permit overcommission, but refuse obvious overcommits, and give root users somewhat more memory allocation than normal users
+- 1: All memory requests are allowed to overcommit
+- 2: Turn off overcommission. Memory requests will fail when the total memory commit reaches the size of the **swap** space plus a configurable percentage (50 by default) of RAM. This factor is modified changing `/proc/sys/vm/overcommit_ratio`.
+
+If available memory exhausted, Linux invokes **OOM**-killer (<strong>O</strong>ut <strong>O</strong>f <strong>M</strong>emory) to decide which process(es) to exterminate to open up memory.
+
+No precise science, algorithm must be heuristic, cannot satisfy everyone. In minds of many developers, purpose of OOM-killer to permit graceful shutdown, rather than be part of normal operations.
+
+An amusing take on this by Andries Brouwer (https://lwn.net/Articles/104185/):
+>An aircraft company discovered that it was cheaper to fly its planes
+with less fuel on board. The planes would be lighter and use less fuel
+and money was saved. On rare occasions however the amount of fuel was
+insufficient, and the plane would crash. This problem was solved by
+the engineers of the company by the development of a special OOF
+(out-of-fuel) mechanism. In emergency cases a passenger was selected
+and thrown out of the plane. (When necessary, the procedure was
+repeated.)  A large body of theory was developed and many publications
+were devoted to the problem of properly selecting the victim to be
+ejected.  Should the victim be chosen at random? Or should one choose
+the heaviest person? Or the oldest? Should passengers pay in order not
+to be ejected, so that the victim would be the poorest on board? And
+if for example the heaviest person was chosen, should there be a
+special exception in case that was the pilot? Should first class
+passengers be exempted?  Now that the OOF mechanism existed, it would
+be activated every now and then, and eject passengers even when there
+was no fuel shortage. The engineers are still studying precisely how
+this malfunction is caused.
+
+In order to make decisions of who gets sacrificed to keep system alive, value called **badness** computed (can be read from `/proc/[pid]/oom_score`) for each process on system and order of killing determined by this value.
+
+
 
 ##
 
