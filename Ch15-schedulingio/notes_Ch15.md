@@ -14,6 +14,28 @@ System performance often depends very heavily on optimizing I/O scheduling strat
 - Understand how the **CFQ** (<strong>C</strong>ompletely <strong>F</strong>air <strong>Q</strong>ueue) and **Deadline** algorithms work.
 
 
+## 15.4 I/O Scheduling
+**I/O scheduler** provides interface between generic block layer and low-level physical device drivers. Both VM (Virtual Memory) and VFS (Virtual File System) layers submit I/O requests to block devices. Job of I/O scheduling layer to prioritize + order requests before they are given to block devices.
+
+Any I/O scheduling algorithm has to satisfy certain (sometimes conflicting) requirements:
+- Hardware access times should be minimized; ie, requests should be order according to physical location on disk. Leads to **elevator** scheme where requests inserted in pending queue in physical order
+- Requests should be merged to extent possible to get as big a contiguous region as possible, which also minimizes disk access time
+- Requests should be satisfied with as low a latency as feasible. In some cases, determinism (in sense of deadlines) important
+- Write operations usually wait to migrate from caches to disk without stalling process. Read operations almost always require process to wait for completion before proceeding further. Favoring reads over writes leads to better parallelism and system responsiveness
+- Processes should share I/O bandwidth in fair, consciously prioritized fashion. Even if it means some overall performance slowdown of I/O layer, process throughput should not suffer inordinately
+
+
+## 15.5 I/O Scheduler Choices
+Since demands can be conflicting, different I/O schedulers may be appropriate for different workloads, eg, large database server vs. desktop system. Different hardware may mandate different strategy. To provide flexibility, Linux kernel has object oriented scheme, where pointers to various needed functions supplied in a data structure, the particular one of which can be selected at boot on kernel command line:
+```shell
+linux ... elevator=[cfq|deadline|noop]
+```
+At least one of I/O scheduling algorithms must be compiled into kernel. Current choices:
+- Completely Fair Queueing (CFQ)
+- Deadline Scheduling
+- noop (A simple scheme)
+
+Default choice is compile configuration option. Modern distributions choose either CFQ or Deadline.
 
 
 ##
