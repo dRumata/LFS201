@@ -21,3 +21,5 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 13. [Memory: Monitoring Usage and Tuning](/Ch13-memory/notes_Ch13.md)
 14. [I/O Monitoring and Tuning](/Ch14-io/notes_Ch14.md)
 15. [I/O Scheduling](/Ch15-schedulingio/notes_Ch15.md)
+16. [Linux Filesystems and the VFS](/Ch16-linuxfsvfs/notes_ch16.md)
+17. [Disk Partitioning](/Ch17-diskpartitioning/notes_Ch17.md)
