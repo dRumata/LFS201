@@ -35,7 +35,6 @@ Local filesystems generally reside within disk partition (which can be physical 
 All I/O activity concerning file usually also involves file's inode, as information must be updated.
 
 ![data_storage_small](/images/data_storage_small.png)
-
 **Data storage in an inode vs. data storage in a directory file**
 
 
