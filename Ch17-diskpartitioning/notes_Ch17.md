@@ -1,13 +1,13 @@
-[Previous Chapter](../ChXX-title/notes_ChXX.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../ChXX-title/notes_ChXX.md)
+[Previous Chapter](../Ch16-linuxfsvfs/notes_Ch16.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch18-fsfeatures/notes_Ch18.md)
 
 ---
 
-# Chapter XX Title - Notes
+# Chapter 17 Disk Partitioning - Notes
 
-## XX.2 Introduction
+## 17.2 Introduction
 
 
-## XX.3 Learning Objectives:
+## 17.3 Learning Objectives:
 
 
 
@@ -17,4 +17,4 @@
 
 ---
 
-[Previous Chapter](../ChXX-title/notes_ChXX.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../ChXX-title/notes_ChXX.md)
+[Previous Chapter](../Ch16-linuxfsvfs/notes_Ch16.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch18-fsfeatures/notes_Ch18.md)
