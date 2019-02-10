@@ -80,7 +80,7 @@ Structure of MBR defined by operating system-independent convention. First 446 b
 
 On Linux systems, beginning and ending address in CHS ignored.
 
-Note for curious: there are 2 more bytes at the end of the MBR known as the magic number, signature word, or end of sector marker, which always have the value **`0x55AA**.
+Note for curious: there are 2 more bytes at the end of the MBR known as the magic number, signature word, or end of sector marker, which always have the value **`0x55AA`**.
 
 ![partition_table_small](/images/partition_table_small.png)
 
