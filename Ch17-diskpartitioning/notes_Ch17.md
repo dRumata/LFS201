@@ -148,6 +148,139 @@ In above, **`sd`** means SCSI or SATA disk. Back when IDE disks could be found, 
 Doing **`ls -l /dev`** will show current available disk device nodes.
 
 
+## 17.11 More on SCSI Device Names
+For SCSI devices, need to elaborate a little more on what first, second hard disk etc. means. Determined by controller number/ID number combination.
+
+Drive designation (**`a`**, **`b`**, **`c`**, etc.) primarily based on ID number of SCSI device, rather than position on bus itself.
+
+Eg. if two SCSI controllers with target ID number 1 and 3 on controller 0, and target ID number 2 and 5 on controller 1 (with ID 2 as last drive):
+- ID 1: `/dev/sda`
+- ID 3: `/dev/sdb`
+- ID 2 (on controller 1): `/dev/sdc`
+- ID 5: `/dev/sdd`
+
+
+## 17.12 blkid
+**blkid**: utility to locate block devices and report on attributes. Works with **libblkid** library. Can take as an argument a particular device of list of devices. Image below shows use of **blkid** with arguments:
+```shell
+$ sudo blkid /dev/sda*
+```
+
+Can determine type of content (eg. filesystem, swap) a block device holds, and also attributes (tokens, **`NAME=value`** pairs) from content metadata (eg. **`LABEL`** or **`UUID`** fields).
+
+Will only work on devices which contain data that is finger-printable: eg. empty partition will not generate block-identifying **UUID**.
+
+Has two main forms of operations: either searching for a device with specific **`NAME=value`** pair, or displaying **`NAME=value`** pairs for one or more devices. Without arguments, will report on all devices. Quite a few options designating how to specify devices and what attributes to report on. Other sample commands:
+```shell
+$ sudo blkid
+$ sudo blkid -L root
+```
+
+![blkid](/images/blkid.png)
+
+
+## 17.13 lsblk
+**lsblk**: related utility which presents block device information in tree format, as shown below:
+
+![lsblk](/images/lsblk.png)
+
+
+## 17.14 Sizing Up Partitions
+Most Linux systems should use <strong><i>minimum</i></strong> of two partitions:
+- **/** (**root**): used for the entire logical filesystem
+  - In practice, most installations will have more than one filesystem on more than one partition, which are joined together at **mount points**
+  - Difficult with most filesystem types to resize the root partition. Using **LVM** (discussed later), can make this easier.
+  - While certainly possible to run Linux with just the root partition, most systems use more partitions to allow for easier backups, more efficient use of disk drives, and better security.
+- **Swap**: used as extension of physical memory. Pages of memory which are not file-backed can be moved to disk until needed again.
+  - Usual recommendation: swap size should be equal to physical memory in size. Sometimes, twice that recommended. However, correct choice depends on related issues of system use scenarios, hardware capabilities. Examples of thinking on this subject can be found at https://help.ubuntu.com/community/SwapFaq and https://www.suse.com/support/kb/doc/?id=7010157.
+  - System may have multiple swap partitions and/or swap files.
+  - On a single disk system, try to center the swap partition. On multiple disk systems, try to spread swap over disks.
+  - Adding more and more swap will necessarily not help because at a certain point it becomes useless. One will need to either add more memory or re-evaluate system setup.
+
+Swap used as **virtual memory**: any time pages from processes are moved out of physical memory, generally stored on swap device. Recent Ubuntu distributions are now placing swap in a file rather than a partition by default.
+
+
+## 17.15 Backing Up and Restoring Partition Tables
+Partitioning and re-partitioning disks are dangerous operations. Need to know how to back up/restore partition tables in order to restore the situation if something goes wrong.
+
+Backing up can be done easily with **dd**:
+```shell
+$ sudo dd if=/dev/sda of=mbrbackup bs-512 count=1
+```
+which will back up **MBR** on first disk, including 64-bit partition table which is part of it.
+
+**MBR** can then be restored, if necessary, by doing:
+```shell
+$ sudo dd if=mbrbackup of=/dev/sda bs=512 count=1
+```
+
+Note: above commands only copy primary partition table. Do not deal with any partition tables stored in other partitions (for extended partitions, etc.).
+
+**Note**: should *always* assume that changing disk partition table might eliminate all data in all filesystems on disk (It should not, but be cautious!). Always prudent to make backup of all data (that is not already backed up) before doing any of this type of work.
+
+In particular, must be careful in using **dd**: simple typing error or misused option could *destroy* entire disk. Hence, do backups!!!
+
+For GPT systems, best to use **sgdisk** tool:
+```shell
+x7:/tmp>sudo sgdisk --backup=/tmp/sda_backup /dev/sda
+The operation has completed successfully.
+x7:/tmp>sudo file sda_backup
+sda_backup: x86 boot sectorl partition 1: ID=0xee, starthead 0, startsector 1, 1000215215 sectors, extended partition table (last)\011, \
+code offset 0x63
+```
+
+Note if run on a pure MBR system:
+```shell
+x7:/tmp>sudo sgdisk --backup=/tmp/sda_backup /dev/sda
+*********************************************
+Found Invalid GPT and valid MBR; converting MBR to GPT format in memory.
+*********************************************
+The operation has completed successfully.
+x7:/tmp>sudo file sda_backup
+/tmp/sda_backup: x86 boot sectorl partition 1: ID=0xee, starthead 0, startsector 1, 3907029167 sectors, code offset 0xb8
+```
+
+## 17.16 Partition Table Editors
+Number of utilities which can be used to manage partition tables:
+- **fdisk**: menu-driven partition table editor. Most standard and one of the most flexible partition table editors. As with any other partition table editor, make sure to write down current partition table settings or make copy of current settings before making changes
+- **sfdisk**: non-interactive Linux-based partition editor program, making it useful for scripting. Use **sfdisk** tool with care!
+- **parted**: **GNU** partition manipulation program. Can create, remove, resize, move partitions (including certain filesystems). GUI interface to **parted** command is **gparted**
+- **gparted**: widely used graphical interface to **parted**
+- **gdisk**: used for GPT systems, but can also operate on MBR systems
+- **sgdisk**: script or command line interface
+
+Many Linux distributions have live/installation version which can be run off either CD-ROM or USB stick. These media usually include a copy of **gparted**, so can easily be used as graphical partitioning tool on disks which are not actually being used while partitioning program is run.
+
+
+## 17.16 Using fdisk
+**fdisk** always included in any Linux installation, so good idea to learn how to use it. Must be root to run **fdisk**. Can be somewhat complex to handle, caution is advised.
+
+**fdisk** interface: simple and text-driven menu. After starting on particular disk:
+```shell
+$ sudo fdisk /dev/sdb
+```
+main (one letter) commands are:
+- **`m`**: Display the menu
+- **`p`**: List the partition table
+- **`n`**: Create a new partition
+- **`d`**: Delete a partition
+- **`t`**: Change a partition type
+- **`w`**: Write the new partition table information and exit
+- **`q`**: Quit without making changes
+
+Fortunately, no actual changes are made until you write the partition table to the disk by entering **`w`**. Therefore important to verify partition table is correct (with **`p`**) before writing to disk with **`w`**. If something wrong, can jump out safely with **`q`**.
+
+System will not use new partition table until reboot. However, can use following command:
+```shell
+$ sudo partprobe -s
+```
+to try and read in revised partition table. However, this doesn't always work reliably and it is best to reboot before doing things like formatting new partitions, etc. as mixing up partitions can be catastrophic.
+
+Any anytime, can do:
+```shell
+$ cat /proc/partitions
+```
+to examine what partitions the operating system is currently aware of.
 
 
 ##
