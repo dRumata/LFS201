@@ -126,7 +126,26 @@ Note: both examples give unique **`UUID`**, which describes filesystem on partit
 
 GPT partition also gives **`PARTUUID`** which describes partition and stays the same even if filesystem reformatted. If hardware supports it, possible to migrate MBR system to GPT, but not hard to *brick* machine while doing so.
 
-Thus, usually benefits not work the risk.
+Thus, usually benefits not worth the risk.
+
+## 17.10 Naming Disk Devices and Nodes
+Linux kernel interacts at low level with disks through device nodes normally found in `/dev` directory. Normally, device nodes accessed only through infrastructure or kernel's Virtual File System. Raw access through device nodes -> extremely efficient way to destroy filesystem. For example, you do this when formatting a partition:
+```shell
+$ sudo mkfs.ext4 /dev/sda9
+```
+
+Device nodes for SCSI and SATA disks follow simple **`xxy[z]`** naming convention, where **`xx`** is device type (usually **`sd`**), **`y`** is the letter for drive number (**`a`**, **`b`**, **`c`**, etc.), and **`z`** is partition number:
+- First hard disk is `/dev/sda`
+- Second hard disk is `/dev/sdb`
+- Etc.
+
+Partitions also enumerated:
+- `/dev/sdb1`: first partition on second disk
+- `/dev/sdc4`: fourth partition on third disk
+
+In above, **`sd`** means SCSI or SATA disk. Back when IDE disks could be found, they would have been `/dev/hda3`, `/dev/hdb` etc.
+
+Doing **`ls -l /dev`** will show current available disk device nodes.
 
 
 
