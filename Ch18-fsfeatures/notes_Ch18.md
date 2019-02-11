@@ -55,7 +55,45 @@ where **`[device-file]`** is usually device name like `/dev/sda3` of `/dev/vg/lv
 
 Each filesystem has own particular options that can be set when formatting. Eg. when creating **ext4** filesystem, journalling settings = one thing to keep in mind. Include defining journal file size, whether or not to use external journal file.
 
-Should lookat **man** page for each of **mkfs\*** programs to see details.
+Should look at **man** page for each of **mkfs.\*** programs to see details.
+
+
+## 18.6 Checking an Repairing Filesystems
+Every filesystem type has utility designed to check for errors (and hopefully fix any that are found). Generic name for these utilities: **fsck**. However, just frontend for filesystem-specific programs.
+
+![fsck](/images/fsck.png)
+
+Thus, following two commands entirely equivalent:
+```shell
+$ sudo fsck -t ext4 /dev/sda10
+$ sudo fsck.ext4 /dev/sda10
+```
+If filesystem is of type understood by operating system, can almost always just do:
+```shell
+$ sudo fsck /dev/sda10
+```
+and system will figure out type by examining first few bytes on partition.
+
+**fsck** run automatically after set number of mounts, or set interval since last time it was run, or after abnormal shutdown. Should only be run on unmounted filesystems. Can force a check of all ounted filesystems at boot by doing:
+```shell
+$ sudo touch /forcefsck
+$ sudo reboot
+```
+The file `/forcefsck` will disappear after successful check. One reason this is valuable trick: can do **fsck** on root filesystem, which is hard to do on running system.
+
+General format for **fsck**:
+```shell
+fsck [-t fstype] [options] [device-file]
+```
+where **`[device-file]`** is usually device name like `/dev/sda3` or `/dev/vg/lvm1`. Usually, do not need to specify filesystem type, as **fsck** can figure it out by examining superblocks at start of partition.
+
+Can control whether any errors found should be fixed one by one manually with **`-r`** option, or automatically, as best possible, by using **`-a`** option, etc. In addition, each filesystem type may have own particular options that can be set when checking.
+
+Note: **journalling** filesystems much faster to check than older generation filesystems for two reasons:
+- Rarely need to scan entire partition for errors, as everything but very last transaction logged and confirmed, so takes almost no time to check
+- Even if whole filesystem checked, newer filesystems designed with **fast fsck** in mind. Older filesystems did not think much about this when designed as sizes were much smaller
+
+Should look at **man** page for each of **fsck.\*** programs to see details
 
 
 ##
