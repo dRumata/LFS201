@@ -37,8 +37,25 @@ $ chattr [+|-|=mode] filename
 $ lsattr filename
 ```
 
+## 18.5 Creating and Formatting Filesystems
+Every filesystem type has utility for **formatting** (making) filesystem on partition. Generic name for these utilities: **mkfs**. However, this is just frontend for filesystem-specific programs, each of which may have particular options.
 
+![mkfs](/images/mkfs.png)
 
+Thus, following two commands entirely equivalent:
+```shell
+$ sudo mkfs -t ext4 /dev/sda10
+$ sudo mkfs.ext4 /dev/sda10
+```
+General format for **mkfs**:
+```shell
+mkfs [-t fstype] [options] [device-file]
+```
+where **`[device-file]`** is usually device name like `/dev/sda3` of `/dev/vg/lvm1`.
+
+Each filesystem has own particular options that can be set when formatting. Eg. when creating **ext4** filesystem, journalling settings = one thing to keep in mind. Include defining journal file size, whether or not to use external journal file.
+
+Should lookat **man** page for each of **mkfs\*** programs to see details.
 
 
 ##
