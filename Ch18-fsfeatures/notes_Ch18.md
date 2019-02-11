@@ -93,7 +93,7 @@ Note: **journalling** filesystems much faster to check than older generation fil
 - Rarely need to scan entire partition for errors, as everything but very last transaction logged and confirmed, so takes almost no time to check
 - Even if whole filesystem checked, newer filesystems designed with **fast fsck** in mind. Older filesystems did not think much about this when designed as sizes were much smaller
 
-Should look at **man** page for each of **fsck.\*** programs to see details
+Should look at **man** page for each of **fsck.\*** programs to see details.
 
 
 ##
