@@ -154,6 +154,79 @@ $ sudo quotaoff -avg
 Note: quota operations will fail if files **`aquota.user`** or **`aquota.group`** do not exist.
 
 
+## 19.9 Examining Quotas
+**quota** utility used to generate reports on quotas:
+- **`quota`** (or **`quota -u`**) returns current user quota
+- **`quota -g`** returns current group quota
+- Superuser may look at quotas for any user or group by specifying user or group name
+
+For example:
+```shell
+$ sudo quota george
+Disk quotas for user george (uid 1000):
+   Filesystem   blocks quota limit grace files quota limit grace
+    /dev/sda5   837572   500  1000        5804     0     0
+
+$ sudo quota gracie
+Disk quotas for user gracie (uid 1001):
+   Filesystem   blocks quota limit grace files quota limit grace
+    /dev/sda5    83757  5000 10000        5804     0     0      
+```
+
+
+## 19.10 Setting Quotas
+Typing **edquota** brings up quota editor. For specified user or group, temporary file created with text representation of current disk quotas for that user or group.
+
+Then, editor invoked for that file, and quotas may then be modified. Once you leave editor, temporary file read and binary quota files adopt changes.
+
+Soft and hard limits -> only fields which can be edited in quota. Other fields informational only.
+
+Examples of how to use **edquota**:
+- **`edquota -u [username]`** edits limits for **`username`**
+- **`edquota -g [groupname]`** edits limits for **`groupname`**
+- **`edquota -u -p [userproto] [username]`** copies **`userproto`**'s user quota values to **`username`**
+- **`edquota -g -p [groupproto] [groupname]`** copies **`groupproto`**'s group quota values to **`groupname`**
+- **`edquota -t`** to set grace periods
+
+Third and fourth commands useful for including in scripts which might be used to create new accounts and set quotas for them.
+
+Quotas for users/groups may be set for disk blocks and/or inodes. In addition, soft/hard limits may be set, as well as grace periods. Soft limits may be exceeded for a grace period. Hard limits may never be exceeded.
+
+Grace period set on per-filesystem basis.
+```shell
+$ sudo edquota gracie
+$ sudo edquota -t
+```
+
+## 19.11 df: Filesystem Usage
+**df** (<strong>d</strong>isk <strong>f</strong>ree) utility examines filesystem capacity and usage. Below, **`-h`** option means "human-readable" (ie. in KB, MD, GB, not bytes) and **`-T`** shows filesystem type. Using **`-i`** option would show inode information instead of bytes.
+
+![dfh](/images/dfh.png)
+
+
+## 19.12 du: Disk Usage
+**du** (<strong>d</strong>isk <strong>u</strong>sage) used to evaluate both disk capacity and usage.
+
+To display disk usage for current directory:
+```shell
+$ du
+```
+To list all files, not just directories:
+```shell
+$ du -a
+```
+To list in human-readable format:
+```shell
+$ du -h
+```
+To display disk usage for specific directory:
+```shell
+$ du -h somedir
+```
+
+![du](/images/du.png)
+
+
 ##
 
 [Back to top](#)
