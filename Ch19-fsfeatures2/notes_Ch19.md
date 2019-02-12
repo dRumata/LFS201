@@ -112,7 +112,7 @@ $ sudo quotaon  [flags] [filesystem]
 $ sudo quotaoff [flags] [filesystem]
 ```
 where flags can be:
-- **`-a, --all`** | turn quotas off for all filesystems
+**`-a, --all`** | turn quotas off for all filesystems
 **`-f, --off`** | turn quotas off
 **`-u, --user`** | operate on user quotas
 **`-g, --group`** | operate on group quotas
