@@ -26,3 +26,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 18. [Filesystem Features: Attributes, Creating, Checking, Mounting](/Ch18-fsfeatures/notes_Ch18.md)
 19. [Filesystem Features: Swap, Quotas, Usage](/Ch19-fsfeatures2/notes_Ch19.md)
 20. [The Ext2/Ext3/Ext4 Filesystems](/Ch20-extfs/notes_Ch20.md)
+21. [The XFS and btrfs Filesystems](/Ch21-xfsbtrfs/notes_Ch21.md)
