@@ -93,7 +93,7 @@ After boot block, there is a series of **block groups**, each of which is same s
 
 **ext2/3/4 Filesystem Layout**
 
-![ext2 filesystem](/images/ext2 filesystem.png)
+![ext2 filesystem](/images/ext2\ filesystem.png)
 
 First and second block groups same in every block group, comprise **Superblock** and **Group Descriptors**. Under normal circumstances, only those in first block group used by kernel; duplicate copies only referenced when filesystem being checked. If everything OK, kernel merely copies them over from the first block group. If there is problem with master copies, goes to next and so on until healthy one found and filesystem structure is rebuilt. This redundancy makes it very difficult to thoroughly fry **ext2/3/4** filesystem, as long as filesystem checks run periodically.
 
