@@ -106,7 +106,7 @@ There are two copies of the GPT header, at the beginning + at the end of the dis
 - Number of partitions
 - Size of partition entries. Each partition entry has minimum size of 128 bytes
 
-![GPT Layout](/images/GPT Layout.png)
+![GPT Layout](/images/GPT_Layout.png)
 
 **blkid** utility (to be discussed later) show information about partitions.
 
