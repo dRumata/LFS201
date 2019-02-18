@@ -11,6 +11,16 @@
 - Use **sysctl** to set kernel parameters either after the system starts, or persistently across system reboots.
 
 
+## 25.4 Kernel and Operating System
+Narrowly defined, Linux is *only* the **kernel** of the **operating system**, which includes many other components, eg. libraries and applications that interact with the kernel.
+
+Kernel: essential central component that connects hardware to software, and manages system resources eg. memory, CPU time allocation among competing applications/services. Handles all connected devices using **device drivers**, makes devices available for operating system use.
+
+System running ***only*** a kernel has rather limited functionality. Will be found only in dedicated and focused **embedded devices**.
+
+
+
+
 ##
 
 [Back to top](#)
