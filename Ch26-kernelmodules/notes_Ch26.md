@@ -2,12 +2,16 @@
 
 ---
 
-# Chapter XX Title - Notes
+# Chapter 26 Kernel Modules - Notes
 
-## XX.2 Introduction
+## 26.2 Introduction
+Linux kernel makes extensive use of **modules**, which contains important software that can be loaded/unloaded as needed after system starts. Many modules incorporate **device drivers** to control hardware either inside system, or attached peripherally. Other modules can control network protocols, support different filesystem types, and many other purposes. Parameters can be specified when loading modules to control their behavior. End result: great flexibility and agility in responding to changing conditions and needs.
 
+## 26.3 Learning Objectives:
+- List the advantages of utilizing kernel modules.
+- Use **insmod**, **rmmod**, and **modprobe** to load and unload kernel modules.
+- Use **modinfo** to find out information about kernel modules.
 
-## XX.3 Learning Objectives:
 
 
 
