@@ -18,9 +18,10 @@ Linux uses **udev**, an intelligent apparatus for discovering hardware and perip
 ## 27.4 Device Nodes
 Character and block devices have filesystem entries associated with them. Network devices in Linux *do not*. These **device nodes** can be used by programs to communicate with devices, using normal I/O system calls such as **`open()`**, **`close()`**, **`read()`**, and **`write()`**. On other hand, network devices work by transmitting/receiving **packets**, which must be constructed by breaking up streams of data, or reassembled into streams when received.
 
-A device driver may manage multiple device nodes, which are normally placed in `/dev` directory:
-
-![lsdevicenodes](/images/lsdevicenodes.png)
+A device driver may manage multiple device nodes, which are normally placed in `/dev` directory. Can be seen with:
+```shell
+$ ls -l /dev
+```
 
 Device nodes can be created with:
 ```shell
@@ -32,6 +33,7 @@ mknod -m 666 /dev/mycdrv c 254 1
 ```
 
 ![device_node_large](/images/device_node_large.png)
+**Device nodes**
 
 
 ##
