@@ -42,7 +42,7 @@ $ sudo /sbin/rmmod module_name
 ```
 Note: not necessary to supply either full path name or **`.ko`** extension when removing module.
 
-![lsmod](/images.lsmod,png)
+![lsmod](/images/lsmod.png)
 
 Module loading/unloading must be done as root user. If full path name known, can always load module directly with:
 ```shell
