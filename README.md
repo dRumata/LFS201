@@ -28,7 +28,7 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 20. [The Ext2/Ext3/Ext4 Filesystems](/Ch20-extfs/notes_Ch20.md)
 21. [The XFS and btrfs Filesystems](/Ch21-xfsbtrfs/notes_Ch21.md)
 22. [Encrypting Disks](/Ch22-encryptingdisks/notes_Ch22.md)
-23. [LVM](/Ch23-lvm/notes_Ch23.md)
+23. [Logical Volume Management (LVM)](/Ch23-lvm/notes_Ch23.md)
 24. [RAID](/Ch24-raid/notes_Ch24.md)
 25. [Kernel Services and Configuration](/Ch25-kernelservices/notes_Ch25.md)
 26. [Kernel Modules](/Ch26-kernelmodules/notes_Ch26.md)
