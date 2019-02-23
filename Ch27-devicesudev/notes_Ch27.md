@@ -108,9 +108,9 @@ By default, when **udev** reads the rules files, looks for files that have suffi
 
 ## 27.11 Creating udev Rules
 Format for **udev** rule simple:
-**```shell
+```shell
 <match><op>value [, ...] <assignment><op>value [, ...]
-```**
+```
 Two separate files defined on single line:
 - First part consists of one or more match pairs denoted by **`==`**. These try to match device's attributes and/or characteristics to some value
 - Second part consists of one or more assignment key-value pairs that assign a value to a name, such as a file name, group assignment, even file permissions etc.
