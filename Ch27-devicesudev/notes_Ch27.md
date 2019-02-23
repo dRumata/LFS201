@@ -37,7 +37,33 @@ mknod -m 666 /dev/mycdrv c 254 1
 
 
 ## 27.5 Major and Minor Numbers
+**Major** and **minor** numbers identify driver associated with device, with driver uniquely reserving a group of numbers. In most cases (but not all), device nodes of the same type (block or character) with the same major number use the same driver.
 
+If you list some device nodes:
+```shell
+$ ls -l /dev/sda*
+brw-rw---- 1 root disk 8,  0 Dec 29 06:40 /dev/sda
+brw-rw---- 1 root disk 8,  1 Dec 29 06:40 /dev/sda1
+brw-rw---- 1 root disk 8,  2 Dec 29 06:40 /dev/sda2
+.......
+```
+**Major** and **minor** numbers appear in same place that file size would when looking at normal file. In above example as **8**, **1**, etc. While normal users will probably never need to refer explicitly to major and minor numbers and will refer to devices by name, system administrators may have to untangle them from time to time if system gets confused about devices, or has some hardware added at runtime.
+
+**Minor** number used only by device driver to differentiate between different devices it may control, or how they are used. These may either be different instances of same kind of device (such as first and second sound card, or hard disk partition), or different modes of operation of given device (such as different density floppy drive media).
+
+Device numbers have meaning in user-space as well. Two system calls, **`mknod()`** and **`sta()`** return information about **major** and **minor** numbers.
+
+
+## 27.6 udev
+Methods of managing device nodes became clumsy and difficult as Linux evolved. Number of device nodes lying in `/dev` + its subdirectories reached numbers in 15,000 - 20,000 range in most installations during 2.4 kernel version series. Nodes for devices which would never be used on most installations were still created by default, as distributors could never be sure exactly which hardware would be present on system.
+
+Many developers + system administrators trimmed list to what was actually needed, especially in embedded configurations, but this essentially manual and potentially error-prone task.
+
+Note: while device nodes *not* normal files and don't take up significant space on filesystem, having huge directories slowed down access to device nodes, especially upon first usage. Exhaustion of available major and minor numbers required more modern + dynamic approach to creation/maintenance of device nodes. Ideally, one would like to register devices by name. However, major and minor numbers cannot be gotten rid of altogether, as **POSIX** standard requires them. (POSIX: acronym for **Portable Operating System Interface**, a family of standards designed to ensure compatibility between different operating systems.)
+
+**udev** method created device nodes on the fly as needed. No need to maintain a ton of device nodes that will never be used. The **`u`** in **udev** stands for **user**, and indicates that most of the work of creating, removing, modifying nodes is done in user-space.
+
+**udev** handles dynamical generation of device nodes, evolved to replace earlier mechanisms such as **devfs**, **hotplug**. Supports **persistent device naming**. Names need not depend on order of device connection or plugging in. Such behavior controlled by specification of **udev rules**.
 
 
 ##
