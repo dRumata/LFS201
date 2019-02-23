@@ -118,6 +118,30 @@ Two separate files defined on single line:
 If no matching rule found, uses default device node name and other attributes.
 
 
+## 27.12 Some Examples of Rules Files
+Example of rules file for **Fitbit** device:
+```shell
+$ cat /usr/lib/udev/rules.d/99-fitbit.rules
+SUBSYSTEM=="usb", ATTR(idVendor)=="2687", ATTR(idProduct)=="fb01", SYMLINK+="fitbit", MODE="0666"
+```
+
+Example for creating crash dumps and fast kernel loading with **kdump**/**kexec**:
+```shell
+$ cat /usr/lib/udev/rules.d/98-kexec.rules
+SUBSYSTEM=="cpu", ACTION=="online", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="cpu", ACTION=="offline", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="memory", ACTION=="add", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="memory", ACTION=="remove", PROGRAM="/bin/systemctl try-restart kdump.service"
+```
+
+Example for kvm virtual machine hypervisor:
+```shell
+$ cat /usr/lib/udev/rules.d/80-kvm.rules
+KERNEL=="kvm", GROUP="kvm", MODE="0666"
+
+$ cat /usr/lib/udev/rules.d/99-fuse.rules
+KERNEL=="fuse", MODE="0666",OWNER="root",GROUP="root"
+```
 
 
 ##
