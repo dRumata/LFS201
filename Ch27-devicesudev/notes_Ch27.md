@@ -76,6 +76,50 @@ Three components of **udev**:
 
 Cleanest way to use **udev**: to have a pure system. `dev` directory empty upon initial kernel boot, then populated with device nodes as they are needed. When used this way, must boot using **initramfs** image, which may contain set of preliminary device nodes, as well as **udev** infrastructure.
 
+
+## 27.8 udev and Hotplug
+As devices added/removed from system, working with the hotplug subsystem, **udev** acts upon notification of events to create/remove device nodes. Information necessary to create them with the right names, major and minor numbers, permissions, etc., gathered by examination of information already registered in **sysfs** pseudo-filesystem (mounted at `/sys`) and a set of configuration files.
+
+Main configuration file: `/etc/udev/udev.conf`. Contains information such as where to place device nodes, default permissions and ownership, etc. By default, rules for device naming located in `/etc/udev/rules.d` and `/usr/lib/udev/rules.d` directories. BY reading **man** page for **udev**, can get lot of specific information about how to set up rules for common situations.
+
+
+## 27.9 The udev Device Manager
+When **udev** receives message from kernel about devices being added/removed, it parses the rule-setting files in `/etc/udev/rules.d/*.rules` and `/usr/lib/udev/rules.d/*.rules` to see if there are any rules relevant to device being added/removed.
+
+It then takes appropriate actions including:
+- Device node naming
+- Device node and symbolic links creation
+- Setting file permissions and ownership for the device node
+- Taking other actions to initialize and make device available.
+
+These rules are completely customizable.
+
+
+## 27.10 udev Rule Files
+**udev** rules files are located under `/etc/udev/rules.d/<rulename>.rules` with names like:
+- **`30-usb.rules`**
+- **`90-mycustom.rules`**
+
+By default, when **udev** reads the rules files, looks for files that have suffix of **`.rules`**. If it finds more than one file, reads them one by one, lexicographically, ie. in ascending alphabetical order. Standard rule file name: generally a two digit number followed by descriptive name (for the rules), folowed by **`.rules`** suffix.
+
+![udev_rule_large](/images/udev_rule_large.png)
+**udev Rule**
+
+
+## 27.11 Creating udev Rules
+Format for **udev** rule simple:
+**```shell
+<match><op>value [, ...] <assignment><op>value [, ...]
+```**
+Two separate files defined on single line:
+- First part consists of one or more match pairs denoted by **`==`**. These try to match device's attributes and/or characteristics to some value
+- Second part consists of one or more assignment key-value pairs that assign a value to a name, such as a file name, group assignment, even file permissions etc.
+
+If no matching rule found, uses default device node name and other attributes.
+
+
+
+
 ##
 
 [Back to top](#)
