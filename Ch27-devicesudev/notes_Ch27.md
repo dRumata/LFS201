@@ -66,6 +66,16 @@ Note: while device nodes *not* normal files and don't take up significant space 
 **udev** handles dynamical generation of device nodes, evolved to replace earlier mechanisms such as **devfs**, **hotplug**. Supports **persistent device naming**. Names need not depend on order of device connection or plugging in. Such behavior controlled by specification of **udev rules**.
 
 
+## 27.7 udev Components
+**udev** runs as **daemon** (either **udevd** or **systemd-udevd**), monitors a **netlink** socket. When new devices initialized/removed, **uevent** kernel facility sends message through the socket, which **udev** receives and takes appropriate action to create/remove device nodes of right names and properties according to the rules.
+
+Three components of **udev**:
+1. The **libudev** library which allows access to information about the devices
+2. The **udevd** or **systemd-udevd** daemon that manages the `dev` directory
+3. The **udevadm** utility for control and diagnostics
+
+Cleanest way to use **udev**: to have a pure system. `dev` directory empty upon initial kernel boot, then populated with device nodes as they are needed. When used this way, must boot using **initramfs** image, which may contain set of preliminary device nodes, as well as **udev** infrastructure.
+
 ##
 
 [Back to top](#)
