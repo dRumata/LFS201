@@ -36,6 +36,10 @@ mknod -m 666 /dev/mycdrv c 254 1
 **Device nodes**
 
 
+## 27.5 Major and Minor Numbers
+
+
+
 ##
 
 [Back to top](#)
