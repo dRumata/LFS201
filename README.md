@@ -33,3 +33,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 25. [Kernel Services and Configuration](/Ch25-kernelservices/notes_Ch25.md)
 26. [Kernel Modules](/Ch26-kernelmodules/notes_Ch26.md)
 27. [Devices and udev](/Ch27-devicesudev/notes_Ch27.md)
+28. [Virtualization Overview](/Ch28-virtualization/notes.Ch28.md)
