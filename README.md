@@ -34,3 +34,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 26. [Kernel Modules](/Ch26-kernelmodules/notes_Ch26.md)
 27. [Devices and udev](/Ch27-devicesudev/notes_Ch27.md)
 28. [Virtualization Overview](/Ch28-virtualization/notes_Ch28.md)
+29. [Containers Overview](/Ch29-containers/notes_29.md)
