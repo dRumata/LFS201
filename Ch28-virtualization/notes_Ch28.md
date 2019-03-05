@@ -77,7 +77,7 @@ First implementations of virtualization on PC architecture -> through the use of
 
 Qemu -> one such emulator.
 
-![virt-emu](/images/virt-emu.png)
+![virt-emu](/images/virt-emu.jpg)
 **Emulator**
 
 
@@ -86,7 +86,60 @@ An Emulator runs completely in software. Hardware constructs replaced by softwar
 
 
 ## 28.9 Types of Virtualization Hypervisors
+Host system (besides functioning normally with respect to software that it runs) also acts as hypervisor that initiates, terminates, manages guests. Also called **Virtual Machine Monitor** (**VMM**).
 
+Two basic methods of virtualization:
+- **Hardware virtualization** (also known as **Full Virtualization**)
+
+  Guest system runs without being aware it is running as virtualized guest, does not require modifications to be run in this fashion.
+
+- **Para-virtualization**
+
+  Guest system is aware it is running in virtualized environment, has been modified specifically to work with it.
+
+Recent CPUs from Intel and AMD incorporate virtualization extensions to the x86 architecture that allow the hypervisor to run fully virtualized (ie. unmodified) guest operating systems with only minor performance penalties.
+
+The Intel extension (Intel Virtualization Technology), usually abbreviated as VT, IVT, VT-32, or VT-64, also known under the development code name of Vanderpool. Has been available since the spring of 2005.
+
+The AMD extension usually called AMD-V, still sometimes referred to by the development code name of Pacifica.
+
+For detailed explanation and comparison of how these two extensions work, see [the Xen and the new processors article](https://lwn.net/Articles/182080/).
+
+Can check directly if your CPU supports hardware virtualization extensions by looking at `/proc/cpuinfo`. If you have an IVT-capable chip, will see **`vmx`** in **`flags`** field. If you have an AMD-V capable chip, will see **`svm`** in same field. May also have to ensure virtualization capability is turned on in your CMOS.
+
+While choice of operating systems tends to be more limited for para-virtualized guests, originally they tended to run more efficiently than fully virtualized guests. Recent advances in virtualization techniques have narrowed or eliminated such advantages, and the wider availability of the hardware support needed for full virtualization has made para-virtualization less advantageous and less popular.
+
+Most modern hardware has hardware virtualization abilities (must be turned on in BIOS).
+
+
+## 28.10 External and in-Kernel Hypervisors
+Hypervisor can be:
+- External to the host operating system kernel: VMware
+- Internal to the host operating system kernel: KVM
+
+In this course, will concentrate on KVM, as it is all open source, and requires no external third party hypervisor program.
+
+
+## 28.11 Dedicated Hypervisor
+Going past emulation, merging of hypervisor program into specially-designed lightweight kernel was next step in Virtualization deployment.
+
+VMware ESX (and related friends): an example of hypervisor embedded into operating system.
+
+![virt-hyper](/images/virt-hyper.jpg)
+**Dedicated Hypervisor**
+
+
+## 28.12 Hypervisor in the Kernel
+The KVM project added hypervisor capabilities into the Linux kernel.
+
+As discussed, specific CPU chip functions and facilities were required and deployed for this type of virtualization.
+
+![virt-kvm](/images/virt-kvm.jpg)
+**Hypervisor in the Kernel**
+
+
+## 28.13 libvirt
+The libvirt project: toolkit to interact with virtualization technologies
 
 
 ##
