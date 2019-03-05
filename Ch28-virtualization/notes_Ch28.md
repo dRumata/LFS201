@@ -139,7 +139,52 @@ As discussed, specific CPU chip functions and facilities were required and deplo
 
 
 ## 28.13 libvirt
-The libvirt project: toolkit to interact with virtualization technologies
+The libvirt project: toolkit to interact with virtualization technologies. Provides management for virtual machines, virtual networks, and storage. Available on all enterprise Linux distributions.
+
+Many application programs interface with libvirt. Some of the most common ones: **virt-manager**, **virt-viewer**, **virt-install**, **virsh**.
+
+Complete list of currently supported hypervisors can be found on [libvirt website](https://www.libvirt.org/):
+- QEMU/KVM
+- Xen
+- Oracle VirtualBox
+- VMware ESX
+- VMware Workstation/Player
+- Microsoft Hyper-V
+- IBM PowerVM (phyp)
+- OpenVZ
+- UML (User Mode Linux)
+- LXC (Linux Containers)
+- Virtuozzo
+- Bhyve (The BSD Hypervisor)
+- Test (Used for testing)
+
+
+## 28.14 Programs Using libvirt
+Many utilities using **libvirt**. Exact list will depend on Linux distribution. Full list can be found on [libvirt website](https://libvirt.org/apps.html).
+
+In this course, will work through the use of robust GUI, **virt-manager**, rather than make much use of command line utilities, which lead to more flexibility, as well as use on non-graphical servers.
+
+![virtprogs](/images/virtprogs.png)
+
+
+## 28.15 What is QEMU?
+QEMU stands for <strong>Q</strong>uick <strong>EMU</strong>lator. Originally written by Fabrice Bellard in 2002. (Bellard is also known for feats such as holding, at one point, the world record for calculating **&pi;`**, reaching 2.7 trillion digits.)
+
+QEMU: hypervisor that performs hardware **emulation**, or **virtualization**. Emulates CPUs by dynamically translating binary instructions between host architecture and emulated architecture.
+
+Host and emulated architectures may be different, or the same. Numerous choices for both host and guest operating systems.
+
+QEMU can also be used to emulate just particular applications, not entire operating systems.
+
+By itself, QEMU much slower than host machine. But, can be used together with **KVM** (<strong>K</strong>ernel <strong>V</strong>irtual <strong>M</strong>achine) to reach speeds close to those of native host.
+
+Guest operating systems do not require rewriting to run under QEMU. QEMU can save, pause, restore a virtual machine at any time. QEMU is a free software licensed under the GPL.
+
+QEMU has the capability of supporting many architectures, including: IA-32 (i386), x86-64, MIPS, SPARC, ARM, SH4, PowerPC, CRIS, MicroBlaze, etc.
+
+Cross-compilation abilities of QEMU make it extremely useful when doing development for embedded processors.
+
+In fact, QEMU has often been used to develop processors which have either not yet been physically produced, or released to market.
 
 
 ##
