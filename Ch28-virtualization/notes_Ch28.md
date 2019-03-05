@@ -187,6 +187,71 @@ Cross-compilation abilities of QEMU make it extremely useful when doing developm
 In fact, QEMU has often been used to develop processors which have either not yet been physically produced, or released to market.
 
 
+## 28.16 Third Party Hypervisor Integration
+Used by itself, QEMU relatively slow. However, can be integrated with third party hypervisors, and then reach near native speeds. Note: some of these systems are very close cousins of QEMU; others are more remote. A few main ones:
+- KVM offers particularly tight integration with QEMU. WHen host and target are same architecture, full acceleration and high speed delivered. KVM native to **Linux**. Will discuss this is detail.
+- Xen, also native to Linux, can run in hardware virtualization mode if architecture offers it, as does x86 and some ARM variants.
+- Oracle Virtual Box can use qcow2 formatted images, and has very close relationship with QEMU.
+
+In this course, recommend using (and will use in labs) **virt-manager** to configure and run virtual machines. Will also give instructions on how to run them using **qemu** command line utilities.
+
+
+## 28.17 Image Formats
+QEMU supports many formats for disk image files. However, only two used primarily, with the rest being available for historical reasons and for conversion utilities. These two main formats:
+- **raw** (default)
+
+  The simplest and easiest format to export to other non-QEMU emulators. Empty sectors do not take up space.
+
+- **qcow2**
+
+  **COW** stands for <strong>C</strong>opy <strong>O</strong>n <strong>W</strong>rite. Many options. See **man qemu-img** for more details.
+
+To get list of supported formats:
+```shell
+c7:/tmp> qemu-img --help | grep formats:
+Supported formats: vfat vpc vmdk vhdx vdi ssh sheepdog rbd raw host_cdrom host_floppy host_device file \
+qed qcow2 qcow parallels nbd iscsi gluster dmg tftp ftps ftp https http cloop bochs blkverify blkdebug
+```
+
+Note in particular:
+- **vdi**: Used by Oracle VirtualBox
+- **vmdk**: Used by VMware
+
+Note: **`qemu-img`** can be used to translate between formats, eg.:
+```shell
+$ qemu-img convert -O vmdk myvm.qcow2 myvm.vmdk
+```
+
+## 28.18 KVM and Linux
+KVM uses the Linux kernel for computing resources including memory management, scheduling, synchronization, and more. When running virtual machine, KVM engages in co-processing relationship with Linux kernel.
+
+In this format, KVM runs the virtual machine monitor within one or more of the CPUs, using VMX or SVM instructions. At the same time, Linux kernel is executing on other CPUs.
+
+The virtual machine monitor runs the guest, which is running at full hardware speed, until it executes an instruction that causes the virtual machine monitor to take over.
+
+At this point, the virtual machine monitor can use any Linux resource to emulate a guest instruction, restart the guest at the last instruction, or do something else.
+
+By loading the KVM modules and starting a guest, turn Linux into hypervisor. The Linux personality is still there, but also have the hardware virtual machine monitor. Can control the Virtual Machine using standard Linux resource and process control tools, such as **cgroups**, **nice**, **numactl**, etc.
+
+KVM first appeared (pre-merge) as part of a Windows Virtual Desktop product. At the time of its upstream merge in 2007, KVM required recent x86-64 processors. On x86-64 platforms, KVM primarily (but not always) a driver for the processor's virtualization subsystem.
+
+KVM appeared as a trio of Linux kernel modules in 2007. When paired with modified version of QEMU (also provided at the same time), created a hypervisor that used the Linux kernel for most of its runtime services.
+
+Shortly after Avi Kivity, the author of KVM, submitted source code to the Linux development community, Linus merged KVM into his Linux tree. This was surprising to a lot of folks.
+
+
+## 28.19 Managing KVM
+Many low level commands for creating, converting, manipulating, deploying, maintaining virtual machine images.
+
+Managing KVM can be done with both command line and graphical interfaces.
+
+Command line tools include: **virt-\*** and **qemu-\***. Graphical interfaces include virt-manager, kimchi, OpenStack, oVirt, etc.
+
+As you develop more expertise, will become practiced in using them. But, for all basic operations, **virt-manager** will suffice and that is what we will use.
+
+![lsvirtqemu](/images/lsvirtqemu.png)
+
+
 ##
 
 [Back to top](#)
