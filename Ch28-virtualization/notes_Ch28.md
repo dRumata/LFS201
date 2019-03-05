@@ -168,7 +168,7 @@ In this course, will work through the use of robust GUI, **virt-manager**, rathe
 
 
 ## 28.15 What is QEMU?
-QEMU stands for <strong>Q</strong>uick <strong>EMU</strong>lator. Originally written by Fabrice Bellard in 2002. (Bellard is also known for feats such as holding, at one point, the world record for calculating **&pi;`**, reaching 2.7 trillion digits.)
+QEMU stands for <strong>Q</strong>uick <strong>EMU</strong>lator. Originally written by Fabrice Bellard in 2002. (Bellard is also known for feats such as holding, at one point, the world record for calculating **&pi;**, reaching 2.7 trillion digits.)
 
 QEMU: hypervisor that performs hardware **emulation**, or **virtualization**. Emulates CPUs by dynamically translating binary instructions between host architecture and emulated architecture.
 
