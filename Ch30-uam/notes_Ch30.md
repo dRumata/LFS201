@@ -54,6 +54,40 @@ $ sudo useradd dexter
 ```
 will create an account for user **`dexter`**, using default algorithms for assigning user and group id, home directory, and shell choice.
 
+Specifically, the **useradd** command above causes following steps to execute:
+- Next available UID greater than **`UID_MIN`** (specified in `/etc/login.defs`) by default assigned as **`dexter`**'s **`UID`**
+- A group called **`dexter`** with a **`GID=UID`** also created and assigned as **`dexter`**'s primary group
+- A home directory `/home/dexter` created and owned by **`dexter`**
+- **`dexter`**'s login shell will be `/bin/bash`
+- Contents of `/etc/skel` copied to `/home/dexter`. By default, `/etc/skel` includes startup files for **bash** and for the X Window system
+- Entry of either **`!!`** placed in password field of `/etc/shadow` file for **`dexter`**'s entry, thus requiring administrator to assign a password for the account to be usable
+
+Defaults can be easily overruled by using options to **useradd**:
+```shell
+$ sudo useradd -s /bin/csh -m -k /etc/skel -c "Bullwinkle J Moose" bmoose
+```
+where explicit non-default values have been given for some of the user attributes.
+
+## 30.7 Modifying and Deleting User Accounts
+Root user can remove user accounts using **userdel**:
+```shell
+$ sudo userdel morgan
+```
+All references to user **`morgan`** will be erased from `/etc/passwd`, `/etc/shadow`, and `/etc/group`.
+
+While this removes account, does not delete the home directory (usually `/home/morgan`) in case the account may be re-established later. If **`-r`** option given to **userdel**, home directory will also be obliterated. However, all other files on system owned by removed user will remain.
+
+**usermod** can be used to change characteristics of a user account, such as group memberships, home directory, login name, password, default shell, user id, etc. For example, the command
+```shell
+$ sudo usermod -L dexter
+```
+locks the account for **`dexter`**, so he cannot login.
+
+Usage pretty straightforward. Note: **usermod** will take care of any modifications to files in `/etc` directory as necessary.
+
+![usermod](/image/usermod.png)
+
+
 
 ##
 
