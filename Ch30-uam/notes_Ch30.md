@@ -88,6 +88,63 @@ Usage pretty straightforward. Note: **usermod** will take care of any modificati
 ![usermod](/image/usermod.png)
 
 
+## 30.8 Locked Accounts
+Linus ships with some system accounts that are **locked** (such as **`bin`**, **`daemon`**, **`sys`**), which means they can run programs, but can never login tot he system and have no valid passoword associated with them. For example, `etc/passwd` has entries like:
+```shell
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+```
+
+The **`nologin`** shell returns the following if a locked user tries to login to the system:
+```shell
+This account is currently not available.
+```
+or whatever message may be stored in `/et/nologin.txt`.
+
+Such locked accounts are created for special purposes, either by system services or applications; if you scan `/etc/passwd` for users with the **`nologin`** shell, you can see who they are on your system.
+
+Also possible to lock account of particular user:
+```shell
+$ sudo usermod -L dexter
+```
+which means the accounts stays on the system but logging in is impossible. Unlocking can be done with **`-U`** option.
+
+Customary practice: lock user's acocunts whenever they leave the organization or is on an extended leave of absence.
+
+Another way to lock an account: use **chage** to change expiration date of account to date in the past:
+```shell
+$ sudo chage -E 2014-09-11 morgan
+```
+Actual date irrelevant as long as it is in the past. Will discuss **chage** shortly.
+
+Another approach is to edit `etc/shadow` file and replace user's hashed password with **`!!`** or some other invalid string.
+
+
+## 30.9 User IDs and /etc/passwd
+Have already seen how `etc/passwd` contaisn one record (one line) for each user on system:
+```shell
+beav:x:1000:1000:Theodore Cleaver:/home/beav:/bin/bash
+rsquirrel:x:1001:1001:Rocket J Squirrel:/home/rsquirrel:/bin/bash
+```
+and have already discussed the fields in here. Each record consists of number of fields separated by colons:
+- **`username`** - the user's unique name
+- **`password`** - either the hashed password (if `/etc/shadow` is not used) or a placeholder ("x" when `/etc/shadow` is used)
+- **`UID`** - user identification number
+- **`GID`** - primary group identification number for the user
+- **`comment`** - comment area, usually the user's real name
+- **`home`** - directory pathname for the user's home directory
+- **`shell`** - absolutely qualified name of the shell to invoke at login
+
+If `/etc/shadow` is not used, password field contains hashed password. If used, contains a placeholder ("**x**").
+
+The convention most Linux distributions have used is that any account with a user ID less than **`1000`** is considered special and belongs to the system; normal user accounts start at **`1000`**. Actual value defined as **`UID-MIN`** and is defined in `/etc/login.defs`.
+
+If User ID if not specified when using **useradd**, system will incrementally assign UIDS starting at **`UID_MIN`**
+
+Additionally, each user gets a **Primary Group ID** whick, by default, is the same number as the UID. These are sometimes called **User Private Groups (UPG)**.
+
+Bad practice to edit `/etc/passwd`, `/etc/group`, `/etc/shadow` directly. Either user appropriate utilities such as **usermod**, or use **vipw** special editor to do so as it is careful about file locking, data corruption, etc.
+
 
 ##
 
