@@ -146,6 +146,15 @@ Additionally, each user gets a **Primary Group ID** whick, by default, is the sa
 Bad practice to edit `/etc/passwd`, `/etc/group`, `/etc/shadow` directly. Either user appropriate utilities such as **usermod**, or use **vipw** special editor to do so as it is careful about file locking, data corruption, etc.
 
 
+## 30.10 Why Use /etc/shadow?
+Use of `/etc/shadow` enables password aging on a per user basis. At same time, also allows for maintaining greater security of hashed passwords.
+
+Default permissions of `/etc/passwd` are **644** (**`-rw-r--r--`**); anyone can read the file. Unfortunately necessary because system programs and user applications need to read information contained in file.
+
+
+
+
+
 ##
 
 [Back to top](#)
