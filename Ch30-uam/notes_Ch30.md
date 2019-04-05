@@ -149,7 +149,15 @@ Bad practice to edit `/etc/passwd`, `/etc/group`, `/etc/shadow` directly. Either
 ## 30.10 Why Use /etc/shadow?
 Use of `/etc/shadow` enables password aging on a per user basis. At same time, also allows for maintaining greater security of hashed passwords.
 
-Default permissions of `/etc/passwd` are **644** (**`-rw-r--r--`**); anyone can read the file. Unfortunately necessary because system programs and user applications need to read information contained in file.
+Default permissions of `/etc/passwd` are **644** (**`-rw-r--r--`**); anyone can read the file. Unfortunately necessary because system programs and user applications need to read information contained in file. These system programs do not run as user root; in any event, only root may change the file.
+
+Of particular concern: hashed passwords themselves. If appear in `/etc/passwd`, anyone may make copy of hashed passwords and then make use of utilities such as **Crack** and **John the Ripper** to guess original cleartext passwords given hashed password. Huge security risk!
+
+`etc/shadow` has permission settings of **`400`** (**`-r--------`**), means that only root can access this file. Makes it more difficult for someone to collect hashed passwords.
+
+Unless compelling good reason not to, should use `/etc/shadow` file.
+
+
 
 
 
