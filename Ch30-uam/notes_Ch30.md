@@ -158,6 +158,123 @@ Of particular concern: hashed passwords themselves. If appear in `/etc/passwd`, 
 Unless compelling good reason not to, should use `/etc/shadow` file.
 
 
+## 30.11 /etc/shadow
+`/etc/shadow` contains one record (one line) for each user:
+```shell
+daemon:*:16141:0:99999:7:::
+.....
+beav:$6$iCZyCnBJH9rmq7P.$RYNm10Jg3wrhAtUnahBZ/mTMg.RzQE6iBXyqaXHvxxbKTYqj.d9wpoQFuRp7fPEE3hMK3W2gcIYhiXa9MIA9w1:16316:0:99999:7:::
+```
+Colon-separated fields:
+- **`username`**: unique user name
+- **`password`**: hashed (**sha512**) value of the password
+- **`lastchange`**: days since Jan 1, 1970 that password was last changed
+- **`mindays`**: minimum days before password can be changed
+- **`maxdays`**: maximum days after which password must be changed
+- **`warn`**: days before password expires that user is warned
+- **`grace`**: days after password expires that account is disabled
+- **`expire`**: date that account is/will be disabled
+- **`reserved`**: reserved field
+
+Username in each record must match *exactly* that found in `etc/passwd`, and also must appear in identical order.
+
+All dates stored as number of days since Jan. 1 1970 (**epoch** date).
+
+Password hash: string "**$6$**" followed by eight character salt value, which is then followed by **$** and an **88** character (**sha512**) password hash.
+
+
+## 30.12 Password Management
+Passowrds can be changed with **passwd**; a normal user can change only their own password, while root can change any user password. When you type your password, not shown; echoing back to screen suppressed.
+
+By default, password choice examined by **`pam_cracklib.so`**, which furthers making good password choices.
+
+Normal user changing password:
+```shell
+$ passwd
+Changing password for clyde
+(current) UNIX password: <clyde\'s password>
+New UNIX password: <clyde\'s-new-password>
+Retype new UNIX password: <clyde\'s-new-password>
+passwd: all authentication tokens updated successfully
+```
+
+Note: when root changes a user's password, root not prompted for current password:
+```shell
+$ sudo passwd kevin
+New UNIX password: <kevin\'s-new-password>
+Retype new UNIX password: <kevin\'s-new-password>
+passwd: all authentication tokens updated successfully
+```
+Note: normal users will not be allowed to set bad passwords, such as ones that are too short, or based on dictionary words. However, root allowed to do so.
+
+
+## 30.13 chage: Password Aging
+Generally considered important to change passwords periodically. Limits amount of time cracked password can be useful to intruder and also can be used to lock unused accounts. Downside: user can find policy annoying, wind up writing down ever-changing passwords, thus making them easier to steal.
+
+Utility to manage this: **chage**:
+```shell
+chage [-m mindays] [-M maxdays] [-d lastday] [-I inactive] [-E expiredate] [-W warndays] user
+```
+Examples:
+```shell
+$ sudo chage -l dexter
+$ sudo chage -m 14 -M 30 kevlin
+$ sudo chage -E 2012-4-1 morgan
+$ sudo chage -d 0 clyde
+```
+
+Only root user can use **chage**. One exception: any user can run **chage -l** to see their aging, as shown below.
+
+To force user to change password at next login:
+```shell
+$ sudo chage -d 0 Username
+```
+
+![chage](/images/chage.png)
+
+
+## 30.14 Restricted shell
+Under Linux, one can use **restricted shell**, invoked as:
+```shell
+$ bash -r
+```
+(Some distributions may define an **rbash** command to same effect.)
+
+Restricted shell: functions in more tightly controlled environment than standard shell, but otherwise functions normally. In particular:
+- Prevents user from using **cd** to change directories
+- Prevents user from redefining following environment variables: **`SHELL`**, **`ENV`**, **`PATH`**
+- Does not permit user to specify absolute path or executable command names starting from **`/`**
+- Prevents user from redirecting input and/or output
+
+Note: there are other restrictions; best way to see them all is to do **man bash** and search for **`RESTRICTED SHELL`**.
+
+Because restricted shell executes `$HOME/.bash_profile` without restriction, user must have neither write nor execute permission on `/home` directory.
+
+Restricted accounts can also be enabled by creating symlink to `/bin/bash`, named `/bin/rbash`, and using in `/etc/passwd`, as will discuss next.
+
+
+## 30.15 Restricted Accounts
+There are times when granting access to user necessary, but should be limited in scope. Setting up restricted user account can be useful in this context. A restricted account:
+- Uses the restricted shell
+- Limits available system programs and user applications
+- Limits system resources
+- Limits access times
+- Limits access locations
+
+From command line, or from script, restricted shell may be invoked with **`/bin/bash -r`**. However, flags may not be specified in `/etc/passwd` file. Simple way to get around this restriction would be to do one of the following:
+```shell
+$ cd /bin ; sudo ln -s bash rbash
+$ cd /bin ; sudo ln bash rbash
+$ cd /bin ; sudo cp bash rbash
+```
+and then, use `/bin/bash` as shell in `/etc/passwd`.
+
+When setting up such account, should avoid inadvertently adding system directories to **`PATH`** environment variable; this would grant restricted user ability to execute other system programs, such as unrestricted shell.
+
+Restricted accounts also sometimes referred to as **limited accounts**.
+
+
+## 30.16 The root Account
 
 
 
