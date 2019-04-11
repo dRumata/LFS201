@@ -192,17 +192,17 @@ Normal user changing password:
 ```shell
 $ passwd
 Changing password for clyde
-(current) UNIX password: <clyde\'s password>
-New UNIX password: <clyde\'s-new-password>
-Retype new UNIX password: <clyde\'s-new-password>
+(current) UNIX password: <clyde's password>
+New UNIX password: <clyde's-new-password>
+Retype new UNIX password: <clyde's-new-password>
 passwd: all authentication tokens updated successfully
 ```
 
 Note: when root changes a user's password, root not prompted for current password:
 ```shell
 $ sudo passwd kevin
-New UNIX password: <kevin\'s-new-password>
-Retype new UNIX password: <kevin\'s-new-password>
+New UNIX password: <kevin's-new-password>
+Retype new UNIX password: <kevin's-new-password>
 passwd: all authentication tokens updated successfully
 ```
 Note: normal users will not be allowed to set bad passwords, such as ones that are too short, or based on dictionary words. However, root allowed to do so.
@@ -293,18 +293,18 @@ To sign onto remote system:
 $ whoami
 student
 $ ssh farflung.com
-student@farflung.com\'s password: (type here)
+student@farflung.com's password: (type here)
 $
 ```
 where assuming there is a student account on farflung.com. To log in as different user:
 ```shell
 $ ssh root@farflung.com
-root@farflung.com\'s password: (type here)
+root@farflung.com's password: (type here)
 ```
 or
 ```shell
 $ ssh -l root farflung.com
-root@farflung.com\'s password: (type here)
+root@farflung.com's password: (type here)
 ```
 To copy files from one system to another:
 ```shell
