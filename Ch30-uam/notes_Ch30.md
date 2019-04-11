@@ -275,8 +275,55 @@ Restricted accounts also sometimes referred to as **limited accounts**.
 
 
 ## 30.16 The root Account
+Root account should only be used for administrative purposes when absolutely necessary, never used as regular account. Mistakes very costly, both for integrity and stability, and for system security.
+
+Default: root logins through network generally prohibited for security reasons. Can permit **Secure Shell** logins using **ssh**, configured with `/etc/ssh/sshd_config`, and **PAM** (<strong>P</strong>luggable <strong>A</strong>uthentication <strong>M</strong>odules), discussed later, through **`pam_securetty.so`** module and associated `/etc/securetty` file. Root login permitted only from devices listed in `/etc/securetty`.
+
+Generally recommended that all root access be through **su** or **sudo** (causing audit trail of all root access through **sudo**). Note: some distributions (such as Ubuntu), by default actually prohibit logging in directly to the root account.
+
+PAM can also be used to restrict which users allowed to **su** to root. Might also be worth it to configure **auditd** to log all commands executed as root.
+
+## 30.17 SSH
+One often needs to login through network into remote system, either with same user name or another. Or, one needs to transfer files to/from remote machine. In either case, one wants to do this securely, free from interception.
+
+**SSH** (<strong>S</strong>ecure <strong>SH</strong>ell) exists for this purpose. Uses encryption based on strong algorithms. Assuming proper **ssh** packages installed on system, one needs no further setup to begin using **ssh**.
+
+To sign onto remote system:
+```shell
+$ whoami
+student
+$ ssh farflung.com
+student@farflung.com\'s password: (type here)
+$
+```
+where assuming there is a student account on farflung.com. To log in as different user:
+```shell
+$ ssh root@farflung.com
+root@farflung.com\'s password: (type here)
+```
+or
+```shell
+$ ssh -l root farflung.com
+root@farflung.com\'s password: (type here)
+```
+To copy files from one system to another:
+```shell
+$ scp file.txt farflung.com:/tmp
+$ scp file.tex student@farflung.com/home/student
+$ scp -r some_dir farflung.com:/tmp/some_dir
+```
+(Omitted request for password to save space; if configured properly with encryption keys as discussed next, will not need to supply password.)
+
+To run command on multiple machines simultaneously:
+```shell
+$ for machines in node1 node2 node3
+do
+      (ssh $ machines some_command &)
+done
+```
 
 
+## 30.18 SSH Configuration Files
 
 
 
