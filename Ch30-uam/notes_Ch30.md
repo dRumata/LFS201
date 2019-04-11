@@ -55,12 +55,12 @@ $ sudo useradd dexter
 will create an account for user **`dexter`**, using default algorithms for assigning user and group id, home directory, and shell choice.
 
 Specifically, the **useradd** command above causes following steps to execute:
-- Next available UID greater than **`UID_MIN`** (specified in `/etc/login.defs`) by default assigned as **`dexter`**'s **`UID`**
-- A group called **`dexter`** with a **`GID=UID`** also created and assigned as **`dexter`**'s primary group
+- Next available UID greater than **`UID_MIN`** (specified in `/etc/login.defs`) by default assigned as **`dexter`**\'s **`UID`**
+- A group called **`dexter`** with a **`GID=UID`** also created and assigned as **`dexter`**\'s primary group
 - A home directory `/home/dexter` created and owned by **`dexter`**
-- **`dexter`**'s login shell will be `/bin/bash`
+- **`dexter`**\'s login shell will be `/bin/bash`
 - Contents of `/etc/skel` copied to `/home/dexter`. By default, `/etc/skel` includes startup files for **bash** and for the X Window system
-- Entry of either **`!!`** placed in password field of `/etc/shadow` file for **`dexter`**'s entry, thus requiring administrator to assign a password for the account to be usable
+- Entry of either **`!!`** placed in password field of `/etc/shadow` file for **`dexter`**\'s entry, thus requiring administrator to assign a password for the account to be usable
 
 Defaults can be easily overruled by using options to **useradd**:
 ```shell
@@ -109,7 +109,7 @@ $ sudo usermod -L dexter
 ```
 which means the accounts stays on the system but logging in is impossible. Unlocking can be done with **`-U`** option.
 
-Customary practice: lock user's acocunts whenever they leave the organization or is on an extended leave of absence.
+Customary practice: lock user\'s acocunts whenever they leave the organization or is on an extended leave of absence.
 
 Another way to lock an account: use **chage** to change expiration date of account to date in the past:
 ```shell
@@ -117,7 +117,7 @@ $ sudo chage -E 2014-09-11 morgan
 ```
 Actual date irrelevant as long as it is in the past. Will discuss **chage** shortly.
 
-Another approach is to edit `etc/shadow` file and replace user's hashed password with **`!!`** or some other invalid string.
+Another approach is to edit `etc/shadow` file and replace user\'s hashed password with **`!!`** or some other invalid string.
 
 
 ## 30.9 User IDs and /etc/passwd
@@ -127,12 +127,12 @@ beav:x:1000:1000:Theodore Cleaver:/home/beav:/bin/bash
 rsquirrel:x:1001:1001:Rocket J Squirrel:/home/rsquirrel:/bin/bash
 ```
 and have already discussed the fields in here. Each record consists of number of fields separated by colons:
-- **`username`** - the user's unique name
+- **`username`** - the user\'s unique name
 - **`password`** - either the hashed password (if `/etc/shadow` is not used) or a placeholder ("x" when `/etc/shadow` is used)
 - **`UID`** - user identification number
 - **`GID`** - primary group identification number for the user
-- **`comment`** - comment area, usually the user's real name
-- **`home`** - directory pathname for the user's home directory
+- **`comment`** - comment area, usually the user\'s real name
+- **`home`** - directory pathname for the user\'s home directory
 - **`shell`** - absolutely qualified name of the shell to invoke at login
 
 If `/etc/shadow` is not used, password field contains hashed password. If used, contains a placeholder ("**x**").
@@ -192,17 +192,17 @@ Normal user changing password:
 ```shell
 $ passwd
 Changing password for clyde
-(current) UNIX password: <clyde's password>
-New UNIX password: <clyde's-new-password>
-Retype new UNIX password: <clyde's-new-password>
+(current) UNIX password: <clyde\'s password>
+New UNIX password: <clyde\'s-new-password>
+Retype new UNIX password: <clyde\'s-new-password>
 passwd: all authentication tokens updated successfully
 ```
 
-Note: when root changes a user's password, root not prompted for current password:
+Note: when root changes a user\'s password, root not prompted for current password:
 ```shell
 $ sudo passwd kevin
-New UNIX password: <kevin's-new-password>
-Retype new UNIX password: <kevin's-new-password>
+New UNIX password: <kevin\'s-new-password>
+Retype new UNIX password: <kevin\'s-new-password>
 passwd: all authentication tokens updated successfully
 ```
 Note: normal users will not be allowed to set bad passwords, such as ones that are too short, or based on dictionary words. However, root allowed to do so.
@@ -293,18 +293,18 @@ To sign onto remote system:
 $ whoami
 student
 $ ssh farflung.com
-student@farflung.com's password: (type here)
+student@farflung.com\'s password: (type here)
 $
 ```
 where assuming there is a student account on farflung.com. To log in as different user:
 ```shell
 $ ssh root@farflung.com
-root@farflung.com's password: (type here)
+root@farflung.com\'s password: (type here)
 ```
 or
 ```shell
 $ ssh -l root farflung.com
-root@farflung.com's password: (type here)
+root@farflung.com\'s password: (type here)
 ```
 To copy files from one system to another:
 ```shell
