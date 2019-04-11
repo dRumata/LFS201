@@ -55,21 +55,12 @@ $ sudo useradd dexter
 will create an account for user **`dexter`**, using default algorithms for assigning user and group id, home directory, and shell choice.
 
 Specifically, the **useradd** command above causes following steps to execute:
-<<<<<<< HEAD
-- Next available UID greater than **`UID_MIN`** (specified in `/etc/login.defs`) by default assigned as **`dexter`**&#39;s **`UID`**
-- A group called **`dexter`** with a **`GID=UID`** also created and assigned as **`dexter`**&#39;s primary group
-- A home directory `/home/dexter` created and owned by **`dexter`**
-- **`dexter`**&#39;s login shell will be `/bin/bash`
-- Contents of `/etc/skel` copied to `/home/dexter`. By default, `/etc/skel` includes startup files for **bash** and for the X Window system
-- Entry of either **`!!`** placed in password field of `/etc/shadow` file for **`dexter`**&#39;s entry, thus requiring administrator to assign a password for the account to be usable
-=======
 - Next available UID greater than **`UID_MIN`** (specified in `/etc/login.defs`) by default assigned as **`dexter`**\'s **`UID`**
 - A group called **`dexter`** with a **`GID=UID`** also created and assigned as **`dexter`**\'s primary group
 - A home directory `/home/dexter` created and owned by **`dexter`**
 - **`dexter`**\'s login shell will be `/bin/bash`
 - Contents of `/etc/skel` copied to `/home/dexter`. By default, `/etc/skel` includes startup files for **bash** and for the X Window system
 - Entry of either **`!!`** placed in password field of `/etc/shadow` file for **`dexter`**\'s entry, thus requiring administrator to assign a password for the account to be usable
->>>>>>> revert
 
 Defaults can be easily overruled by using options to **useradd**:
 ```shell
@@ -118,11 +109,7 @@ $ sudo usermod -L dexter
 ```
 which means the accounts stays on the system but logging in is impossible. Unlocking can be done with **`-U`** option.
 
-<<<<<<< HEAD
-Customary practice: lock user&#39;s acocunts whenever they leave the organization or is on an extended leave of absence.
-=======
-Customary practice: lock user\'s acocunts whenever they leave the organization or is on an extended leave of absence.
->>>>>>> revert
+Customary practice: lock user\'s accounts whenever they leave the organization or is on an extended leave of absence.
 
 Another way to lock an account: use **chage** to change expiration date of account to date in the past:
 ```shell
@@ -130,11 +117,7 @@ $ sudo chage -E 2014-09-11 morgan
 ```
 Actual date irrelevant as long as it is in the past. Will discuss **chage** shortly.
 
-<<<<<<< HEAD
-Another approach is to edit `etc/shadow` file and replace user&#39;s hashed password with **`!!`** or some other invalid string.
-=======
 Another approach is to edit `etc/shadow` file and replace user\'s hashed password with **`!!`** or some other invalid string.
->>>>>>> revert
 
 
 ## 30.9 User IDs and /etc/passwd
@@ -144,21 +127,12 @@ beav:x:1000:1000:Theodore Cleaver:/home/beav:/bin/bash
 rsquirrel:x:1001:1001:Rocket J Squirrel:/home/rsquirrel:/bin/bash
 ```
 and have already discussed the fields in here. Each record consists of number of fields separated by colons:
-<<<<<<< HEAD
-- **`username`** - the user&#39;s unique name
-- **`password`** - either the hashed password (if `/etc/shadow` is not used) or a placeholder ("x" when `/etc/shadow` is used)
-- **`UID`** - user identification number
-- **`GID`** - primary group identification number for the user
-- **`comment`** - comment area, usually the user&#39;s real name
-- **`home`** - directory pathname for the user&#39;s home directory
-=======
 - **`username`** - the user\'s unique name
 - **`password`** - either the hashed password (if `/etc/shadow` is not used) or a placeholder ("x" when `/etc/shadow` is used)
 - **`UID`** - user identification number
 - **`GID`** - primary group identification number for the user
 - **`comment`** - comment area, usually the user\'s real name
 - **`home`** - directory pathname for the user\'s home directory
->>>>>>> revert
 - **`shell`** - absolutely qualified name of the shell to invoke at login
 
 If `/etc/shadow` is not used, password field contains hashed password. If used, contains a placeholder ("**x**").
@@ -218,19 +192,6 @@ Normal user changing password:
 ```shell
 $ passwd
 Changing password for clyde
-<<<<<<< HEAD
-(current) UNIX password: <clyde&#39;s password>
-New UNIX password: <clyde&#39;s-new-password>
-Retype new UNIX password: <clyde&#39;s-new-password>
-passwd: all authentication tokens updated successfully
-```
-
-Note: when root changes a user&#39;s password, root not prompted for current password:
-```shell
-$ sudo passwd kevin
-New UNIX password: <kevin&#39;s-new-password>
-Retype new UNIX password: <kevin&#39;s-new-password>
-=======
 (current) UNIX password: <clyde\'s password>
 New UNIX password: <clyde\'s-new-password>
 Retype new UNIX password: <clyde\'s-new-password>
@@ -242,7 +203,6 @@ Note: when root changes a user\'s password, root not prompted for current passwo
 $ sudo passwd kevin
 New UNIX password: <kevin\'s-new-password>
 Retype new UNIX password: <kevin\'s-new-password>
->>>>>>> revert
 passwd: all authentication tokens updated successfully
 ```
 Note: normal users will not be allowed to set bad passwords, such as ones that are too short, or based on dictionary words. However, root allowed to do so.
@@ -333,30 +293,18 @@ To sign onto remote system:
 $ whoami
 student
 $ ssh farflung.com
-<<<<<<< HEAD
-student@farflung.com&#39;s password: (type here)
-=======
 student@farflung.com\'s password: (type here)
->>>>>>> revert
 $
 ```
 where assuming there is a student account on farflung.com. To log in as different user:
 ```shell
 $ ssh root@farflung.com
-<<<<<<< HEAD
-root@farflung.com&#39;s password: (type here)
-=======
 root@farflung.com\'s password: (type here)
->>>>>>> revert
 ```
 or
 ```shell
 $ ssh -l root farflung.com
-<<<<<<< HEAD
-root@farflung.com&#39;s password: (type here)
-=======
 root@farflung.com\'s password: (type here)
->>>>>>> revert
 ```
 To copy files from one system to another:
 ```shell
@@ -376,7 +324,66 @@ done
 
 
 ## 30.18 SSH Configuration Files
+Can configure **SSH** to further expedite use, in particular to permit logging in without password. User-specific configuration files created under every user's home directory in hidden `.ssh` directory:
+```shell
+$ ls -l ~/.ssh
+total 20
+-rw-r--r-- 1 hilda hilda 1172 Sep 27  2014 authorized_keys
+-rw------- 1 hilda hilda  207 Aug  9  2011 config
+-rw------- 1 hilda hilda 1675 Dec  8  2010 id_rsa
+-rw-r--r-- 1 hilda hilda  393 Dec  8  2010 id_rsa.pub
+-rw-r--r-- 1 hilda hilda 1980 Apr 28 07:36 known_hosts
+```
+which contains:
+- **`id_rsa`**: the user's private encryption key
+- **`id_rsa.pub`**: the user's public encryption key
+- **`authorized_keys`**: a list of public keys that are permitted to login
+- **`known_hosts`**: a list of hosts from which logins have been allowed in the past
+- **`config`**: a configuration file for specifying various options
 
+First, user has to generate private and public encryption keys with **ssh-keygen**:
+```shell
+$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/hilda/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/hilda/.ssh/id_rsa
+Your public key has been saved in /home/hilda/.ssh/id_rsa.pub
+The key fingerprint is:
+76:da:d3:51:1e:c8:2d:3b:34:28:46:b2:2b:db:d1:c4 hilda@c7
+The key\'s randomart image is:
++--[ RSA 2048]----+
+|      . .        |
+|       =   o o   |
+|      . E . * +  |
+|       = . . * . |
+|    . o S . + .  |
+|     + o + . o   |
+|    . . . o .    |
+|           .     |
+|                 |
++-----------------+
+```
+This will also generate the public key, `/.ssh/id_rsa.pub`.
+
+*Private key must never ever be shared with anyone!*
+
+Public key can be given to any machine with which you want to permit password-less access. Should also be added to your `authorized_keys` files, together with all public keys from other users who have accounts on you machine and you want tot permit password-less access to their accounts.
+
+`known_hosts` file gradually built up as **ssh** accesses occur. If system detects changes in users who are trying to log in through **ssh**, will warn you of them and afford opportunity to deny access. Note: `authorized_keys` file contains information about users and machines:
+```shell
+$ cat authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQ
+...0000aSd...hilda@sbc
+```
+while `known_hosts` only contains information about computer nodes:
+```shell
+$ cat known_hosts
+192.30.252.129 ssh_rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDb09IDSw
+....BK6tb...==
+```
+Can examine **man ssh_config** page to see what kinds of options can go into **ssh** configuration files.
 
 
 ##
