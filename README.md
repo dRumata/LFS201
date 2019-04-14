@@ -38,3 +38,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 30. [User Account Management](/Ch30-uam/notes_Ch30.md)
 31. [Group Management](/Ch31-gm/notes_Ch31.md)
 32. [File Permissions and Ownership](/Ch32-fpo/notes_Ch32.md)
+33. [Pluggable Authentication Modules (PAM)](/Ch33-pam/notes_Ch33.md)
