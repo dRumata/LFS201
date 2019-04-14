@@ -36,3 +36,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 28. [Virtualization Overview](/Ch28-virtualization/notes_Ch28.md)
 29. [Containers Overview](/Ch29-containers/notes_Ch29.md)
 30. [User Account Management](/Ch30-uam/notes_Ch30.md)
+31. [Group Management](/Ch31-gm/notes_Ch31.md)
