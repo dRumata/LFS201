@@ -37,3 +37,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 29. [Containers Overview](/Ch29-containers/notes_Ch29.md)
 30. [User Account Management](/Ch30-uam/notes_Ch30.md)
 31. [Group Management](/Ch31-gm/notes_Ch31.md)
+32. [File Permissions and Ownership](/Ch32-fpo/notes_Ch32.md)
