@@ -48,6 +48,44 @@ $ sudo usermod -G student,group1,group2 student
 ```
 **Note**: Be very careful with **usermod -G** command: the group list that follows is the complete list of groups, not just the changes. Any supplementail groups left out will be gone! Non-destructive use should utilize **`-a`** option, which will preserve pre-existing group memberships when adding new ones.
 
+## 31.6 User Private Groups
+Linux uses User Private Groups (UPG).
+
+Idea behind UPGs: each user will have his/her own group. However, UPGs are **not guaranteed** to be private. Additional members may be added to someone's private group in `/etc/group`.
+
+By default, users whose accounts are created with **useradd** have: primary **`GID`** = **`UID`** and group name is also identical to user name.
+
+As specified in `/etc/profile`, **umask** is set to **`002`** for all users created with UPG. Under this scheme, user files thus created with permissions **`664`** (**`rw-rw-r--`**) and directories with **`775`** (**`rwxrwxr-x`**). Will discuss **umask** in next section.
+
+
+## 31.7 Group Membership
+A Linux user has one **primary** group; listed in `/etc/passwd` and will also be listed in `/etc/group`. User may belong to between 0 and 15 **secondary groups**.
+
+Primary group is the **`GID`** that is used whenever the user creates files or directories. Membership in other, secondary, groups grant user additional permissions.
+
+Group membership can be identified by running either of the following commands:
+```shell
+$ groups [user1 user2 ...]
+$ id -Gn [user1 user2 ...]
+```
+With no arguments, either command reports on current user. Note: default groups can differ by distribution:
+
+On CentOS:
+```shell
+[student@CentOS7 ~]$ groups
+student
+[student@CentOS7 ~]$
+```
+
+On Ubuntu:
+```shell
+student@ubuntu:~$ groups
+student adm cdrom sudo dip plugdev lpadmin sambashare libvirt
+student@ubuntu:~$
+```
+
+
+
 
 
 ##
