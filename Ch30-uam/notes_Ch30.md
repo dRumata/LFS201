@@ -386,6 +386,38 @@ $ cat known_hosts
 Can examine **man ssh_config** page to see what kinds of options can go into **ssh** configuration files.
 
 
+## 30.19 Remote Graphical Login
+Login into remote machine with full graphical desktop. Often, may use VNC (Virtual Network Computing) to connect to system. Common implementation: **`tigervnc`**.
+
+To test, first make sure that **vnc** packages installed:
+```shell
+$ sudo yum install tigervnc tigervnc-server
+$ sudo zypper install tigervnc tigervnc-server
+$ sudo apt install tigervnc tigervnc-server
+```
+using right package management system command.
+
+Start the server as a normal user with:
+```shell
+$ vncserver
+```
+Can test with:
+```shell
+$ vncviewer localhost:2
+```
+(May have to play with numbers other than 2, such as 1, 3, 4..., depending on what you are running at the moment, and how your machine is configured.)
+
+To view from remote machine, just slightly different:
+```shell
+$ vncviewer -via student@some_machine localhost:2
+```
+If you get a rather strange message about having to authenticate because of 'color profile', and no passwords work, have to kill **colord** daemon on server machine:
+```shell
+$ sudo systemctl stop colord
+```
+This is a bug (not a feature), will only appear in some distributions and some systems for unclear reasons.
+
+
 ##
 
 [Back to top](#)
