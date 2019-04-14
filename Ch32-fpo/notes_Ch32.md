@@ -70,6 +70,114 @@ where **`u`** stands for user (owner), **`o`** stands for other (world), and **`
 Permissions can be represented either as a bitmap, usually written in octal, or in a symbolic form. Octal bitmaps usually look like **`0755`**, which symbolic representations look like **`u+rwx,g+rwx,o+rx`**.
 
 
+## 32.8 Octal Digits
+Symbolic syntax can be difficult to type and remember, so one often uses octal shorthand, which lets you set all the permissions in one step. Done with simple algorithm, and a single digit suffices to specify all three permission bits for each entity. Octal number representation if **sum** for each digit of:
+- **4** if read permission desired
+- **2** if write permission desired
+- **1** if execute permission desired
+
+Thus, **7** means read/write/execute, **6** means read/write, **5** means read/execute.
+
+When you apply this with **chmod**, have to give a value for each of the three digits:
+```shell
+$ chmod 755 a_file
+$ ls -l a_file
+-rwxr-xr-x 1 coop coop 1602 Mar 9 15:04  a_file
+```
+
+Permissions can be represented either as a bitmap, usually written in octal, or in a symbolic form. Octal bitmaps usually look like **`0755`**, which symbolic representations look like **`u+rwx,g+rwx,o+rx`**.
+
+![chmodmint](/images/chmodmint.png)
+
+
+## 32.9 chown and chgrp
+Changing file ownership is done with **chown** and changing the group is done with **chgrp**.
+
+Only the superuser can change ownership on files. Likewise, can only change group ownership to groups that you are a member of.
+
+Changing group ownership of file:
+```shell
+$ chgrp cleavers somefile
+```
+and changing ownership (only superuser can do this):
+```shell
+$ chown wally somefile
+```
+Can change both at same time with:
+```shell
+$ chown wally:cleavers somefile
+```
+where you separate owner and group with colon (or period).
+
+All three of these programs take **`-R`** option, which stands for recursive. For example:
+```shell
+$ chown -R wally:cleavers ./
+$ chown -r wally:wally subdir
+```
+will change owner and group of all files in current directory and all its subdirectories in first command, and in **`subdir`** and all its subdirectories in second command.
+
+
+## 32.10 umask
+Default permissions given when creating file are read/write for owner, group **and** world (**`0666`**), and for a directory it is read/write/execute for everyone (**`0777`**). However, if you do the following:
+```shell
+$ touch afile
+$ mkdir adir
+$ ls -l | grep -e afile -e adir
+drwxrwxr-x 2 coop coop 4096 Sep 16 11:18 adir
+-rw-rw-r-- 1 coop coop    0 Sep 16 11:17 afile
+```
+you will notice actual permissions have changed to **`664`** for the file and **`775`** for the directory. They have been modified by current **umask** whose purpose is to show which permissions should be denied. The current value can be shown by:
+```shell
+$ umask
+0002
+```
+which is the most conventional value set by system administrators for users. This value if combined with the file creation permissions to get the actual result; i.e.,
+```shell
+0666 & ~002 = 0664; i.e., rw-rw-r--
+```
+Can change **umask** at any time with **umask** command:
+```shell
+$ umask 0022
+```
+
+## 32.12 Filesystem ACLs
+Linux contains full implementation of POSIX ACLs (<strong>A</strong>ccess <strong>C</strong>ontrol <strong>L</strong>ists) which extends simpler user, group, world and read, write, execute model.
+
+Particular privileges can be granted to specific users or groups of users when accessing certain objects or classes of objects. Files and directories can be shared without using **`777`** permissions.
+
+While Linux kernel enables use of ACLs, still must be implemented as well in particular filesystem. All major filesystems used in modern Linux distributions incorporate the ACL extensions, and one can use the option **`-acl`** when mounting. Default set of ACLs is created at system install.
+
+
+## 32.13 Getting and Setting ACLs
+To see ACLs:
+```shell
+$ getfacl file|directory
+```
+**Example:**
+```shell
+$ getfacl file1
+```
+To set ACLs:
+```shell
+$ setfacl options permissions file|directory
+```
+**Examples:**
+```shell
+$ setfacl -m u:isabelle:rx /home/stephane/file1
+$ setfacl -x u:isabelle    /home/stephane/file
+```
+Note: new files inherit default ACL (if set) from the directory they reside in. Also note: **mv** and **cp -p** preserves ACLs.
+
+To remove an ACL:
+```shell
+$ setfacl -x u:isabelle /home/stephane/file1
+```
+To set default on directory:
+```shell
+$ setfacl -m d:u:isabelle:rx somedir
+```
+
+
 
 ##
 
