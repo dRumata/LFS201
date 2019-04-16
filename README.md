@@ -39,3 +39,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 31. [Group Management](/Ch31-gm/notes_Ch31.md)
 32. [File Permissions and Ownership](/Ch32-fpo/notes_Ch32.md)
 33. [Pluggable Authentication Modules (PAM)](/Ch33-pam/notes_Ch33.md)
+34. [Network Addresses](/Ch34-networkaddresses/notes_Ch34.md)
