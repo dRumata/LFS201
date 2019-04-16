@@ -68,6 +68,22 @@ There are other **`control`** flags, such as **`include`**, **`substack`**. See 
 **`module-arguments`** can be given to modify **PAM** module's behavior.
 
 
+## 33.8 LDAP Authentication
+**LDAP** (<strong>L</strong>ightweight <strong>D</strong>irectory <strong>A</strong>ccess <strong>P</strong>rotocol): industry standard protocol for using/administering distributed directory services over network, meant to be both open and vendor-neutral.
+
+When using LDAP for centralized authentication, each system/client connects to centralized LDAP server for user authentication. Using TLS makes it a secure option and is recommended.
+
+LDAP uses PAM and **system-config-authentication** or **authconfig-tui**. One has to specify the server, search base DN (domain name), and TLS (<strong>T</strong>ransport <strong>L</strong>ayer <strong>S</strong>ecurity). Also required: **openldap-clients**, **pam ldap**, **nss-pam-ldapd**.
+
+When configuring system for LDAP authentication, five files changed:
+- `/etc/openldap/ldap.conf`
+- `/etc/pam_ldap.conf`
+- `/etc/nslcd.conf`
+- `/etc/sssd/sssd.conf`
+- `/etc/nsswitch.conf`
+
+Can edit these files manually or use one of the utility programs available (**system-config-authentication** or **authconfig-tui**).
+
 
 
 ##
