@@ -38,6 +38,35 @@ Several steps involved in authentication:
 - Each referenced module executed in accordance with rules of relevant configuration file for that application
 
 
+## 33.6 PAM Configuration Files
+Each file in `/etc/pam.d` corresponds to a **service** and each (non-commented) line in the file specifies a rule. The rule is formatted as list of space-separated tokens, the first two of which are case insensitive:
+```shell
+type control module-path module-arguments
+```
+Example: screenshot here shows contents of `/etc/pam.d/su` on RHEL 7 system. Notice that there is a stack; **su** will require loading of **system-auth** etc.
+
+![pamsu](/images/pamsu.png)
+
+
+## 33.7 PAM Rules
+Module **`type`** specifies **management group** that module is to be associated with:
+- **`auth`**: Instructs application to prompt user for identification (username, password, etc). May set credentials and grant privileges
+- **`account`**: Checks on aspects of user's account, such as password aging, access control, etc.
+- **`password`**: Responsible for updating user authentication token, usually a password
+- **`session`**: Used to provide functions before/after session is established (such as setting up environment, logging, etc)
+
+The **`control`** flag controls how the success/failure of module affects overall authentication process:
+- **`required`**: Must return success for the service to be granted. If part of stack, all other modules are still executed. Application not told which module/modules failed
+- **`requisite`**: Same as **`required`**, except failure in any module terminates stack and return status sent to application
+- **`optional`**: Module not required. If the only module, then return status to application may cause failure
+- **`sufficient`**: If this module succeeds, then no subsequent modules in stack executed. If it fails, then it doesn't necessarily cause the stack to fail, unless it is the only one in the stack
+
+There are other **`control`** flags, such as **`include`**, **`substack`**. See **man pam.d** for details.
+
+**`module-path`** gives file name of library to be found in `/lib*/security`, in either absolute or relative path form.
+
+**`module-arguments`** can be given to modify **PAM** module's behavior.
+
 
 
 
