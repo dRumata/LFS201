@@ -58,11 +58,14 @@ Can see long list of reserved addresses for both IPv4 and IPv6 on the [Reserved 
 ## 34.7 IPv6 Address Types
 IPv6 address types include:
 - **Unicast**: packet delivered to one interface
-  - **Link-local**: auto-configured to for every interface to have one. Non-routable.
-  - 
-- **Network**: an address whose **host** portion is set to all binary zeroes. Ex. **`192.168.1.0`** (the host portion can be the last 1-3 octets as discussed later; here it is just the last octet)
-- **Broadcast**: an address to which each member of a particular network will listen. Will have the host portion set to all 1 bits, such as in **`172.16.255.255`** or **`148.114.255.255`** or **`192.168.1.255`** (Host portion is last two octets in the first two cases, just the last one in the third case)
-- **Multicast**: an address to which approximately configured nodes will listen. The address **`224.0.0.2`** is an example of a multicast address. Only nodes specifically configured to pay attention to specific multicast address will interpret packets for that multicast group
+  - **Link-local**: auto-configured to for every interface to have one. Non-routable
+  - **Global**: dynamically or manualle assigned. routable
+  - Reserved for documentation
+- **Multicast**: a packet is delivered to multiple interfaces
+- **Anycast**: a packet is delivered to the nearest of multiple interfaces (in terms of routing distance)
+- **IPv4-mapped**: an IPv4 address mapped to IPv4. For example, **`::FFFF:a.b.c.d/96`**
+
+In addition, IPv6 has some special types of addresses such as loopback, which is assigned to the **`lo`** interface, as **`::1/128`**.
 
 
 
