@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch33-pam/notes_Ch33.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch35-networkdevices/notes_Ch35.md)
+[Previous Chapter](../Ch33-pam/notes_Ch33.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch35-networkdevconf/notes_Ch35.md)
 
 ---
 
@@ -157,4 +157,4 @@ On almost all Linux systems, one can simply edit (as root) the file `/etc/hostna
 
 ---
 
-[Previous Chapter](../Ch33-pam/notes_Ch33.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch35-networkdevices/notes_Ch35.md)
+[Previous Chapter](../Ch33-pam/notes_Ch33.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch35-networkdevconf/notes_Ch35.md)

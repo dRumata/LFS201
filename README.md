@@ -40,3 +40,4 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 32. [File Permissions and Ownership](/Ch32-fpo/notes_Ch32.md)
 33. [Pluggable Authentication Modules (PAM)](/Ch33-pam/notes_Ch33.md)
 34. [Network Addresses](/Ch34-networkaddresses/notes_Ch34.md)
+35. [Network Devices and Configuration](/Ch35-networkdevconf/notes_Ch35.md)
