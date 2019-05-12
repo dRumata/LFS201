@@ -68,6 +68,88 @@ IPv6 address types include:
 In addition, IPv6 has some special types of addresses such as loopback, which is assigned to the **`lo`** interface, as **`::1/128`**.
 
 
+## 34.8 IPv4 Address Classes
+Historically, IP addresses based on defined **classes**. Classes A, B, C used to distinguish network portion of address from host portion of address. This is used for routing purposes.
+
+**Address Classes**
+
+Network Class | Highest order octet range | Notes
+------------- | ------------------------- | -----
+A | 1-127 | 128 networks, 16,772,214 hosts per network, 127.x.x.x reserved for loopback
+B | 128-191 | 16,384 networks, 65,534 hosts per network
+C | 192-223 | 2,097,152 networks, 254 hosts per network
+D | 224-239 | Multicast addresses
+E | 240-254 | Reserved address range
+
+
+## 34.9 Netmasks
+**Netmask** used to determine how much of address used for network portion and how much for host portion, as seen. Also used to determine network/broadcast addresses.
+
+**Address Classes and Netmasks**
+
+Network Class | Decimal | Hex | Binary
+------------- | ------- | --- | ------
+A | **`255.0.0.0`** | **`ff:00:00:00`** | **`11111111 00000000 00000000 00000000`**
+B | **`255.255.0.0`** | **`ff:ff:00:00`** | **`11111111 11111111 00000000 00000000`**
+C | **`255.255.255.0`** | **`ff:ff:ff:00`** | **`11111111 11111111 11111111 00000000`**
+
+Class A addresses use 8 bits for network portion of address and 24 bits for host portion of address.
+
+Class B addresses use 16 for network, 16 for host.
+
+Class C addresses use 24 for network, 8 for host.
+
+Class D addresses used for multicasting.
+
+Class E addresses currently not used.
+
+Network address obtained by **anding** (logical and - &) IP address with netmask. Interested in network addresses because they define local network which consists of collection of nodes connected via same media and sharing same network address. All nodes on same network can directly see each other.
+
+**Example:**
+```shell
+172.16.2.17  ip address
+&255.255.0.0  netmask
+-----------------
+172.16.0.0  network address
+```
+
+
+## 34.10 Hostname
+**Hostname**: simply a label used to identify networked device to distinguish from other elements on network. Historically, also been called nodename.
+
+For DNS purposes, hostnames appended with period (dot) and domain name, so that machine with hostname of **`antje`** could have **fully qualified domain name (FQDN)** of **`antje.linuxfoundation.org`**.
+
+Hostname generally specified at installation time, can be modified at any time later.
+
+
+## 34.11 Getting and Setting a Hostname
+At any given time, ascertaining hostname as simple as:
+```shell
+$ hostname
+wally
+```
+Changing hostname involved giving parameter, requires root privilege:
+```shell
+$ sudo hostname lumpy
+lumpy
+```
+Current value always stored in `/etc/hostname` on most Linux distributions.
+
+Changing hostname in this fashion -> not persistent; when system rebooted, reverts to value before modification. As usual, making persistent changes involves changing configuration files in `/etc` directory tree. Best done by using **hostnamectl** facility, which arises from **systemd** infrastructure.
+
+![hostnamectl](/images/hostnamectl.png)
+
+Changing hostname persistently (surviving reboot):
+```shell
+$ sudo hostnamectl set-hostname MYPC
+```
+Most distributions do not use "pretty" hostname for anything.
+
+On almost all Linux systems, one can simply edit (as root) the file `/etc/hostname` and put in new name.
+
+
+
+
 
 ##
 
