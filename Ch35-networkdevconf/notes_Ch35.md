@@ -18,7 +18,20 @@ Network devices such as Ethernet, wireless connections require careful configura
 - Configure name resolution as well as run diagnostic utilities.
 
 
-## 
+## 35.4 Network Devices
+Network devices *not* associated with **special device files** (also known as **device nodes**), unlike block/character devices. Know by their names rather than having associated entries in `/dev` directory.
+
+Names consist of type identifier followed by number:
+- **`eth0`**, **`eth1`**, **`eno1`**, **`eno2`**, etc. for Ethernet devices
+- **`wlan0`**, **`wlan1`**, **`wlan2`**, **`wlp3s0`**, **`wlp3s2`**, etc. for wireless devices
+- **`br0`**, **`br1`**, **`br2`**, etc. for bridge interfaces
+- **`vmnet0`**, **`vmnet1`**, **`vmnet2`**, etc. for virtual devices for communicating with virtual clients
+
+Historically, multiple virtual devices could be associated with single physical devices.
+
+
+## 35.5 ip
+**ip**: the command line utility used to configure, control, query interface parameters and control devices, routing, etc. Preferred to the venerable **ifconfig** discussed next.
 
 
 ##
