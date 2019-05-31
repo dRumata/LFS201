@@ -89,6 +89,33 @@ Some of the main values of `OBJECT`:
 ![ipubuntu](/images/ipubuntu.png)
 
 
+## 35.7 ifconfig
+**ifconfig**: system administration utility long found in UNIX-like operating systems, used to configure, control, query network interface parameters from either command line or from system configuration scripts. Superseded by **ip**, some Linux distributions no longer install by default. Some usage examples:
+- Display some information about all interfaces:
+  ```shell
+  $ ifconfig
+  ```
+- Display information about only `eth0`:
+  ```shell
+  $ ifconfig eth0
+  ```
+- Set IP address to `192.168.1.50`
+  ```shell
+
+  ```
+- 
+  ```shell
+
+  ```
+- 
+  ```shell
+
+  ```
+- 
+  ```shell
+
+  ```
+
 
 ##
 
