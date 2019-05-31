@@ -31,7 +31,63 @@ Historically, multiple virtual devices could be associated with single physical 
 
 
 ## 35.5 ip
-**ip**: the command line utility used to configure, control, query interface parameters and control devices, routing, etc. Preferred to the venerable **ifconfig** discussed next.
+**ip**: the command line utility used to configure, control, query interface parameters and control devices, routing, etc. Preferred to the venerable **ifconfig** discussed next, since more versatile + more efficient because it uses **netlink** sockets rather than **ioctl** system calls.
+
+**ip** can be used for wide variety of tasks. Can be used to configure, control, query devices and interface parameters. Also manipulate routing, policy-based routing, tunneling.
+
+Basic syntax:
+```shell
+ip [ OPTIONS ] OBJECT { COMMAND | help }
+ip [ -force ] -batch filename 
+```
+where second form can read commands from designated file.
+
+**ip** a multiplex utility. `OBJECT` argument describes what kind of action going to be performed. Possible `COMMANDS` depend on which `OBJECT` selected.
+
+Some of the main values of `OBJECT`:
+
+**Main ip `object`s**
+
+`OBJECT` | Function
+-------- | --------
+`address` | **IPv4** or **IPv6** protocol device address
+`link` | Network Devices
+`maddress` | Multicast Address
+`monitor` | Watch for netlink messages
+`route` | Routing table entry
+`rule` | Rule in the routing policy database
+`tunnel` | Tunnel over IP
+
+
+## 36.6 Examples of Using ip
+**ip** utility can be used in many ways:
+- Show information for all network interfaces:
+  ```shell
+  $ ip link show
+  ```
+- Show information for `eth0` network interface, including statistics:
+  ```shell
+  $ ip -s link show eth0
+  ```
+- Set IP address for `eth0`:
+  ```shell
+  $ sudo ip addr add 192.168.1.7 dev eth0
+  ```
+- Bring `eth0` down:
+  ```shell
+  $ sudo ip link set eth0 down
+  ```
+- Set **MTU** to 1480 bytes for `eth0`:
+  ```shell
+  $ sudo ip link set eth0 mtu 1480
+  ```
+- Set networking route:
+  ```shell
+  $ sudo ip route add 172.16.1.0/24 via 192.168.1.5
+  ```
+  
+![ipubuntu](/images/ipubuntu.png)
+
 
 
 ##
