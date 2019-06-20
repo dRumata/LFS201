@@ -99,23 +99,108 @@ Some of the main values of `OBJECT`:
   ```shell
   $ ifconfig eth0
   ```
-- Set IP address to `192.168.1.50`
+- Set IP address to `192.168.1.50` on interface `eth0`:
   ```shell
-
+  $ sudo ifconfig eth0 192.168.1.50
   ```
-- 
+- Set the *netmask* to 24-bit:
   ```shell
-
+  $ sudo ifconfig eth0 netmask 255.255.255.0
   ```
-- 
+- Bring interface `eth0` up:
   ```shell
-
+  $ sudo ifconfig eth0 up
   ```
-- 
+- Bring interface `eth0` down:
   ```shell
-
+  $ sudo ifconfig eth0 down
   ```
 
+Set the **MTU** (<strong>M</strong>aximum <strong>T</strong>ransfer <strong>U</strong>nit)
+```shell
+$ sudo ifconfig eth0 mtu 1480
+```
+
+![ifconfigrhel7](/images/ifconfigrhel7.png)
+
+
+## 35.8 Problems with Network Device Names
+Classic device naming conventions described earlier encountered difficulties, especially when multiple interfaces of same type present. Eg., if two network cards, one named `eth0` and other `eth1`, but which physical device should be associated with each name?
+
+Simplest method: have first device found be `eth0`, second `eth1` etc. Unfortunately, probing for devices not deterministic for modern systems, and devices may be located/plugged in unpredictable order. Thus, one might wind up with Internet interface swapped with local interface. Even if no change in hardware, order in which interfaces located known to vary with kernel version and configuration.
+
+Many system administrators solved this problem in a simple manner: by hardcoding associations between hardware (MAC) addresses and device names in system configuration files and startup scripts. While this method worked for years, required manual tuning + had other problems, eg., when MAC addresses not fixed. Can happen in both embedded and virtualized systems.
+
+
+## 35.9 Predictable Network Interface Device Names
+**Predictable Network Interface Device Names** (**PNIDN**): strongly correlated with use of **udev** and integration with **systemd**. 5 types of names that devices can be given:
+1. Incorporating Firmware or BIOS provided index numbers for on-board devices:
+   
+   Example: `eno1`
+2. Incorporating **Firmware** or **BIOS** provided **PCI Express** hotplug slow index numbers:
+   
+   Example: `ens1`
+3. Incorporating physical and/or geographical location of the hardware connection:
+   
+   Example: `enp2s0`
+4. Incorporating the `MAC` address:
+   
+   Example: `enx7837d1ea46da`
+5. Using the old classic method:
+   
+   Example: `eth0`
+
+## 35.10 Examples of the New Naming Scheme
+For example, on machine with two onboard PCI network interfaces that would have been `eth0` and `eth1`:
+```shell
+$ ip link show | grep enp
+2: enp4s2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo-fast state DOWN mode DEFAULT qlen 1000
+3: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo-fast state UP mode DEFAULT qlen 1000
+```
+
+These names are correlated with physical locations of the hardware on the PCI system.
+
+Likewise, for wireless device that previously would have been simply named `wlan0`:
+```shell
+17:/home/coop>ip link show | grep w1
+3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DORMANT qlen 1000
+```
+See same pattern. Easy to turn off new scheme, go back to classic names. Left as research project. In following, will mostly use classic names for definiteness + simplicity.
+
+## 35.11 NIC Configuration Files
+While network interfaces can be configured on the fly using either **ip** or **ifconfig** utilities, settings not persistent. Thus, number of Linux distribution-dependent files store persistent network interface and device configuration information.
+
+Each distribution has own set of files and/or directories. Depending on version, might be:
+
+**Red Hat**
+```shell
+/etc/sysconfig/network
+/etc/sysconfig/network-scripts/ifcfg-ethX
+/etc/sysconfig/network-scripts/ifcfg-ethX:Y
+/etc/sysconfig/network-scripts/route-ethX
+```
+**Debian**
+```shell
+/etc/network/interfaces
+```
+**SUSE**
+```shell
+/etc/sysconfig/network
+```
+
+When using **systemd**, preferable to use Network Manager, rather than try to configure underlying text files. In fact, in new Linux distributions, many of these files non-existent, empty, or much smaller, there only for backward compatibility reasons.
+
+## 35.12 Network Manager
+Once upon a time, network connections almost all wired (Ethernet), did not change unless there was significant change to either the hardware, software, or network configuration. During system boot, files in `/etc` consulted to establish all device configurations.
+
+However, modern systems often have dynamic configurations:
+- Networks may change as a device is moved from place to place
+- Wireless devices may have a large choice of networks to hook into
+- Devices may change as hardware such as wireless devices are plugged in or turned on and off
+
+Previously discussed configuration files created to deal with more static situations, very distribution dependent.
+
+**Network Manager** still uses configuration files, but administrator can avoid directly manipulating them. Its use hopefully almost the same on different systems.
 
 ##
 
