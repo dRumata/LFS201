@@ -115,11 +115,10 @@ Some of the main values of `OBJECT`:
   ```shell
   $ sudo ifconfig eth0 down
   ```
-
-Set the **MTU** (<strong>M</strong>aximum <strong>T</strong>ransfer <strong>U</strong>nit)
-```shell
-$ sudo ifconfig eth0 mtu 1480
-```
+- Set the **MTU** (<strong>M</strong>aximum <strong>T</strong>ransfer <strong>U</strong>nit)
+  ```shell
+  $ sudo ifconfig eth0 mtu 1480
+  ```
 
 ![ifconfigrhel7](/images/ifconfigrhel7.png)
 
