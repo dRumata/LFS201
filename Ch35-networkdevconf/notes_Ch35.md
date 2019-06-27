@@ -201,6 +201,98 @@ Previously discussed configuration files created to deal with more static situat
 
 **Network Manager** still uses configuration files, but administrator can avoid directly manipulating them. Its use hopefully almost the same on different systems.
 
+## 35.13 Network Manager Interfaces
+**GUI (Graphical User Interface)**
+
+If using your laptop in a hotel room or a coffee shop, probably going to use whatever graphical interface your Linux distribution's desktop offers. Can use this to select between different networks, configure security/passwords, turn devices off/on etc.
+
+**nmtui**
+
+If making configuration change on system that is likely to last for a while, likely to use **nmtui** as it has almost no learning curve + will edit underlying configuration files for you.
+
+**nmcli**
+
+If need to run scripts that change network configuration, will want to use **nmcli**. Of, if command line junkie, may want to use this instead of **nmtui**.
+
+If GUI properly done, should be able to accomplish any task using any of these three methods. However, will focus on **nmtui** and **nmcli** because essentially distribution independent + hide any differences in underlying configuration files.
+
+
+## 35.14 nmtui
+**nmtui** straightforward to use. Can navigate with either arrow keys or tab key.
+
+Besides activating/editing connections, also set system hostname. However, some operations, such as this, cannot be done by normal users, will be prompted for root password to go forward.
+
+![nmtui-main](/images/nmtui-main.png) **nmtui Main Screen**
+
+![nmtui-edit](/images/nmtui-edit.png) **nmtui Edit Screen**
+
+## 35.15 nmtui Wireless Configuration
+![nmtui-config](/images/nmtui-config.png) **nmtui Wireless Configuration**
+
+## 35.16 nmcli
+**nmcli**: command line interface to **Network Manager**. Can issue direct commands, but also has interactive mode.
+
+For many details/examples, can visit [Networking/CLI Fedora wiki webpage](https://fedoraproject.org/wiki/Networking/CLI) or can type:
+```shell
+$ man nmcli-examples
+```
+Will explore use of **nmcli** in lab exercises.
+
+![nmcli](/images/nmcli.png)
+
+## 35.17 Routing
+**Routing**: process of selecting paths in network along which to send network traffic.
+
+**Routing table**: list of routes to other networks managed by system. Defines paths to all networks and hosts, sending remote traffic to routers.
+
+To see the current routing table, can use **route** or **ip**:
+```shell
+$ route -n
+$ ip route
+```
+
+![routeubuntu](/images/routeubuntu.png)
+
+
+## 35.18 Default Route
+**Default route**: the way packets are send when there is no other match in routing table for reaching specified network.
+
+Can be obtained dynamically using DHCP. However, can also be manually configured (static). With **nmcli** can be done via:
+```shell
+$ sudo nmcli con mod virbr0 ipv4.routes 192.168.10.0/24 \
+              +ipv4.gateway 192.168.122.0
+$ sudo nmcli con up virbr0
+```
+or can modify configuration files directly. On Red Hat-based systems, can modify `/etc/sysconfig/network` putting in the line:
+```shell
+GATEWAY=x.x.x.x
+```
+or alternatively in `/etc/sysconfig/network-scripts/ifcfg-ethX` on device-specific basis in configuration file for individual NIC. On Debian-based systems, equivalent is putting:
+```shell
+gateway=x.x.x.x
+```
+in `etc/network/interfaces`.
+
+On either system can set default gateway at runtime with:
+```shell
+$ sudo route add default gw 192.168.1.10 enp2s0
+$ route
+Kernel IP routing table
+Destination   Gateway      Genmask       Flags Metric Ref Use Iface
+default       192.168.1.10 0.0.0.0       UG    0      0     0 enp2s0
+default       192.168.1.1  0.0.0.0       UG    1024   0     0 enp2s0
+172.16.132.0  0.0.0.0      255.255.255.0 U     0      0     0 vmnet1
+192.168.1.0   0.0.0.0      255.255.255.0 U     0      0     0 enp2s0
+192.168.113.0 0.0.0.0      255.255.255.0 U     0      0     0 vmnet8
+```
+Note: this might wipe out your network connection! Can restore either by resetting network, or in above example by doing:
+```shell
+$ sudo route add default gw 192.168.1.1 enp2s0
+```
+These changes not persistent, will not survive system restart.
+
+
+
 ##
 
 [Back to top](#)
