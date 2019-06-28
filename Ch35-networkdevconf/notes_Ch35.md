@@ -37,8 +37,8 @@ Historically, multiple virtual devices could be associated with single physical 
 
 Basic syntax:
 ```shell
-ip [ OPTIONS ] OBJECT { COMMAND | help }
-ip [ -force ] -batch filename 
+ip [ OPTIONS ] OBJECT [ COMMAND | help ]
+ip [ -force ] -batch filename
 ```
 where second form can read commands from designated file.
 
@@ -85,7 +85,7 @@ Some of the main values of `OBJECT`:
   ```shell
   $ sudo ip route add 172.16.1.0/24 via 192.168.1.5
   ```
-  
+
 ![ipubuntu](/images/ipubuntu.png)
 
 
@@ -134,19 +134,19 @@ Many system administrators solved this problem in a simple manner: by hardcoding
 ## 35.9 Predictable Network Interface Device Names
 **Predictable Network Interface Device Names** (**PNIDN**): strongly correlated with use of **udev** and integration with **systemd**. 5 types of names that devices can be given:
 1. Incorporating Firmware or BIOS provided index numbers for on-board devices:
-   
+
    Example: `eno1`
 2. Incorporating **Firmware** or **BIOS** provided **PCI Express** hotplug slow index numbers:
-   
+
    Example: `ens1`
 3. Incorporating physical and/or geographical location of the hardware connection:
-   
+
    Example: `enp2s0`
 4. Incorporating the `MAC` address:
-   
+
    Example: `enx7837d1ea46da`
 5. Using the old classic method:
-   
+
    Example: `eth0`
 
 ## 35.10 Examples of the New Naming Scheme
