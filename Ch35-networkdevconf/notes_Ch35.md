@@ -291,6 +291,135 @@ $ sudo route add default gw 192.168.1.1 enp2s0
 ```
 These changes not persistent, will not survive system restart.
 
+## 35.19 Static Routes
+**Static routes**: used to control packet flow when there is more than one router or route. Defined for each interface and can be either persistent or non-persistent.
+
+When system can access more than one router, or perhaps there are multiple interfaces, useful to selectively control which packets go to which router.
+
+Either **route** or **ip** command can be used to set a non-persistent route as in:
+```shell
+$ sudo ip route add 10.5.0.0/16 via 192.168.1.100
+$ route
+Destination  Gateway      Genmask        Flags Metric Ref Use Iface
+default      192.168.1.1  0.0.0.0        UG    0      0   0   eth0
+10.5.0.0     quad         255.255.0.0    UG    0      0   0   eth0
+192.168.1.0  *            255.255.255.0  U     1      0   0   eth0
+```
+
+On Red Hat-bases system, persistent route can be set up editing `/etc/sysconfig/network-scripts/route-ethX` as shown by:
+```shell
+$ cat /etc/sysconfig/network-scripts/route-eth0
+10.5.0.0/16 via 172.17.9.1
+```
+
+On Debian-based systems, need to add lines to `/etc/network/interfaces` such as:
+```shell
+iface eth1 inet dhcp
+    post-up route add -host 10.1.2.51 eth1
+    post-up route add -host 10.1.2.52 eth1
+```
+
+On SUSE-based system, need to add or create file such as `/etc/sysconfig/network/ifroute-eth0` with lines like:
+```shell
+# Destination Gateway Netmask Interface [Type] [Options]
+192.168.1.150 192.168.1.1 255.255.255.255 eth0
+10.1.1.150 192.168.233.1.1 eth0
+10.1.1.0/24 192.168.1.1 - eth0
+```
+where each field is separated by tabs.
+
+## 35.20 Name Resolution
+**Name Resolution**: act of translating hostnames to IP addresses of their hosts. Eg., browser or email client will take **`training.linuxfoundation.org`** and resolve he name to the IP address of the server (or servers) that serve **`training.linuxfoundation.org`** in order to transmit to and from that location.
+
+There are two facilities for doing this translation:
+- Static name resolution (using `/etc/hosts`).
+- Dynamic name resolution (using DNS servers).
+
+There are several command line tools that can be used to resolve IP address of hostname:
+```shell
+$ [dig | host | nslookup] linuxfoundation.org
+```
+- **dig**: generates the most information, has many options
+- **host**: more compact
+- **nslookup**: older
+
+dig is the newest and the other are sometimes considered deprecated, but the output for host is easiest to read and contains the basic information.
+
+One sometimes also required **reverse resolution**: converint IP address to host name. Try feeding these three utilities a known IP address instead of hostname, and examine output.
+
+## 35.21 /etc/hosts
+`/etc/hosts` holds local database of hostnames and IP addresses. Contains set of records (each taking one line) which map IP addresses with corresponding hostnames and aliases.
+
+Typical `/etc/hosts` file looks like:
+```shell
+$ cat /etc/host
+127.0.01      localhost localhost.localdomain localhost4 localhost4 localdomain4
+::1           localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.1.100 hans hans7 hans64
+192.168.1.150 bethe bethe7 bethe64
+192.168.1.2   hp-printer
+192.168.1.10  test32 test64 oldpc
+```
+Such static name resolution primarily used for local, small, isolated networks. Generally checked before DNS attempted to reolve address; however, priority can be controlled by `/etc/nsswitch.conf`.
+
+The other host-related files in `/etc` are `/etc/hosts.deny` and `/etc/hosts.allow`. These are self-documenting and their purpose is obvious from their names. The `allow` file searched first, and `deny` file only searched if query is not found there.
+
+`/etc/host.conf` contains general configuration information; rarely used.
+
+## 35.22 DNS
+If name resolution cannot be done locally using `/etc/hosts`, then system will query a DNS (<strong>D</strong>omain <strong>N</strong>ame <strong>S</strong>erver) server.
+
+DNS dynamic and consists of network of servers which client uses to look up names. Service distributed; any one DNS server has only information about its **zone of authority**; however, all of them together can cooperate to resolve any name.
+
+Machine's usage of DNS configured in `/etc/resolv.conf`, which historically has looked like:
+```shell
+search example.com aps.org
+nameserver 192.168.1.1
+nameserver 8.8.8.8
+```
+which:
+- Can specify particular domains to search
+- Defines a strict order of nameservers to query
+
+![DNS_zone_large](/images/DNS_zone_large.png) **DNS**
+
+## 35.23 Network Diagnostics
+Number of basic network utilities in every system administrator's toolbox, including:
+- **ping**
+
+  Send 64-byte test packets to designated network hosts and (if it finds them) tries to report back on the time required to reach it (in milliseconds), any lost packets, and some other parameters. Note that the exact output will vary according to the host being targeted, but you can at least see that the network is working and the host is reachable.
+
+- **traceroute**
+
+  Is used to display a network path to a destination. Shows the routers packets flow through to get to a host, as well as the time it takes for each **hop**
+
+- **mtr**
+
+  Combines functionality of **ping** and **traceroute** and creates a continuously updated display, like **top**
+
+- **dig**
+
+  Is useful for testing DNS functionality. Note that one can also use **host** or **nslookup**, older programs that also try to return DNS information about a host.
+
+Note: some recent distributions (such as RHEL 7) require root privilege (as with **sudo**) in order to run the first three diagnostic utilities.
+
+**Examples**:
+```shell
+$ ping -c 10 linuxfoundation.org
+$ traceroute linuxfoundation.org
+$ mtr linuxfoundation.org
+```
+
+## 35.24 ping Example
+![pingrhel7](/images/pingrhel7.png)
+
+## 35.25 traceroute Example
+![tracerouterhel7](/images/tracerouterhel7.png)
+
+## 35.26 mtr Example
+![mtrhel7](/images/mtrhel7.png)
+
 
 
 ##
