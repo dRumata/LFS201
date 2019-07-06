@@ -73,6 +73,70 @@ Will work with lower-level tools for following reasons:
 
 Disadvantage: can seem more difficult to learn at first. In following, will concentrate on use of modern **firewalld** package, includes both **firewall-cmd** and **firewall-config**. FOr distributions which don't have it by default, can be installed from source rather easily, as will do if necessary in exercise.
 
+## 36.8 Why We Are Not Working with iptables
+More firewall installations today actually use **iptables** package on user side. This currently interfaces same kernel firewall implementation code as **firewalld**, which will be discussed more in detail.
+
+Decided not to teach **iptables** because it requires much more time to get to useful functionality.
+
+However, **iptables** discussed in detail in next course in Linux Foundation system administrator sequence: [*LFS311 - Linux for System Engineers*](https://training.linuxfoundation.org/training/linux-for-system-engineers/?sf_action=get_data&sf_data=all&_sft_course_mode=instructor-led&sf_paged=2)/[*LFS211 - Linux Networking and Administration*](https://training.linuxfoundation.org/training/linux-networking-and-administration/?sf_action=get_data&sf_data=all&sf_paged=3).
+
+## 36.9 firewalld
+**firewalld**: **Dynamic Firewall Manager**. Utilizes network/firewall **zones** which have defined levels of trust for network interfaces or connections. Supports both IPv4 and IPv6 protocols.
+
+In addition, separates **runtime** and **permanent** (persistent) changes to configuration, and also includes interfaces for services/applications to add firewall rules.
+
+Configuration files kept in `/etc/firewalld` and `/usr/lib/firewalld`. Files in `/etc/firewalld` override those in other directory and are the ones system administrators should work on.
+
+Command line tool actually **firewall-cmd** which will be discussed. Run before getting any further:
+```shell
+$ firewall-cmd --help
+Usage: firewall-cmd [OPTIONS...]
+....
+Status options
+   --state                 Return and print firewalld state
+   --reload                Reload firewall and keep state information
+   --complete-reload       Reload firewall and loose state information
+   --runtime-to-permanent  Create permanent from runtime configuration
+....
+```
+which runs about 200 lines, too long to be included here.
+
+Note: will see that almost all options rather obvious, as well named. As a service, **firewalld** replaces older **iptables** Error to run both services, **firewalld** and **iptables**, at same time.
+
+## 36.10 firewalld Service Status
+**firewalld**: service which needs to be running to use and configure the firewall. Enabled/disabled, or started/stopped in usual way:
+```shell
+$ sudo systemctl [enable/disable] firewalld
+$ sudo systemctl [start/stop] firewalld
+```
+Can show current state in either of the following ways:
+```shell
+$ sudo systemctl status firewalld
+firewalld.service - firewalld - dynamic firewall daemon
+    Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled)
+    Active: active (running) since Tue 2015-04-28 12:00:59 CDT; 5min ago
+ Main PID: 777 (firewalld)
+    CGroup: /system.slice/firewalld.service
+             777  /usr/bin/python -Es /usr/sbin/firewalld --nofork --nopid
+Apr 28 12:00:59 CenOS7 systemd[1]: Started firewalld - dynamic firewall daemon.
+$ sudo firewall-cmd --state
+running
+```
+
+Note: if you have more than one network interface when using IPv4, have to turn on **ip forwarding**. Can do this at runtime by doing either of:
+```shell
+$ sudo sysctl net.ipv4 ip_forward=1
+$ echo 1 > /proc/sys/net/ipv4/ip_forward (needs to be run as root to get echo to work properly)
+```
+However, this is not persistent. To do that, have to add following line to `/etc/sysctl.conf`:
+```shell
+net.ipv4.ip_forward=1
+```
+and then reboot or type:
+```shell
+$ sudo sysctl -p
+```
+to read in new setting without rebooting.
 
 
 
