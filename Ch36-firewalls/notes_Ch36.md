@@ -162,6 +162,26 @@ The zones:
 
   Used when access to some (but not all) services are to be allowed to the public. Only particular incoming connections are allowed.
 
+- **work**
+
+  Trust (but not completely) connected nodes to be not harmful. Only certain incoming connections are allowed.
+
+- **home**
+
+  Mostly trust the other network nodes, but till select which incoming connections are allowed.
+
+- **internal**
+
+  Similar to **work** zone.
+
+- **trusted**
+
+  All network connections are allowed.
+
+On system installation, most, if not all Linux distributions, will select the **public** zone as default for all interfaces.
+
+The differences between some of the zones mentioned not obvious, do not need to go into that much detail. Note: one should not use a more open zone than necessary.
+
 ##
 
 [Back to top](#)
