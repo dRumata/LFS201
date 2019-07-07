@@ -138,7 +138,29 @@ $ sudo sysctl -p
 ```
 to read in new setting without rebooting.
 
+## 36.11 Zones
+**firewalld** works with **zones**, each of which has defined level of trust and certain known behavior for incoming/outgoing packets. Each interface belongs to particular zone (normally, it is **Network Manager** which informs **firewalld** which zone is applicable), but this can be changed with **firewallcmd** or the **firewall-config** GUI.
 
+The zones:
+- **drop**
+
+  All incoming packets dropped with no reply. Only outgoing connections are permitted.
+
+- **block**
+
+  All incoming network connections rejected. Only permitted connections are those from within the system.
+
+- **public**
+
+  DO not trust any computers on the network; only certain consciously selected incoming connections are permitted.
+
+- **external**
+
+  Used when masquerading is being used, such as in routers. Trust levels are the same as in public.
+
+- **dmz (Demilitarized Zone)**
+
+  Used when access to some (but not all) services are to be allowed to the public. Only particular incoming connections are allowed.
 
 ##
 
