@@ -42,7 +42,7 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 34. [Network Addresses](/Ch34-networkaddresses/notes_Ch34.md)
 35. [Network Devices and Configuration](/Ch35-networkdevconf/notes_Ch35.md)
 36. [Firewalls](/Ch36-firewalls/notes_Ch36.md)
-37. [System Startup and Shutdown]()
+37. [System Startup and Shutdown](/Ch37-systemsusd/notes_Ch37.md)
 38. [GRUB]()
 39. [init: SystemV, Upstart, systemd]()
 40. [Backup and Recovery Methods]()
