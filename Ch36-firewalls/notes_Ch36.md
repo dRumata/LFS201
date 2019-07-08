@@ -182,6 +182,132 @@ On system installation, most, if not all Linux distributions, will select the **
 
 The differences between some of the zones mentioned not obvious, do not need to go into that much detail. Note: one should not use a more open zone than necessary.
 
+## 36.12 Zone Management
+Get the default zone:
+```shell
+$ sudo firewall-cmd --get-default-zone
+public
+```
+
+Obtain a list of zones currently being used:
+```shell
+$ sudo firewall-cmd --get-active-zones
+public
+  interfaces: eno16777736
+```
+
+List all available zones:
+```shell
+$ sudo firewall-cmd --get-zone
+block dmz drop external home internal public trusted work
+```
+
+To change the default zone to **trusted** and then change it back:
+```shell
+$ sudo firewall-cmd --set-default-zone=trusted
+success
+$ sudo firewall-cmd --set-default-zone=public
+success
+```
+
+To assign an interface temporarily to a particular zone:
+```shell
+$ sudo firewall-cmd --zone=internal --change-interface=eno1
+success
+```
+
+To assign an interface to a particular zone permanently:
+```shell
+$ sudo firewall-cmd --permanent --zone=internal --change-interface=eno1
+success
+```
+which creates the file `/etc/firewalld/zones/internal.xml`.
+
+To ascertain the zone associated with a particular interface:
+```shell
+$ sudo firewall-cmd --get-zone-of-interface=eno1
+public
+```
+
+Finally, to get all details about a particular zone:
+```shell
+$ sudo firewall-cmd --permanent --zone=public --list-all
+public (default, active)
+  interfaces: eno16777736
+  sources:
+  services: dhcpv6-client ssh
+  ports:
+  masquerade: no
+  forward-ports:
+  icmp-blocks:
+  rich rules:
+```
+
+## 36.13 Source Management
+Any zone can be bound not just to network interface, but also to particular network addresses. Packet associated with zone if:
+- it comes from source address already bound to the zone; or if not,
+- it comes from an interface bound to the zone.
+
+Any packet not fitting the above criteria is assigned to the default zone (i.e., usually **public**).
+
+To assign a source to a zone (permanently):
+```shell
+$ sudo firewall-cmd --permanent --zone=trusted --add-source=192.168.1.0/24
+success
+```
+
+This says anyone with an IP address of **`192.168.1.x`** will be added to the **trusted** zone.
+
+Note: can remove previously assigned source from zone by using **`--remove-source`** option, or change zone by using **`--change-source`**.
+
+Can list the sources bound to a zone with:
+```shell
+$ sudo firewall-cmd --permanent --zone=trusted --list-sources
+192.168.1.0/24
+```
+
+In both of above commands, if you leave out the **`--permanent`** option, you get only the current runtime behavior.
+
+## 36.14 Service Management
+So far, have assigned particular interfaces and/or addresses to zones, but haven't delineated what **services** and **ports** should be accessible within a zone.
+
+To see all the services available:
+```shell
+$ sudo firewall-cmd --get-services
+RH-Satellite-6 amanda-client bacula bacula-client dhcp dhcpv6 dhcpv6-client dns ftp \
+high-availability http https imaps ipp ipp-client ipsec kerberos kpasswd ldap ldaps \
+libvirt libvirt-tls mdns mountd ms-wbt mysql nfs ntp openvpn pmcd pmproxy pmwebapi \
+pmwebapis pop3s postgresql proxy-dhcp radius rpc-bind samba samba-client smtp ssh \
+telnet tftp tftp-client transmission-client vnc-server wbem-https
+```
+or, to see those currently accessible in a particular zone:
+```shell
+$ sudo firewall-cmd --list-services --zone=public
+dhcpv6-client ssh
+```
+
+To add a service to a zone:
+```shell
+$ sudo firewall-cmd --permanent --zone=home --add-service=dhcp
+success
+$ sudo firewall-cmd --reload
+```
+Second command, with **`reload`**, needed to make change effective. Also possible to add new services by editing files in `/etc/firewalld/services`.
+
+## 36.15 Port Management
+Port management very similar to service management:
+```shell
+$ sudo firewall-cmd --zone=home --add-port=21/tcp
+success
+$ sudo firewall-cmd --zone=home --list-ports
+21/tcp
+```
+where by looking at `/etc/services`, can ascertain that port 21 corresponds to **ftp**:
+```shell
+$ grep " 21/tcp" /etc/services
+ftp                21/tcp
+```
+
 ##
 
 [Back to top](#)
