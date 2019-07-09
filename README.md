@@ -43,7 +43,7 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 35. [Network Devices and Configuration](/Ch35-networkdevconf/notes_Ch35.md)
 36. [Firewalls](/Ch36-firewalls/notes_Ch36.md)
 37. [System Startup and Shutdown](/Ch37-systemsusd/notes_Ch37.md)
-38. [GRUB]()
+38. [GRUB](/Ch38-grub/notes_Ch38.md)
 39. [init: SystemV, Upstart, systemd]()
 40. [Backup and Recovery Methods]()
 41. [Linux Security Modules]()
