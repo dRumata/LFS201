@@ -45,6 +45,23 @@ Note: any changes made to configuration are **not persistent** and will be lost 
 
 Also possible to enter a pure shell, rather than edit a particular **stanza**. Can run a number of different commands and even try to re-install or repair GRUB. If there are serious problems, like not being able to find a configuration file, GRUB reverts back to this command line mode and you may be able to rescue the system without resorting to rescue media.
 
+## 38.6 Installing GRUB
+The word **installing** can have several different meanings with respect to GRUB:
+1. Installing the **grub** program and associated utilities in their proper locations. In GRUB 1 there is actually a program called **grub**, but in GRUB 2 there are a bunch of utilities with names like **grub2-*** or **grub-***; how they are packaged is rather distribution dependent.
+2. Installing the files GRUB needs to operate at boot time, under either `/boot/grub` or `/boot/grub2`. Separate than the files the Linux kernel needs (**`vmlinuz-*`**, **`initramfs-*`**) which will need to be in `/boot` directory as well.
+3. Installing GRUB as the **boot loader** in system; usually, done at the front of the entire hard disk, but can also be done in a partition and accessed via **chainloading** from one GRUB to another.
+
+If you do not install GRUB during a system installation, or need to re-install at some later point, exact procedure for doing so depends on GRUB version. For either version, relevant essential configuration file contains some global parameters, and then, a stanza for each operating system or kernel configured.
+
+For Version 2, installation procedure can be as easy as:
+```shell
+$ sudo grub2-install /dev/sda
+```
+
+Please read **man** page carefully before running such command. Many options, and messing up GRUB can make system un-bootable. In particular, have to tell system where to find `/boot` directory, what partition it resides in.
+
+Note: on EFI multi-boot systems, may have to also run **efibootmgr** as things can be more complex. See **man** page.
+
 ##
 
 [Back to top](#)
