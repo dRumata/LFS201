@@ -64,7 +64,32 @@ Note: on EFI multi-boot systems, may have to also run **efibootmgr** as things c
 
 ## 38.7 GRUB Device Nomenclature
 In both GRUB versions, the first hard drive is denoted as **`hd0`**, second is **`hd1`**, etc. However, in Version 1, partitions start counting from 0, and in Version 2 from 1:
-- **`sda1`** is **(`hd0,1`)** in **GRUB 2**, but 
+- **`sda1`** is **`(hd0,1)`** in **GRUB 2**, but **`(hd0,0)`** in **GRUB 1**.
+- **`sdc4`** is **`(hd2,4)`** in **GRUB 2**, but **`(hd2,3)`** in **GRUB 1**.
+
+There is no need to emphasize that getting confused about this can be rather destructive. Both versions of GRUB sometimes use **`sda#`** notation, and sometimes use **`(hd0,#)`**, so can get further confusing.
+
+Within configuration file, each stanza has to specify what the root partition is; not the same as what is meant when talking about root directory of system. In this context, means the partition contains the kernel itself (in the `/boot` directory). Eg., very common to have `/boot` in its own partition, such as `/dev/sda1`.
+
+Also fine to do **`kernel (hd0,0)/vmlinuz....`** instead, and leave out **`root`** line.
+
+Quick look at `grub.cfg` should make it clear.
+
+## 38.8 GRUB Configuration File
+Remember: should not edit **`grub.cfg`** directly. Two locations in `/etc` directory that should require attention and are used to reconstruct **`grub.cfg`** whenever system altered with new kernels, or relevant updating program (such as **update-grub** or **grubby**) manually run.
+
+First location: `/etc/default/grub`. Screenshot shows how this looks like on RHEL 7 system. Red Hat has really slimmed down this file compared to other distributions.
+
+![etcdefaultgrub](/images/etcdefaultgrub.png)
+
+Second location: `/etc/grub.d`. Screenshot shows how it looks on Ubuntu 17.04.
+
+Each of the two files (`/etc/default/grub` and `/etc/grub.d`) run in ascending order when configuration file updated. Won't discuss them here, as they are self-documenting and recommend to look at them.
+
+![etcgrubd](/images/etcgrubd.png)
+
+
+
 
 ##
 
