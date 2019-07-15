@@ -62,6 +62,10 @@ Please read **man** page carefully before running such command. Many options, an
 
 Note: on EFI multi-boot systems, may have to also run **efibootmgr** as things can be more complex. See **man** page.
 
+## 38.7 GRUB Device Nomenclature
+In both GRUB versions, the first hard drive is denoted as **`hd0`**, second is **`hd1`**, etc. However, in Version 1, partitions start counting from 0, and in Version 2 from 1:
+- **`sda1`** is **(`hd0,1`)** in **GRUB 2**, but 
+
 ##
 
 [Back to top](#)
