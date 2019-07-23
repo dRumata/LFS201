@@ -27,6 +27,21 @@ Secondly, shutdown/reboot was seen as a relatively rare event, and exactly how l
 
 Modern systems have required newer methods with enhanced capabilities.
 
+## 39.5 Startup Alternatives
+To deal with intrinsic limitations in SysVinit, new methods of controlling system startup developed. While there are others, two main schemes adopted by Enterprise distributors:
+1. **Upstart**: developed by Ubuntu, first included in 6.10 release in 2006, made default in 9.10 release in 2009. Also adopted in Fedora 9 (in 2008), in RHEL 6 and its clones (CentOS, Scienctific Linux, Oracle Linux), and in openSUSE was offered as an option since version 11.3. Has also been used in various embedded and mobile devices.
+2. **systemd**: more recent, Fedora was fist major distribution to adopt in 2011. Standard since RHEL 7 and Ubuntu 16.04.
+
+RHEL 7 based on systemd and every other major Linux distribution has adopted it, made it the default or announced plans to do so. Main systemd developers closely tied to Linux kernel community. Even Ubuntu phased out Upstart in its favor.
+
+Migrations to newer schemes complicated, bugs and missing features can be very disabling, so there have been essential required compatibility layers. Thus, SysVinit utilities and methods will persist for long time, even if under the hood things are quite different.
+
+History of all this and controversies quite complicated. Colorful personalities have ensured not all discussion is of technical nature In our context, will not look through this lens.
+
+Next, going to concentrate on systemd and SysVinit with briefer section on Upstart. (even though RHEL 6 and some other distributions had used Upstart, has been thoroughly hidden behind compatibility layer using normal SysVinit utilities.)
+
+
+
 ##
 
 [Back to top](#)
