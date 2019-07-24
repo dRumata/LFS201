@@ -70,6 +70,55 @@ Other files might include:
 
 systemd backward compatible with SysVinit, so using old commands will generally work. Supports the concept of runlevels, supported via runlevel *targets*, and **telimit** is emulated to work with runlevels.
 
+## 39.8 systemctl
+**systemctl**: main utility for managing services. Basic syntax:
+```shell
+$ systemctl [options] command [name]
+```
+Below, can see some examples of how you can use **systemctl**:
+- To show the status of everything that systemd controls:
+  ```shell
+  $ systemctl
+  ```
+- To show all available services:
+  ```shell
+  $ systemctl list-units -t service --all
+  ```
+- To show only active services:
+  ```shell
+  $ systemctl list-units -t service
+  ```
+- To start (activate) one or more units:
+  ```shell
+  $ sudo systemctl start foo
+  $ sudo systemctl start foo.service
+  $ sudo systemctl start /path/to/foo.service
+  ```
+  where a unit can be a service or a socket.
+- To stop (deactivate) a service:
+  ```shell
+  $ sudo systemctl stop foo.service
+  ```
+- To enable/disable a service:
+  ```shell
+  $ sudo systemctl enable sshd.service
+  $ sudo systemctl disable sshd.service
+  ```
+  Equivalent of `chkconfig on/off` and doesn't actually start the service.
+
+**Note**: Some **systemctl** commands in the above examples can be run as non-root user, others require running as root or with **sudo**.
+
+For an excellent summary fo how to go from **SysVinit** to **systemd**, see the [SysVinit to Systemd Cheatsheet](https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet).
+
+## 39.10 A Word About SysVinit
+SysVinit was standard method for starting and shutting down systems, and for managing services for many years.
+
+However, has been replaced on all major Linux distributions by systemd. Still value in covering how it works, as it is being replaced, as compatibility layers have been put into place to ensure the older methods can still be used. Furthermore, sometimes third party software has not been updated to use **systemctl** methods of systemd (a prominent example: VMWare, as of this writing).
+
+Besides discussion of runlevels and other ingredients, **chkconfig** and **service** commands will also be explained. Eventually, will probably move to drop discussion of SysVinit, as well as Upstart.
+
+
+
 ##
 
 [Back to top](#)
