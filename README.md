@@ -44,7 +44,7 @@ Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these doc
 36. [Firewalls](/Ch36-firewalls/notes_Ch36.md)
 37. [System Startup and Shutdown](/Ch37-systemsusd/notes_Ch37.md)
 38. [GRUB](/Ch38-grub/notes_Ch38.md)
-39. [init: SystemV, Upstart, systemd]()
+39. [init: SystemV, Upstart, systemd](/Ch39-init/notes_Ch39.md)
 40. [Backup and Recovery Methods]()
 41. [Linux Security Modules]()
 42. [Local System Security]()
