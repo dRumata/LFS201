@@ -58,6 +58,18 @@ Instead of bash scripts, systemd uses `.service` files. In addition, systemd sor
 
 systemd backward compatible with SysVinit and the concept of runlevels supported via runlevel **targets**. **telinit** program emulated to work with runlevels.
 
+## 39.7 systemd Configuration Files
+Although systemd prefers to use set of new standardized configuration files, can also use distribution-dependent legacy configuration files as fall-back.
+
+Example of new configuration file: `/etc/hostname`, which would replace `/etc/sysconfig/network` in Red Hat, `/etc/hostname` in SUSE, and `/etc/hostname` (adopted as the standard) in Debian.
+
+Other files might include:
+- `/etcvconsole.conf`: default keyboard mapping and console font
+- `/etc/sysctl.d/*.conf`: drop-in directory for kernel **sysctl** parameters
+- `/etc/os-release` distribution ID file
+
+systemd backward compatible with SysVinit, so using old commands will generally work. Supports the concept of runlevels, supported via runlevel *targets*, and **telimit** is emulated to work with runlevels.
+
 ##
 
 [Back to top](#)
