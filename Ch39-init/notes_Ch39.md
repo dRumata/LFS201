@@ -40,7 +40,23 @@ History of all this and controversies quite complicated. Colorful personalities 
 
 Next, going to concentrate on systemd and SysVinit with briefer section on Upstart. (even though RHEL 6 and some other distributions had used Upstart, has been thoroughly hidden behind compatibility layer using normal SysVinit utilities.)
 
+## 39.6 systemd
+systemd system and session manager for Linux rapidly taking root in all major distributions. Features include following:
+- Is compatible with SysVinit scripts
+- Boots faster than previous systems
+- Provides aggressive parallelization capabilities
+- Uses socket and D-Bus activation for starting services
+- Replaces shell scripts with programs
+- Offers on-demand starting of daemons
+- Keeps track of processes using cgroups
+- Supports creating snapshots and restoring of the system state
+- Maintains mount and automount points
+- Implements an elaborate transactional dependency-based service control logic
+- Can work as a drop-in replacement for SysVinit.
 
+Instead of bash scripts, systemd uses `.service` files. In addition, systemd sorts all daemons into their own Linux cgroups (control groups).
+
+systemd backward compatible with SysVinit and the concept of runlevels supported via runlevel **targets**. **telinit** program emulated to work with runlevels.
 
 ##
 
