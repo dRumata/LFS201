@@ -164,7 +164,34 @@ id:5:initdefault
 ```
 This is the level to stop at when booting the system. However, if another value specified on kernel command line, init ignores default. (This is done by simply appending right integer to kernel command line.) Default level is usually 5 for a full multi-user, networked graphical system, or 3 for a server without a graphical interface.
 
-Some recent systemd-based distributions (including RHEL 7) do not use this file at all; all lines in it are comments, but it is kept around to avoice breaking old scripts.
+Some recent systemd-based distributions (including RHEL 7) do not use this file at all; all lines in it are comments, but it is kept around to avoid breaking old scripts.
+
+## 39.13 SysVinit Startup Scripts
+Traditional method is to first run the `rc.sysinit` script, which performs numerous functions, such as starting LVM, mounting filesystems, etc. This script resides in `/etc` directory, but more likely you will find it in `/etc/rc.d` with symbolic link to `/etc`.
+
+Next, `rc` script (in same directory) is run with desired runlevel as argument. This causes system to to to `rc.d/rc[0-6].d` directory and run all the scripts in there as in:
+```shell
+$ ls -lF /etc/rc.d/rc5.d
+total 0
+lrwxrwxrwx. 1 root root 14 Sep 3 10.05 K05pcmd -> ../init.d/pmcd*
+lrwxrwxrwx. 1 root root 14 Sep 3 10.05 K05pmie -> ../init.d/pmie*
+....
+lrwxrwxrwx. 1 root root 14 Sep 3 10.05 S10network -> ../init.d/network*
+lrwxrwxrwx. 1 root root 14 Sep 3 10.05 S19vmware -> ../init.d/vmware*
+```
+
+The `rc.local` script may be used to start system-specific applications.
+
+Note:
+- All the actual scripts are in `/etc/init.d`. Each runlevel directory just links back to them.
+- **Start** scripts start with **S** in the name
+- **Kill** scripts start with **K** in the name.
+
+The existence or non-existence of a script's symbolic link in a runlevel directory determines whether or not the script is executed at that runlevel.
+
+The number following the **K** or **S** in each script's name determines the order in which the scripts are invoked. the script name is also the name of the service.
+
+Controlling which initialization scripts are run on entry to each runlevel involves managing the symbolic links. While it is possible to manage these links manually, there are utilities such as **chconfig** whicha re designed to do this consistently and more easily.
 
 
 ##
