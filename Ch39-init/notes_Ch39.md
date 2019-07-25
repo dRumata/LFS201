@@ -147,7 +147,24 @@ where first character is the previous level, **`N`** means unknown.
 $ sudo /sbin/telinit 5
 ```
 
+## 39.12 SysVinit and /etc/inittab
+When **init** process started, first thing it does is to read `/etc/inittab`. Historically, this file told **init** which scripts to run to bring system up each runlevel, and was done with series of lines, one for each runlevel:
+```shell
+id:runlevel(s):action:process
+```
+where:
+- `id`: a unique 1-4 character identification for the entry
+- `runlevel(s)`: zero or more single character or digit identifiers indicating which runlevel the action will be taken for
+- `action`: describes the action to be taken
+- `process`: specifies the process to be executed.
 
+However, In more recent systems such as RHEL 6 which hide upstart behind compatibility layer, the only uncommented line and the only thing being set in this file is the default runlevel with the line:
+```shell
+id:5:initdefault
+```
+This is the level to stop at when booting the system. However, if another value specified on kernel command line, init ignores default. (This is done by simply appending right integer to kernel command line.) Default level is usually 5 for a full multi-user, networked graphical system, or 3 for a server without a graphical interface.
+
+Some recent systemd-based distributions (including RHEL 7) do not use this file at all; all lines in it are comments, but it is kept around to avoice breaking old scripts.
 
 
 ##
