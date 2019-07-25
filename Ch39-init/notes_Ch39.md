@@ -117,6 +117,37 @@ However, has been replaced on all major Linux distributions by systemd. Still va
 
 Besides discussion of runlevels and other ingredients, **chkconfig** and **service** commands will also be explained. Eventually, will probably move to drop discussion of SysVinit, as well as Upstart.
 
+## 36.11 SysVinit Runlevels
+As a SysVinit system starts, passes through sequence of **runlevels** which define different system states; numbered from 0 to 6.
+
+Runlevel 0 reserved for **system halt** state, runlevel 1 for **single-user mode**, and runlevel 6 for **system reboot**. Other runlevels used to define what services running for a normal system, and different distributions define them somewhat differently. Eg., on Red Hat-based systems, runlevel 2 defined as running system without networking or **X**, runlevel 3 includes networking, and runlevel 5 includes networking and **X**. Table below summarizes SysVinit rundown levels.
+
+**System Runlevels**
+
+Runlevel | Meaning
+-------- | -------
+S, s | Same as 1
+0 | Shutdown system and turn power off
+1 | Single User Mode
+2 | Multiple user, no NFS, only text login
+3 | Multiple user, with NFS and network, only text login
+4 | Not used
+5 | Multiple user, with NFS and network, graphical login with X
+6 | Reboot
+
+Current runlevel can be simply displayed with **runlevel** command:
+```shell
+$ runlevel
+N 5
+```
+where first character is the previous level, **`N`** means unknown.
+
+**telinit** can be used to change runlevel of system. Eg., to go from runlevel 3 to runlevel 5, type:
+```shell
+$ sudo /sbin/telinit 5
+```
+
+
 
 
 ##
