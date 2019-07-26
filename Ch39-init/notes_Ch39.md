@@ -193,6 +193,38 @@ The number following the **K** or **S** in each script's name determines the ord
 
 Controlling which initialization scripts are run on entry to each runlevel involves managing the symbolic links. While it is possible to manage these links manually, there are utilities such as **chconfig** whicha re designed to do this consistently and more easily.
 
+## 39.14 chkconfig
+**chkconfig**: used to query and configure what runlevels the various sytem services are to run in. Can see some **chkconfig** examples below:
+- Check particular service to see if it is set up to run in the current runlevel:
+  ```shell
+  $ chkconfig some_service
+  ```
+  This will return true if the service is configured to be running, false otherwise. Should now that even if it is configured to be running, might currently be stopped.
+- See what services are configured to run in each of the runlevels:
+  ```shell
+  $ chkconfig --list [service name]
+  ```
+- Turn on a certain service next time the system boots:
+  ```shell
+  $ sudo chkconfig some_service on
+  ```
+- Do not turn a certain service on next time the system boots:
+  ```shell
+  $ chkconfig some_service off
+  ```
+- You should not that the on and off do not affect the current state by starting or stopping a service. You would have to do that with:
+  ```shell
+  $ sudo service some_service [stop | start]
+  ```
+
+Not difficult to add your own services and write your own startup scripts. One only has to place a script in `/etc/init.d` which has to have certain features in it (just some lines at the top!) and then use `chkconfig --add` to enable or `chkconfig --del` to disable use of the on and off instructions etc.
+
+How does **chkconfig** actually determine which number should appear after the `S` or `K` in a symbolic link, and how does it know which runlevels to set on or off and what state to set the symbolic links in? The information is in the scripts themselves, which contain a line near the top like:
+```shell
+# chkconfig: 2345 10 90
+```
+The first argument after the **chkconfig:** is there to define which runlevels to have the service on by default. In the above example that means levels 2, 3, 4, and 5. The second and third numbers are the numerical prefixes in the start and stop scripts, so in the above they start with **S10** and **K90**.
+
 
 ##
 
