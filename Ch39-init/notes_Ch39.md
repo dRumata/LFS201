@@ -225,6 +225,44 @@ How does **chkconfig** actually determine which number should appear after the `
 ```
 The first argument after the **chkconfig:** is there to define which runlevels to have the service on by default. In the above example that means levels 2, 3, 4, and 5. The second and third numbers are the numerical prefixes in the start and stop scripts, so in the above they start with **S10** and **K90**.
 
+## 39.15 service
+Every operating system has **services** which are usually started on system initialization and often remain running until shutdown. Such services may be started, stopped, or restarted at any time, generally requiring root privilege. On a Linux system using or emulating SysVinit, the services are those in the `.etc.init.d` directory.
+
+You can see the current status of a particular service by doing:
+```shell
+$ sudo service network status
+Configured devices:
+lo eth0 eth1 eth2 wlan0
+Currently active devices:
+lo eth0
+
+$ sudo service vsftpd status
+vsftpd (pid 5284) is running...
+```
+**service** takes a number of options, which vary according to the particular service; for example:
+```shell
+$ sudo service network
+Usage: /etc/init.d/network {start|stop|restart|reload|status}
+
+$ sudo service iptables
+Usage: /etc/init.d/iptables {start|stop|restart|condrestart|status|panic|save}
+```
+
+All **service** really does is change directory to `/etc/init.d` and run the appropriate script in that directory with the supplied options.
+
+Can see the status of all the services on the system with:
+```shell
+$ sudo service --status-all
+acpid (pid 4170) is running...
+anacron (pid 4540) is running...
+atd (pid 4553) is running...
+....
+smartd (pid 4614) is running...
+smbd is stopped
+......
+```
+Starting and stopping services with **service** is only effective during the current operation of the system; all changes are lost upon reboot. To cause a particular service to be turned on or not during system initialization, on Red Hat-based systems one uses **chkconfig** as described earlier.
+
 
 ##
 
