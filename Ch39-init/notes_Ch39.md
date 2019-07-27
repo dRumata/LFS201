@@ -282,7 +282,44 @@ $ sudo sysv-rc-conf cups [ on | off ]
 ```
 Will have to consult **man** pages for full documentation.
 
+## 39.17 Upstart
+Upstart: **event-driven**, rather than being a set of serial precedures. Event notifications are sent to init process to tell it to execute certain commands at the right time after prerequisites have been fulfilled. Because Upstart is being superseded by systemd, won't spend as much time on it or do exercises with it. Upstart configuration files include:
+```shell
+/etc/init/rcS.conf
+/etc/rc.sysinit
+/etc/inittab
+/etc/init/rc.conf
+/etc/rc[0-5].d
+/etc/init/start-ttys.conf
+```
 
+When kernel starts init process, this causes **`rcS.conf`** script to be executed. This, in turn, causes **`rc-sysinit.conf`** to be run.
+
+**`rc-sysinit.conf`** will do a number of tasks, including starting the LVM, mounting filesystems, and then executing all of the runlevel scripts for the default runlevel specified in `/etc/inittab`.
+
+This is accomplished by executing **`rc.conf`** and parring it the runlevel. These runlevel scripts bring up the services on the system. Finally, additional scripts such as **`prefdm.conf`** (for runlevel 5 only) are executed.
+
+As mentioned previously, `/etc/inittab` is deprecated, and is not used only for setting up the default runlevel via the **`initdefault`** line. Other configuration is done via Upstart jobs in the `/etc/init` directory. Generally, Upstart events will be found in the `/etc/event.d` directory.
+
+Eg., number of active **`tty`** consoles is now set by the **`ACTIVE_CONSOLES`** variable in `/etc/sysconfig/init` which is read by the `/etc/init/start-ttys.conf` job. Default value is **`ACTIVE_CONSOLES=/dev/tty[1-6]`**, which starts a getty process on **`tty1`** through **`tty6`**.
+
+While Upstart was included in RHEL 6, RHEL 7 uses systemd. Ubuntu is currently the only major Linux distribution using Upstart, but has announced plans to move to systemd.
+
+## 39.18 Upstart utilities
+Using **initctl** you can view, start, stop jobs in much the same way that **service** does. Syntax is:
+```shell
+$ initctl options command
+```
+where **`options`** can have the following values:
+- **start**: Starts a job
+- **stop**: Stops a job
+- **restart**: Restarts a job
+- **reload**: Sends **HUP** signal to a job
+- **status**: Queries status of a job
+- **list**: Lists known jobs
+- **emit**: Emits an event
+
+Good summary of how to use **initctl** and many other features of Upstart can be found online: [Upstart Intro, Cookbook & Best Practices](http://upstart.ubuntu.com/cookbook/)
 
 
 ##
