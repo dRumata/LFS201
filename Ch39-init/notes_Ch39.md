@@ -263,6 +263,27 @@ smbd is stopped
 ```
 Starting and stopping services with **service** is only effective during the current operation of the system; all changes are lost upon reboot. To cause a particular service to be turned on or not during system initialization, on Red Hat-based systems one uses **chkconfig** as described earlier.
 
+## 39.16 chkconfig and service on Debian-based systems
+On Debian-based systems, including Ubuntu, the utilities will work only if you have installed the **sysvinit-utils** and **chkconfig** packages, as in:
+```shell
+$ sudo apt install sysvinit-utils chkconfig
+```
+However, revent versions of Ubuntu no longer package **chkconfig**; will have to use **update-rc.d** utility about to be described.
+
+As alternative, can use the more native commands on these systems. Eg., equivalent of **service** utility:
+```shell
+$ sudo invoke-rc.d cups [ status | start | stop ]
+$ sudo status cups
+```
+to check or change the **cups** situation. **status** command is more rence and preferred over **invoke-rc.d**. Likewise, equivalent of **chkconfig** would be:
+```shell
+$ sudo update-rc.d cups [ defaults | purge ]
+$ sudo sysv-rc-conf cups [ on | off ]
+```
+Will have to consult **man** pages for full documentation.
+
+
+
 
 ##
 
