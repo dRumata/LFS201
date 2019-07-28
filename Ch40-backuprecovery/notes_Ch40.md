@@ -134,6 +134,32 @@ Example of one useful strategy involving tapes (can easily substitute other medi
 
 A good rule of thumb is to have at least two weeks of backups available.
 
+## 40.10 Backup utilities
+A number of programs are used for backup purposes:
+- **cpio**
+- **tar**
+- **gzip**, **bzip2**, **xz**
+
+  **cpio** and **tar** create and extract **archives** of files. The archives are often compressed with **gzip**, **bzip2**, or **xz**. The archive file may be written to disk, magnetic tape, or any other device which can hold files. Archives are very useful for transferring files from one filesystem or machine to another.
+
+- **dd**
+
+  This powerful utility is often used to transfer raw data between media. It can copy entire partitions or entire disks.
+
+- **rsync**
+
+  This powerful utility can synchronize directory subtrees or entire filesystems across a network, or between different filesystem locations on a local machine.
+
+- **dump and restore**
+
+  These ancient utilities are designed specifically for backups. They read from the filesystem directly (which is more efficient). However, they must be restored only on the same filesystem type that they came from. There are newer alternatives.
+
+- **mt**
+
+  Useful for querying and positioning tapes before performing backups and restores.
+
+## 40.11 Using tar for Backups
+
 
 ##
 
