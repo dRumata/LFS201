@@ -44,24 +44,95 @@ Whether you are administering only one personal system or a network of many mach
 ## 40.5 What Needs Backup?
 Some data is critical for backup, some less critical, and some never needs saving. In priority order:
 1. **Definitely**
-  - Business-related date
-  - System configuration files
-  - User files (usually under `/home`)
+    - Business-related date
+    - System configuration files
+    - User files (usually under `/home`)
 2. **Maybe**
-  - Spooling directories (for printing, mail, etc.)
-  - Logging files (found in `/var/log`, and elsewhere)
+    - Spooling directories (for printing, mail, etc.)
+    - Logging files (found in `/var/log`, and elsewhere)
 3. **Probably not**
-  - Software that can easily be re-installed; on a well-managed system, this should be almost everything
-  - The `/tmp` directory, because its contents are indeed supposed to be temporary
+    - Software that can easily be re-installed; on a well-managed system, this should be almost everything
+    - The `/tmp` directory, because its contents are indeed supposed to be temporary
 4. **Definitely not**
-  - Pseudo-filesystems such as `/proc`, `/dev`, and `/sys`
-  - Any swap partitions or files
+    - Pseudo-filesystems such as `/proc`, `/dev`, and `/sys`
+    - Any swap partitions or files
 
 Obviously, files essential to your organization require backup. Configuration files may change frequently, and along with individual user's files, require backup as well.
 
 Logging files can be important if you have to investigate your system's history, which can be particularly important for detecting intrusions and other security violations.
 
 Don't have to back up anything that can easily be re-installed. Also, the **swap** partitions (or files) and `/proc` filesystems are generally not useful for necessary to backup, since the data in these areas is basically temporary (just like in the `/tmp` directory).
+
+## 40.6 Backup vs. Archive
+All backup media have finite lifetime before becoming unreadable. Conventional estimates are listed below:
+- Magnetic tapes: 10-30 years
+- CDs and DVDs: 3-10 years
+- Hard Disks: 2-5 years
+
+Lifetime is very sensitive to:
+- Environmental conditions (temperature, humidity, etc.)
+- Quality of media
+- Haivng working software that can read data on current operating systems and hardware.
+
+Lifetime is sufficient for backup, but nor for permanent digital archiving.
+
+For lifetimes longer than the usual backup timescales, data can be preserved using multiple copies, plus copying over to newer media from time to time.
+
+FOr very long times (i.e., many decades, centuries, etc.), standard methods do not work easily, as everything can go obsolete, hardware, software, and document format, media.
+
+None of the inexpensive digital formats can actually compete with paper and film for long periods of time (if they are properly stored and continuously cared for - like wine).
+
+This is a problem serious people think about and there should be good solutions available before all is lost.
+
+## 40.7 Tape Drives
+Tape drives not as common as they used to be. Relatively slow and permit only sequential access. On any modern setup, rarely used for primary backup. Sometimes used for off-site storage for archival purposes for long time reference. However, magnetic tape drives always have only finite lifetime without physical degradation and loss of data.
+
+Modern tape drives usually of the LTO (Linear Tape Open) variety, whose first versions appeared in the late 1990s as an open standards alternative; early formats were mostly proprietary. Early versions held up to 100 GB; newer versions can hold 2.5 TB or more in a cartridge of the same size.
+
+Day to day backups are usually done with some form of NAS (Network Attached Storage) or with cloud-based solutions, making new tape-based installations less and less attractive. However, they can still be found and system administrators may be required to deal with them.
+
+In what follows, will try not to focus on particular physical forms for the backup media, and will speak more abstractly.
+
+## 40.8 Backup Methods
+Should never have all backups residing in same physical location as systems being protected. Otherwise, fire or other physical damage could lead to a total loss. In the past, this usually meant physically transporting magnetic tapes to a secure location. Today, this is more likely to mean transferring backups files over the Internet to alternative physical locations. Obviously, has to be done in secure way, using encryption and other security precautions as appropriate.
+
+Several different kinds of backup methods can be used, often in concert with each other:
+- **Full**
+
+  Back up all files on the system.
+
+- **Incremental**
+
+  Backup all files that have changed since the last incremental or full backup.
+
+- **Differential**
+
+  Backup all files that have changed since the last full backup.
+
+- **Multiple level incremental**
+
+  Backup all files that have changed since the previous backup at the same or a previous level.
+
+- **User**
+
+  Backup only files in a specific user's directory.
+
+
+## 40.9 Backup Strategies
+Should note that backup methods useless without associated **restore** methods. Have to take into account the robustness, clarity, ease of both directions when selecting strategies.
+
+Simplest backup scheme: do a full backup of everything once, and then perform incremental backups of everything that subsequently changes. While full backups can take a lot of time, restoring from incremental backups can be more difficult and time consuming. Thus, can use a mix of both to optimize time and effort.
+
+Example of one useful strategy involving tapes (can easily substitute other media in description):
+1. Use tape 1 for a full backup on Friday.
+2. Use tapes 2-5 for incremental backups on Monday-Thursday.
+3. Use tape 6 for full backup on second Friday.
+4. Use tapes 2-5 for incremental backups on second Monday-Thursday.
+5. Do not overwrite tape 1 until completion of full backup on tape 6.
+6. After full backup to tape 6, move tape 1 to external location for disaster recovery.
+7. For next full backup (next Friday) get tape 1 and exchange for tape 6.
+
+A good rule of thumb is to have at least two weeks of backups available.
 
 
 ##
