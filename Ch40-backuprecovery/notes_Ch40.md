@@ -196,6 +196,34 @@ Note: can combine options (when using short notation) so no need to type every d
 
 Furthermore, single-dashed **tar** options can be used with or without dashes; i.e., **`tar cvf file.tar dir1`** has same result as **`tar -cvf file.tar dir1`**.
 
+## 40.12 Using tar for Restoring Files
+**`-x`** or **`--extract`** option extracts files from archive, all by default. Can narrow the file extraction list by specifying ony particular files. If directory specified, all included files and subdirectories are also extracted.
+
+**`-p`** or **`--same-permissions`** options ensures files are restored with their original permissions.
+
+**`-t`** or **`--list`** option lists, but does not extract, the files in the archive.
+
+**Examples**:
+- Extract from an archive:
+  ```shell
+  $ tar --extract --same-permissions --verbose --file /dev/st0
+  $ tar -xpvf /dev/st0
+  $ tar xpvf /dev/st0
+  ```
+
+- Specify only specific files to restore:
+  ```shell
+  $ tar xvf /dev/st0 somefile
+  ```
+
+- List the contents of a **tar** backup:
+  ```shell
+  $ tar --list --file /dev/st0
+  $ tar -tf /dev/st0
+  ```
+
+
+
 ##
 
 [Back to top](#)
