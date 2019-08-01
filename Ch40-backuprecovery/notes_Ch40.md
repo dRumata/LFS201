@@ -234,6 +234,54 @@ Because **tar** only looks at file's date, does not consider any other changes t
 
 **Note**: when followed by an option like **`--newer`**, must use the dash in options like **`-vzf`**, or **tar** will get confused. This kind of option specification confusion sometimes occurs with old UNIX utilities like **ps** and **tar** with complicated histories involving different families of UNIX.
 
+## 40.14 Archive Compression Methods
+Often desired to compress files to save disk space and/or network transmission time, especially since modern machines will often find the compress -> transmit -> decompress cycle faster than just transmitting (or copying) an uncompressed file.
+
+Number of commonly used compression schemes available in Linux. In order of increasing compression efficiency (which comes at the cost of longer compression times):
+- **gzip**
+
+  Uses Lempel-Zip Coding (LZ277) and produces **`.gz`** files.
+
+- **bzip2**
+
+  Uses Burrow-Wheeler block sorting text compression algorithm and Huffman coding, and produces **`.bz2`** files.
+
+- **xz**
+
+  Produces **`.xz`** files and also support legacy **`.lzma`** format.
+
+Decompression times do not vary as much as compression times do. For day-to-day use on smaller files, one usually just uses **gzip**, as it is extremely fast, but, for larger files and for archiving purposes, the other two methods are often used. E.g., [The Linux Kernel Archives](https://www.kernel.org/) now offers kernels only in the **xz** format.
+
+The **`.zip`** format is rarely used in Linux, except to extract legacy archives from other operating systems.
+
+Compression utilities very easily (and often) used in combination with **tar**:
+```shell
+$ tar zcvf source.tar.gz source
+$ tar jcvf source.tar.bz2 source
+$ tar Jcvf source.tar.xz source
+```
+for producing a compressed archive. Note: first command has the exact same effect as doing:
+```shell
+$ tar cvf source.tar source; gzip -v source.tar
+```
+but is more efficient because:
+1. There is no intermediate file storage.
+2. Archiving and compression happen simultaneously in the pipeline.
+
+For decompression:
+```shell
+$ tar xzvf source.tar.gz
+$ tar xjvf source.tar.bz2
+$ tar xJvf source.tar.xz
+```
+or even simpler:
+```shell
+$ tar xvf source.tar.gz
+```
+as modern versions of **tar** can sense the method of compression and take care of it automatically.
+
+Obviously, not worth using these methods on archives whose component files are already compressed, such as **`.jpg`** images, or **`.pdf`** files.
+
 ##
 
 [Back to top](#)
