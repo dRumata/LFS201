@@ -159,7 +159,42 @@ A number of programs are used for backup purposes:
   Useful for querying and positioning tapes before performing backups and restores.
 
 ## 40.11 Using tar for Backups
+**tar** is easy to use:
+- When creating **tar** archive, for each directory given as argument, all files and subdirectories will be included in archive
+- When restoring, reconstitutes directories as necessary
+- Even has **`--newer`** option that allows incremental backups
+- Version of **tar** used in Linux can also handle backups that do not fit on one tape or whatever device being used.
 
+Few examples of how to use **tar** for backups:
+- Create an archive using **`-c`** or **`--create`**:
+  ```shell
+  $ tar --create --file /dev/st0 /root
+  $ tar -cvf /dev/st0 /root
+  ```
+  Can specify a device or file with **`-f`** or **`--file`** option.
+
+- Create with multi-volume option, using **`-M`** or **`--multi-volume`** if backup won't fit on one device:
+  ```shell
+  $ tar -cMf /dev/st0 /root
+  ```
+  Will be prompted to put next tape when needed.
+
+- Verify files with compare option, using **`-d`** or **`--compare`**:
+  ```shell
+  $ tar --compare --verbose --file /dev/st0
+  $ tar -dvf /dev/st0
+  ```
+  After making backup, can make sure that it is complete and correct using above verification option.
+
+By default, **tar** will recursively include all subdirectories in archive.
+
+When creating archive, **tar** prints message about removing leading slashes from absolute path name. While this allows for restoring files anywhere, default behavior can be modified.
+
+Most **tar** options can be given in short form with one dash, or long form with two: **`-c`** is completely equivalent to **`--create`**.
+
+Note: can combine options (when using short notation) so no need to type every dash.
+
+Furthermore, single-dashed **tar** options can be used with or without dashes; i.e., **`tar cvf file.tar dir1`** has same result as **`tar -cvf file.tar dir1`**.
 
 ##
 
