@@ -338,7 +338,32 @@ $ rsync -r project-X archive-machine:archives/project-X
 ```
 Simple (and very effective and very fast) backup strategy: simply duplicate directories or patitions across a network with **rsync** commands and do so frequently.
 
+## 40.18 cpio
+**cpio** (<strong>c</strong>o<strong>p</strong>y <strong>i</strong>n and <strong>o</strong>ut): general file archiver utility that has been around since the earliest days of UNIX, originally designed for tape backups. Even though newer archiving programs (like **tar**, which is not exactly young) have been deployed to do many of the tasks that were once in the domain of **cpio**, it still survives.
 
+E.g., have already seen the use fo **rpm2cpio** to convert RPM packages into **cpio** archives and then extract them. Also, the Linux kernel uses a version of **cpio** internally to deal with **initramfs** and **initrd** initial ram filesystems and disks during boot. One reason **cpio** lives on is that it is lighter than **tar** and other successors, even if it is somewhat less robust.
+
+Examples of using **cpio**:
+- Create an archive, use **`-o`** or **`--create`**:
+  ```shell
+  $ ls | cpio --create -O /dev/st0
+  ```
+- Extract from an archive, use **`-i`** or **`--extract`**:
+  ```shell
+  $ cpio --i somefile -I /dev/st0
+  ```
+- List contents of an archive, use **`-t`** or **`--list`**:
+  ```shell
+  $ cpio -t -I /dev/st0
+  ```
+
+Can specify the input (**`-I`** device) or use redirection on the command line.
+
+The **`-o`** or **`--create`** option tells **cpio** to copy files out to an archive. **cpio** reads a list of file names (one per line) from standard input and writes the archives to standard output.
+
+The **`-i`** or **`--extract`** option tells **cpio** to copy files from an archive, reading the archive from standard input. If you list files names as patterns (such as **`*.c`**) on the command line, only files in the archive that match the patterns are copied from the archive. If no patterns give, all files extracted.
+
+The **`-t`** or **`--list`** options tells **cpio** to list archive contents. Adding the **`-v`** or **`--verbose`** option generates long listing.
 
 ##
 
