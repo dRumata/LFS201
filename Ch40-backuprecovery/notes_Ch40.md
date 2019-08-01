@@ -295,6 +295,49 @@ $ dd --help
 ```
 will yield a really long list of options, some frequently used, and some only very rarely.
 
+## 40.16 dd Examples
+Some examples of using **dd**:
+- Create a 10MB file filled with zeros:
+  ```shell
+  $ dd if=/dev/zero of=outfile bs=1M count=10
+  ```
+- Backup an entire hard drive to another (raw copy):
+  ```shell
+  $ dd if=/dev/sda of=/dev/sdb
+  ```
+- Create an image of a hard disk (which could later be transferred to another hard disk):
+  ```shell
+  $ dd if=/dev/sda of=sdadisk.img
+  ```
+- Backup a partition:
+  ```shell
+  $ dd if=/dev/sda1 of=partition1.img
+  ```
+- Use **dd** in a pipeline:
+  ```shell
+  $ dd if=ndata conv=swab count=1024 | uniq > ofile
+  ```
+
+## 40.17 rsync
+**rsync** (<strong>r</strong>emote <strong>sync</strong>hronize): used to transfer files across network (or between different locations on the same machine) as in:
+```shell
+$ rsync [options] source destination
+```
+
+Source and destination can take the form of **`target:path`** where **`target`** can be in the form of **`[user@]host`**. `user@` part is optional and used if the remote user is different from the local user. Thus, these are all possible **rsync** commands:
+```shell
+$ rsync file.tar someone@backup.mydomain:/usr/local
+$ rsync -r a-machine:/usr/local b-machine:/usr/
+$ rsync -r --dry-run /usr/local /BACKUP/usr
+```
+Have to be very careful with **rsync** about exact location specifications (especially if you use the **`--delete`** option), so it is highly recommended to use the **`--dry-run`** option first, and then repeat if the projected action looks correct.
+
+**rsync** is very clever; checks local files against remote files in small chunks, and very efficient in that when copying one directory to a similar directory, only the differences are copied over the network. This synchronizes the second directory with the first directory. One often uses the **`-r`** option which causes **rsync** to recursively walk down directory tree copying all files and directories below the one lsited as the **`sourcefile`**. Thus, very useful way to back up project directory might be similar to:
+```shell
+$ rsync -r project-X archive-machine:archives/project-X
+```
+Simple (and very effective and very fast) backup strategy: simply duplicate directories or patitions across a network with **rsync** commands and do so frequently.
+
 
 
 ##
