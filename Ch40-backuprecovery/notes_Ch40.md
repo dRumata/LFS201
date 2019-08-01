@@ -222,7 +222,17 @@ Furthermore, single-dashed **tar** options can be used with or without dashes; i
   $ tar -tf /dev/st0
   ```
 
+## 40.13 Incremental Backups with tar
+Can do incremental backup with **tar** using the **`-N`** (or the equivalent **`--newer`**), or the **`--after-date`** options. Either option requires specifying either a date or a qualified (reference) file name:
+```shell
+$ tar --create --newer '2011-12-1' -vf backup1.tar /var/tmp
+$ tar --create --after-date '2011-12-1' -vzf backup1.tar /var/tmp
+```
+Either form creates backup archive of all files in `/var/tmp` which were modified after December 1, 2011.
 
+Because **tar** only looks at file's date, does not consider any other changes to the file, such as permissions or file name. To include files with these changes in incremental backup, use **find** and create a list of files to be backed up.
+
+**Note**: when followed by an option like **`--newer`**, must use the dash in options like **`-vzf`**, or **tar** will get confused. This kind of option specification confusion sometimes occurs with old UNIX utilities like **ps** and **tar** with complicated histories involving different families of UNIX.
 
 ##
 
