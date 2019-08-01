@@ -282,6 +282,21 @@ as modern versions of **tar** can sense the method of compression and take care 
 
 Obviously, not worth using these methods on archives whose component files are already compressed, such as **`.jpg`** images, or **`.pdf`** files.
 
+## 40.15 dd
+**dd**: one of the original UNIX utilities, extremely versatile. Without options, does very low-level raw copying of files or even whole disks. Capable of doing many kind of data conversions during the copy (such as changing byte order) and has many options to control offsets, number of bytes, block size, etc.
+
+**dd** often used to read fixed amounts of data from special device nodes such as `/dev/zero` pr `/dev/random`. Basic syntax:
+```shell
+$ dd if=input-file of=output-file options
+```
+If the input or output files are not specified, the default is to use **`stdin`** and **`stdout`**. Doing:
+```shell
+$ dd --help
+```
+will yield a really long list of options, some frequently used, and some only very rarely.
+
+
+
 ##
 
 [Back to top](#)
