@@ -365,6 +365,70 @@ The **`-i`** or **`--extract`** option tells **cpio** to copy files from an arch
 
 The **`-t`** or **`--list`** options tells **cpio** to list archive contents. Adding the **`-v`** or **`--verbose`** option generates long listing.
 
+## 40.19 dump and restore
+**dump** and **restore** utilities: been around since earliest days of UNIX, not originally designed for modern hardware, filesystems, storage capabilities.
+
+Unlike **cpio** and **tar**, these utilities directly read and write filesystem, more efficient and allows backup files to be created without affecting time stamps.
+
+Positive features:
+- Can perform full or incremental backups
+- Understand specific filesystem format and hot to read and write it
+- Efficient when creating full backups, head movement reduced
+- Can specify output tape size and density, block size and count, or even both
+- Can dump to any valid device or file; defaults to `/dev/tape`
+- Parameters in `/etc/fstab` control what gets dumped and when.
+
+Negative features:
+- Multiple filesystem passes are required for backups
+- Only works with ext2, ext3, and ext4 filesystems. (Other filesystems may have their own utilities, such as **xfsdump**)
+- Cannot be run safely on mounted filesystems.
+
+Lack of filesystem flexibility: rather strong limitation, both because of multiplicity of filesystem tapes in use in Linux, and because modern trend is to abstract details such as exactly how data is stored.
+
+**dump** and **restore** sometimes used by higher-level backup program suites, such as Amanda. Some familiarity with these legacy tools is useful.
+
+## 40.20 dump Options
+**dump** has a number of options, including letting you set parameters. Some of these include:
+- **`-0-9`**
+
+  Dump level. Level 0 is full backup and higher numbers are incremental backups.
+
+- **`-B records`**
+
+  Records per volume.
+
+- **`-b blocksize`**
+
+  KB per record.
+
+- **`-f file`**
+
+  Output device or file.
+
+- **`-u`**
+
+  Update `/etc/dumpdates`
+
+- **`-w`**
+  Print most recent dump date of each filesystem in `/etc/dumpdates`.
+
+(Note: some systems, such as Debian-based ones, may use `/var/lib/dumpdates` instead.)
+
+Parameter values need not be placed immediately after the option, but must be given in the same order as the options that specify them.
+
+## 40.21 restore
+**restore** used to read archives, tapes, or files which were created by **dump**. E.g., to restore all files that were dumped, relative to current directory:
+```shell
+$ sudo restore -rvf /tmp/boot_backup
+```
+Useful options to **restore**:
+- **`-r`**
+
+  Restores everything. The dumped 
+- **`-t`**
+- **`-x`**
+- **`-i`**
+
 ##
 
 [Back to top](#)
