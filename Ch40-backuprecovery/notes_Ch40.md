@@ -424,10 +424,54 @@ $ sudo restore -rvf /tmp/boot_backup
 Useful options to **restore**:
 - **`-r`**
 
-  Restores everything. The dumped 
+  Restores everything. The dumped material is read and the complete contents are loaded into the current directory.
+
 - **`-t`**
+
+  Files and directories specified are listed on standard output if they reside on the backup. If no file argument is specified, the root directory on the backup is listed. No actual restore is performed with this option.
+
 - **`-x`**
+
+  The files and directories named are extracted from the backup. If the named file matches a directory on the backup, the directory is recursively extracted. If no argument is listed, then all contents of the backup are extracted.
+
 - **`-i`**
+
+  This mode allows the interactive restoration of files form the backup. After reading in the directory information from the backup, **restore** provides a shell-like interface that allows the user to move around the directory tree selecting files to be extracted.
+
+You cannot use **`-r`** and **`-s`** at the same time.
+
+## 40.22 mt
+**mt** utility is used to control magnetic tape devices. Most often used to query or position the tape before or between backups and restores. By default, **mt** uses tape drive defined in **`TAPE`** environment variable. Can also use the **`-f device`** option to specify tape.
+
+Note: only root user can use **mt**. Syntax:
+```shell
+mt [-h] [-f device] operation [count] [arguments...]
+```
+where:
+- **`-h`**: is for displaying usage (help)
+- **`-f device`**: is for specifying the tape device
+- **`operation`**: is one of the tape operations
+- **`count`**: is used for some operations which can repeat (default is 1)
+- **`arguments`**: are used for some operations.
+
+Some examples of using **mt**:
+- Show satus information about the tape device:
+  ```shell
+  $ mt status
+  ```
+- Rewind the tape:
+  ```shell
+  $ mt rewind
+  ```
+- Erase the tape:
+  ```shell
+  $ mt erase
+  ```
+- Move forward to the end of the current archive:
+  ```shell
+  $ mt fsf
+  ```
+
 
 ##
 
