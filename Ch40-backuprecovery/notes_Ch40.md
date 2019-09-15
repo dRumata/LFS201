@@ -336,7 +336,7 @@ Have to be very careful with **rsync** about exact location specifications (espe
 ```shell
 $ rsync -r project-X archive-machine:archives/project-X
 ```
-Simple (and very effective and very fast) backup strategy: simply duplicate directories or patitions across a network with **rsync** commands and do so frequently.
+Simple (and very effective and very fast) backup strategy: simply duplicate directories or partitions across a network with **rsync** commands and do so frequently.
 
 ## 40.18 cpio
 **cpio** (<strong>c</strong>o<strong>p</strong>y <strong>i</strong>n and <strong>o</strong>ut): general file archiver utility that has been around since the earliest days of UNIX, originally designed for tape backups. Even though newer archiving programs (like **tar**, which is not exactly young) have been deployed to do many of the tasks that were once in the domain of **cpio**, it still survives.
@@ -471,6 +471,18 @@ Some examples of using **mt**:
   ```shell
   $ mt fsf
   ```
+
+## 40.23 Backup Programs
+No shortage of available backup program suites available for Linux, including proprietary applications for those supplied by storage vendors, as well as open-source applications. Several that are particularly well known:
+
+1. **Amanda** (<strong>A</strong>dvanced <strong>M</strong>aryland <strong>A</strong>utomatic <strong>N</strong>etwork <strong>D</strong>isk <strong>A</strong>rchiver) uses native utilities (including **tar** and **dump**) but is far more robust and controllable. **Amanda** is generally available on Enterprise **Linux** systems through usual repositories. Complete information can be found on the [Amanda website](http://www.amanda.org/).
+2. **Bacula** is designed for automatic backup on heterogeneous networks. Can be rather complicated to use and recommended (by its authors) only to experienced administrators. Generally available on Enterprise Linux systems through usual repositories. Complete information can be found at the [Bacula website](https://www.bacula.org/7.0.x-manuals/en/main/Main_Reference.html).
+3. **Clonezilla** is a very robust disk cloning program, which can make images of disks and deploy them, either to restore a backup, or to be used for ghosting, to provide an image that can be used to install many machines. Complete information can be found at the [Clonezilla website](https://clonezilla.org/).
+
+  Program comes in two versions: Clonezilla live, which is good for single machine backup and recovery, and Clonezilla SE, <storng>s</strong>erver <strong>e</strong>dition, which can clone to many computers at the same time. Clonezilla not very hard to use, and extremely flexible, supporting many operating systems (not just Linux), filesystem types, and boot loaders.
+
+
+
 
 
 ##
