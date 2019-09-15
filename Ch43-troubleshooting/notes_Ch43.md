@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter XX Title - Notes
+# Chapter 43 Basic Troubleshooting - Notes
 
 ## XX.2 Introduction
 
