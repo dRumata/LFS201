@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch40-backuprecovery/notes_Ch40.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch42-localsecurity/notes_ChXX.md)
+[Previous Chapter](../Ch40-backuprecovery/notes_Ch40.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch42-localsecurity/notes_Ch42.md)
 
 ---
 
@@ -21,6 +21,21 @@ A modern computer system must be made secure, but needs vary according to sensit
 
 Basic idea to **hook system calls**; insert code wherever an application requests transition to kernel (system) mode in order to accomplish work that requires enhanced abilities; this code makes sure permissions are valid, malicious intent is protected against, etc. Does this by invoking security-related functional steps before and/or after a system call is fulfilled by kernel.
 
+## 41.5 LSM Choices
+For a long time, only enhanced security model implemented was **SELinux**. When project was first floated upstream in 2001 to be included directly in kernel, there were objections about using only one approach to enhanced security.
+
+As a result, LSM approach was adopted, where alternative modules to SELinux could be used as they were developed and was incorporated into Linux kernel in 2003.
+
+Current LSM implementations:
+- [SELinux](https://selinuxproject.org/page/Main_Page)
+- [AppArmor](https://gitlab.com/apparmor)
+- [Smack](http://schaufler-ca.com/)
+- [Tomoyo](https://tomoyo.osdn.jp)
+
+Only one LSM can be used at a time, as they potentially modify the same parts of the Linux kernel.
+
+Will concentrate primarily on SELinux and secondarily on AppArmor in order of usage volume.
+
 
 
 
@@ -30,4 +45,4 @@ Basic idea to **hook system calls**; insert code wherever an application request
 
 ---
 
-[Previous Chapter](../Ch40-backuprecovery/notes_Ch40.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch42-localsecurity/notes_ChXX.md)
+[Previous Chapter](../Ch40-backuprecovery/notes_Ch40.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch42-localsecurity/notes_Ch42.md)
