@@ -81,7 +81,21 @@ Permissive
 
 However, important to note that disabling SELinux on systems in which SELinux will be re-enabled is not recommended. Preferable to use the **permissive** mode instead of disabling SELinux, so as to avoid relabeling the entire filesystem, which can be time-consuming.
 
+## 41.8 SELinux Policies
+The same configuration file, usually `/etc/sysconfig/selinux`, also sets the **SELinux policy**. Multiple policies are allowed, but only one can be active at a time. Changing the policy may require a reboot of the system and a time-consuming re-labeling of filesystem contents. Each policy has files which must be installed under `/etc/selinux/[SELINUXTYPE]`.
 
+Most common policies:
+- **targeted**
+
+  The **default** policy in which SELinux is more restricted to targeted processes. User processes and **init** processes are not targeted. SELinux enforces memory restrictions for **all** processes, which reduces the vulnerability to buffer overflow attacks.
+- **minimum**
+
+  A modification of the targeted policy where only selected processes are protected.
+- **MLS**
+
+  The Multi-Level Security policy is much more restrictive; all processes are placed in fine-grained security domains with particular policies.
+
+##
 
 
 
