@@ -95,7 +95,27 @@ Most common policies:
 
   The Multi-Level Security policy is much more restrictive; all processes are placed in fine-grained security domains with particular policies.
 
-##
+## 41.9 Context Utilities
+As mentioned earlier, contexts are labels applied to files, directories, ports, and processes. Those labels are used to describe access rules. There are four SELinux contexts:
+- **User**
+- **Role**
+- **Type**
+- **Level**.
+
+However, will focus on **type**, which is most commonly utilized context. Label naming convention determines that type context labels should end with **`_t`** as in **`kernel_t`**.
+
+Use **`-Z`** option to see context:
+```shell
+$ ls -Z
+$ ps auZ
+```
+Use **chcon** command to change context:
+```shell
+$ chcon -t etc_t somefile
+$ chcon --reference somefile so
+```
+
+
 
 
 
