@@ -49,6 +49,42 @@ SELinux originally developed by United States NSA (<strong>N</strong>ational <st
 
  A SELinux context is a name used by a rule to define how users, processes, files, and ports interact with each other. As the default policy is to deny any access, rules are used to describe allowed actions on the system.
 
+## 41.7 SELinux Modes
+SELinux can be run under one of the three following modes:
+- **Enforcing**: All SELinux code is operative and access is denied according to policy. All violations are audited and logged.
+- **Permissive**: Enables SELinux code, but only audits and warns about operations that would be denied in enforcing mode.
+- **Disabled**: Completely disables SELinux kernel and application code, leaving the system without any of its protections.
+
+These modes are selected (and explained) in a file (usually `/etc/selinux/config`) whose location varies by distribution (it is often either at `/etc/sysconfig/selinux` or linked from there). The file is well self-documented. The **sestatus** utility can display the current mode and policy.
+
+![SELinus_Mode_Enforcing_large](/images/SELinus_Mode_Enforcing_large.png) **SELinux Enforcing Mode**
+
+![SELinus_Mode_Permissive_large](/images/SELinus_Mode_Permissive_large.png) **SELinux Permissive Mode**
+
+To examine or set current mode, one can use **getenforce** and **setenforce**:
+```shell
+$ getenforce
+Disabled
+$ sudo setenforce Permissive
+$ getenforce
+Permissive
+```
+
+**setenforce** can be used to switch between **enforcing** and **permissive** modes on the fly while system is in operation. However, changing in or out of the **disabled** mode cannot be done this way. While **setenforce** allows you to switch between **permissive** and **enforcing** modes, it does not allow you to disable SELinux completely. There are at least two different ways to disable SELinux:
+- **Configuration file**
+
+  Edit the SELinux configuration file (usually `/etc/selinux/config`) and set **`SELINUX=disabled`**. This is the default method and should be used to permanently disable SELinux.
+
+- **Kernel parameter**
+
+  Add **`selinux=0`** to the kernel parameter list when rebooting.
+
+However, important to note that disabling SELinux on systems in which SELinux will be re-enabled is not recommended. Preferable to use the **permissive** mode instead of disabling SELinux, so as to avoid relabeling the entire filesystem, which can be time-consuming.
+
+
+
+
+
 ##
 
 [Back to top](#)
