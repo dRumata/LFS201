@@ -192,6 +192,91 @@ This section has covered the basics and most common system administration tasks 
 - [SELinux User's and Administrator's Guide](https://docs.fedoraproject.org/en-US/Fedora/25/html/SELinux_Users_and_Administrators_Guide/)
 - [Red Hat Enterprise Linux 6 Security-Enhanced Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/index)
 
+## 41.18 AppArmor
+AppArmor is an LSM alternative to SELinux. Support for it has been incorporated in the Linux kernel since 2006. It has been used by SUSE, Ubuntu, and other distributions.
+
+AppArmor:
+- Provides Mandatory Access Control (MAC)
+- Allows administrators to associate a security profile to a program which restricts its capabilities
+- Is considered easier (by some but not all) to use than SELinux
+- Is considered filesystem-neutral (no security labels required).
+
+AppArmor supplements the traditional UNIX Discretionary Access Control (DAC) model by providing Mandatory Access Control (MAC).
+
+In addition to manually specifying profiles, AppArmor includes a learning mode, in which violations of the profile are logged, but not prevented. This log can then be turned into a profile, based on the program's typical behavior.
+
+## 41.19 Checking Status
+Distributions that come with AppArmor tend to enable it and load it by default. Note: Linux kernel has to have it turned on as well, and, in most cases, only one LSM can run at a time.
+
+Assuming you have the AppArmor kernel module available, on a systemd-equipped system you can do:
+```shell
+$ sudo systemctl [start|stop|restart|status] apparmor
+```
+to change or inquire about the current state of operation, or do:
+```shell
+$ sudo systemctl [enable|disable] apparmor
+```
+to cause to be loaded or not loaded at boot.
+
+In order to see the current status, do:
+```shell
+$ sudo apparmor_status
+apparmor module is loaded.
+25 profiles are loaded.
+25 profiles are in enforce mode.
+    /sbin/dhclient
+...
+```
+
+**Profiles** and **processes** are in either **enforce** or **complain** mode, directly analogous to SELinux's **enforcing** and **permissive** modes. Note that in the process, listing the PID is given:
+```shell
+$ ps aux | grep libvirtd
+root      787  0.0  0.9  527200  35936 ?       Ssl  10:54  0:00  /usr/sbin/libvirtd
+student  3346  0.0  0.0   13696   2204 pts/16  S+   11:42  0:00  grep --color=auto libvirtd
+```
+
+## 41.20 Modes and Profiles
+**Profiles** restrict how executable programs, which have pathnames on your system, such as `/usr/bin/evince`, can be used.
+
+Processes can be run in either of the two modes:
+- **Enforce Mode**
+
+  Applications are prevented from acting in ways which are restricted. Attempted violations are reported to the system logging files. This is the default mode. A profie can be set to this mode with **aa-enforce**.
+- **Complain Mode**
+
+  Policies are not enforced, but attempted policy violations are reported. This is also called the learning mode. A profile can be set to this mode with **aa-complain**
+
+Linux distributions come with pre-packaged profiles, typically installed either when a given package is installed, or with an AppArmor package, such as **apparmor-profiles**. These profiles are stored in `/etc/apparmor.d`.
+
+When installing new software, new profiles can be created specific to any executables in the package.
+
+Exactly what AppArmor profiles are installed on your system depends on your selection of software packages. For example, on one particular Ubuntu system:
+
+![apparmor_profiles](/images/apparmor_profiles.PNG)
+
+Full documentation on what can go in these files can be obtained by doing **man apparmor.d**.
+
+## 41.21 AppArmor Utilities
+AppArmor has quite a few administrative utilities for monitoring and control. For example, on an OpenSUSE system:
+
+![apparmor_utilities1](/images/apparmor_utilities1.PNG)
+
+Note: many of these utilities can be invoked with either their short or long names:
+
+![apparmor_utilities2](/images/apparmor_utilities2.PNG)
+
+**AppArmor Utilities**
+
+Program | Use
+------- | ---
+**`apparmor_status`** | Show status of all profiles and processes with profiles
+**`apparmor_notify`** | Show a summary for AppArmor log messages
+**`complain`** | Set a specified profile to complain mode
+**`enforce`** | Set a specified profile to enforce mode
+**`disable`** | Unload a specified profile from the current kernel and prevent from being loaded on system startup
+**`logprof`** | Scan log files, and, if AppArmor events that are not covered by existing profiles have been recorded, suggest how to take into account, and, if approved, modify and reload
+**`easyprof`** | Help setup a basic AppArmor profile for a program
+
 
 
 
