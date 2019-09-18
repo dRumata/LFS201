@@ -478,8 +478,7 @@ No shortage of available backup program suites available for Linux, including pr
 1. **Amanda** (<strong>A</strong>dvanced <strong>M</strong>aryland <strong>A</strong>utomatic <strong>N</strong>etwork <strong>D</strong>isk <strong>A</strong>rchiver) uses native utilities (including **tar** and **dump**) but is far more robust and controllable. **Amanda** is generally available on Enterprise **Linux** systems through usual repositories. Complete information can be found on the [Amanda website](http://www.amanda.org/).
 2. **Bacula** is designed for automatic backup on heterogeneous networks. Can be rather complicated to use and recommended (by its authors) only to experienced administrators. Generally available on Enterprise Linux systems through usual repositories. Complete information can be found at the [Bacula website](https://www.bacula.org/7.0.x-manuals/en/main/Main_Reference.html).
 3. **Clonezilla** is a very robust disk cloning program, which can make images of disks and deploy them, either to restore a backup, or to be used for ghosting, to provide an image that can be used to install many machines. Complete information can be found at the [Clonezilla website](https://clonezilla.org/).
-
-  Program comes in two versions: Clonezilla live, which is good for single machine backup and recovery, and Clonezilla SE, <storng>s</strong>erver <strong>e</strong>dition, which can clone to many computers at the same time. Clonezilla not very hard to use, and extremely flexible, supporting many operating systems (not just Linux), filesystem types, and boot loaders.
+Program comes in two versions: Clonezilla live, which is good for single machine backup and recovery, and Clonezilla SE, <storng>s</strong>erver <strong>e</strong>dition, which can clone to many computers at the same time. Clonezilla not very hard to use, and extremely flexible, supporting many operating systems (not just Linux), filesystem types, and boot loaders.
 
 
 
