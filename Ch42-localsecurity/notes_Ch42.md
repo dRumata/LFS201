@@ -177,7 +177,21 @@ Should emphasize that this is generally a **bad idea** and is to be avoided in m
 
 By default, when a file is created in a directory, it is owned by the user and group of the user that created it. Using the **setgid** setting on the directory changes this so that files created in the directory are group owned by the group owner of the directory. Allows you to created a shared directory in which a group of users can share files.
 
+## 42.17 Setting the setuid/setgid Bits
+Simply done by:
+```shell
+$ chmod u+s somefile
+$ chmod g+s somefile
+```
+where fist example does **setuid** and second the **setgid** operation.
 
+For directories, setting group bits has very different effect; used to create a shared directory, as in:
+```shell
+$ chmod g+s somedir
+```
+Files created in this directory are group owned by the group owner of the directory.
+
+Note: cannot effectively change the **setuid** on a shell script file; in fact, won't do anything unless you actually change the **setuid** bit *on the shell*, which would be a terrible security hole. Can only do this on executable binary programs.
 
 ##
 
