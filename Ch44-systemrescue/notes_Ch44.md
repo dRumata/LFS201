@@ -1,4 +1,4 @@
-[Previous Chapter](../Ch43-troubleshooting/notes_Ch44.md) - [Table of Contents](../README.md#table-of-contents) - [Jump to First Chapter](../Ch01-introduction/notes_Ch01.md)
+[Previous Chapter](../Ch43-troubleshooting/notes_Ch43.md) - [Table of Contents](../README.md#table-of-contents) - [Jump to First Chapter](../Ch01-introduction/notes_Ch01.md)
 
 ---
 
@@ -120,4 +120,4 @@ To boot into single user mode, use the same method as decribed for emergency mod
 
 ---
 
-[Previous Chapter](../Ch43-troubleshooting/notes_Ch44.md) - [Table of Contents](../README.md#table-of-contents) - [Jump to First Chapter](../Ch01-introduction/notes_Ch01.md)
+[Previous Chapter](../Ch43-troubleshooting/notes_Ch43.md) - [Table of Contents](../README.md#table-of-contents) - [Jump to First Chapter](../Ch01-introduction/notes_Ch01.md)
