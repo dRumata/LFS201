@@ -1,4 +1,4 @@
-[Previous Chapter](../42-localsecurity/notes_Ch42.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch44-systemrescue/notes_Ch44.md)
+[Previous Chapter](../Ch42-localsecurity/notes_Ch42.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch44-systemrescue/notes_Ch44.md)
 
 ---
 
@@ -119,4 +119,4 @@ to try and mount all filesystems. If this does not succeed completely, can try t
 
 ---
 
-[Previous Chapter](../42-localsecurity/notes_Ch42.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch44-systemrescue/notes_Ch44.md)i
+[Previous Chapter](../Ch42-localsecurity/notes_Ch42.md) - [Table of Contents](../README.md#table-of-contents) - [Next Chapter](../Ch44-systemrescue/notes_Ch44.md)i
