@@ -95,7 +95,7 @@ Very important:
 - May *not* include any subdirectories
 
 Ubuntu
-![lsbin](/images/lsbin.png)
+![lsbin](../images/lsbin.png)
 
 Required programs in `/bin/`:
 
@@ -120,7 +120,7 @@ Stores data used before kernel begins executing user-mode programs. May include:
 Before, essential files often placed directly in `/` instead of separate `/boot` directory (following traditional UNIX practices) -> now considered obsolete.
 
 RHEL
-![lsboot](/images/lsboot.png)
+![lsboot](../images/lsboot.png)
 
 ## 2.11 Other Files and Directories in `/boot`
 Multiple kernel versions available in `/boot`, with four files available for each version (Choice between kernels make by using GRUB at boot time).
@@ -140,7 +140,7 @@ Device files represent **character** (byte-stream) + **block I/O** devices.
 
 Network devices -> no device nodes in Linux, instead referenced by name, eg. **eth1**, **wlan0**.
 
-![lsdev](/images/lsdev.png)
+![lsdev](../images/lsdev.png)
 
 
 ## 2.13 `/etc`
@@ -168,7 +168,7 @@ $ ls -l ~/public_html
 
 One exception: home directory for **root** user in Linux systems *always* found under `/root`. Some older UNIX systems may use `/` instead, causing clutter.
 
-![lshome](/images/lshome.png)
+![lshome](../images/lshome.png)
 
 
 ## 2.15 `/lib` and `/lib64`
@@ -232,7 +232,7 @@ Files containing info on similar topic grouped in virtual directories/sub-direct
 
 Entries in `/proc` examined throughout course -> detailed look for kernel configuration + system monitoring.
 
-![lsproc](/images/lsproc.png)
+![lsproc](../images/lsproc.png)
 
 
 ## 2.20 `/sys`
@@ -242,7 +242,7 @@ Mount point for **sysfs pseudo-filesystem** where all info resides in memory, no
 
 Entries in `/sys` also examined throughout course.
 
-![lssys](/images/lssys.png)
+![lssys](../images/lssys.png)
 
 
 ## 2.21 `/root`
@@ -250,7 +250,7 @@ Home directory for root user (pronounced "slash-root")
 
 Root account that owns `/root` -> *only* use for actions requiring superuser privilege. Use another account for non-privileged user actions.
 
-![lsroot](/images/lsroot.png)
+![lsroot](../images/lsroot.png)
 
 
 ## 2.22 `/sbin`
@@ -262,7 +262,7 @@ Included programs (if subsystems installed):
 
 **Note**: some recent distributions -> no separation between `/sbin` and `/usr/sbin` (also `/bin` and `/usr/bin`), just one directory with symbolic links (to preserve two directory view). Believe time-honored concept of enabling possibility of placing `/usr` on separate partition mounted after boot -> obsolete.
 
-![lssbin](/images/lssbin.png)
+![lssbin](../images/lssbin.png)
 
 
 ## 2.23 `/srv`
@@ -341,7 +341,7 @@ Directory | Purpose
 `/var/tmp` | Temporary files to be preserved across system reboot, sometimes linked to `/tmp`
 `/var/www` | Root for website hierarchies
 
-![lsvar](/images/lsvar.png)
+![lsvar](../images/lsvar.png)
 
 
 ## 2.27 `/run`
@@ -353,7 +353,7 @@ Implemented as empty mount point with **tmpfs** ram disk (like `/dev/shm`) mount
 
 Some existing locations (`/var/run`, `/var/lock`) just symbolic links to directories under `/run`. Other locations, depending on distribution taste, may also just point to locations under `/run`.
 
-![lsrun](/images/lsrun.png)
+![lsrun](../images/lsrun.png)
 
 
 ##

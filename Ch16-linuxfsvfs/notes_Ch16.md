@@ -34,7 +34,7 @@ Local filesystems generally reside within disk partition (which can be physical 
 
 All I/O activity concerning file usually also involves file's inode, as information must be updated.
 
-![data_storage_small](/images/data_storage_small.png)
+![data_storage_small](../images/data_storage_small.png)
 **Data storage in an inode vs. data storage in a directory file**
 
 
@@ -49,7 +49,7 @@ Because possible (+ quite common) for two or more directory entries to point to 
 
 When process refers to pathname, kernel searched directories to find corresponding inode number. After name converted to inode number, inode loaded into memory + used by subsequent requests.
 
-![hard_and_soft_links](/images/hard_and_soft_links.png)
+![hard_and_soft_links](../images/hard_and_soft_links.png)
 
 
 ## 16.7 Filesystem Tree organization
@@ -92,7 +92,7 @@ $ cat /proc/filesystems
 ```
 Note: additional filesystem types may have their code loaded only when system tries to access a partition that uses them.
 
-![filesystems](/images/filesystems.png)
+![filesystems](../images/filesystems.png)
 
 
 ## 16.12 Journaling Filesystems

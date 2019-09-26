@@ -80,13 +80,13 @@ Remember: should not edit **`grub.cfg`** directly. Two locations in `/etc` direc
 
 First location: `/etc/default/grub`. Screenshot shows how this looks like on RHEL 7 system. Red Hat has really slimmed down this file compared to other distributions.
 
-![etcdefaultgrub](/images/etcdefaultgrub.png)
+![etcdefaultgrub](../images/etcdefaultgrub.png)
 
 Second location: `/etc/grub.d`. Screenshot shows how it looks on Ubuntu 17.04.
 
 Each of the two files (`/etc/default/grub` and `/etc/grub.d`) run in ascending order when configuration file updated. Won't discuss them here, as they are self-documenting and recommend to look at them.
 
-![etcgrubd](/images/etcgrubd.png)
+![etcgrubd](../images/etcgrubd.png)
 
 
 

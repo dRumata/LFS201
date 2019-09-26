@@ -117,25 +117,25 @@ Over time, grew to contain lot of information about system properties, eg. inter
 ## 11.9 A survey of /proc
 What resides in `/proc` pseudo-filesystem:
 
-![lsprocubuntu](/images/lsprocubuntu.png)
+![lsprocubuntu](../images/lsprocubuntu.png)
 
 First, see there is subdirectory for each process on system, whether sleeping, running, scheduled out. Looking at random one:
 
-![lsproc3589](/images/lsproc3589.png)
+![lsproc3589](../images/lsproc3589.png)
 
 Directory full of information about status of process and resources it is using. For example:
 
-![procstatus](/images/procstatus.png)
+![procstatus](../images/procstatus.png)
 
 Other entries give system-wide information. Eg. can see **interrupt** statistics in below screenshot. For each interrupt, see what type it is, how many times it has been handled on each CPU, which devices registered to respond to it. Also get global statistics.
 
-![procinterrupts](/images/procinterrupts.png)
+![procinterrupts](../images/procinterrupts.png)
 
 
 ## 11.10 /proc/sys
 Most tunable system parameters can be found in subdirectory tree rooted at `/proc/sys`:
 
-![procsys](/images/procsys.png)
+![procsys](../images/procsys.png)
 
 Each subdirectory contains information + knobs that can be tuned (with care):
 - **`abi/`**: Contains files with application binary information; rarely used
@@ -189,19 +189,19 @@ Network devices examined with:
 ```shell
 $ ls -lF /sys/class/net
 ```
-![sysclassnet](/images/sysclassnet.png)
+![sysclassnet](../images/sysclassnet.png)
 
 Below, can see what looking at Ethernet card gives.
 
 Intention with **sysfs** to have one text value per line, although not expected to be rigorously enforced.
 
-![sysclassnetcard](/images/sysclassnetcard.png)
+![sysclassnetcard](../images/sysclassnetcard.png)
 
 Underlying device and driver for first network interface can be traced through **`device`** and (to be seen shortly) **`driver`** symbolic links. Below shows what can be seen when looking at directory corresponding to first Ethernet card.
 
 To see full spectrum of information available with **sysfs**, will just have to examine.
 
-![sysclassnetcarddevice](/images/sysclassnetcarddevice.png)
+![sysclassnetcarddevice](../images/sysclassnetcarddevice.png)
 
 
 ## 11.13 sar
@@ -217,7 +217,7 @@ $ sar [ options ] [ interval ] [ count ]
 ```
 where report repeated after interval seconds a total of count times (defaults to 1). With no options, gives report on CPU usage.
 
-![sar](/images/sar.png)
+![sar](../images/sar.png)
 
 List of major **sar** options, or modes, each one of which has its own sub-options:
 
@@ -245,7 +245,7 @@ For example, below can take look at getting paging statistics, and then I/O and 
 
 **ksar** program -> **java**-based utility for generating nice graphs for **sar** data. Can be downloaded from https://sourceforge.net/projects/ksar/.
 
-![sario](/images/sario.png)
+![sario](../images/sario.png)
 
 ##
 

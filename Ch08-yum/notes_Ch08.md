@@ -45,7 +45,7 @@ Will concentrate on command line use of **yum**, not consider graphical interfac
 
 ## 8.6 Configuring yum to Use Repositories
 Repository configuration files kept in `/etc/yum.repos.d`, have **`.repo`** extension. Eg. on one RHEL 7 system:
-![yumrepos](/images/yumrepos.png)
+![yumrepos](../images/yumrepos.png)
 
 Note: on RHEL 6 there is no **`redhat.repo`** file. RHEL 6 + earlier versions handled distribution-supplied repos in somewhat different manner, although RHEL clones like CentOS used conventional repos for main distribution packages.
 

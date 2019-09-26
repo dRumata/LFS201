@@ -26,7 +26,7 @@ Boot program then loads kernel into memory and executes it. On x86 platforms (an
 
 Newer computers are moving to UEFI, a replacement for BIOS, which performs many of the same functions.
 
-![boot_sequence_small](/images/boot_sequence_small.png) **The Boot Sequence**
+![boot_sequence_small](../images/boot_sequence_small.png) **The Boot Sequence**
 
 ## 37.5 BIOS
 On x86 architecture, BIOS contains all the code required to gain initial access to the keyboard, display screen, disk drives, serial communications, and a number of miscellaneous functions. Once full system running, most of these devices will have enhanced capabilities when complete and specialized device drivers can be loaded and take over.
@@ -50,7 +50,7 @@ The <strong>Li</strong>nux <strong>Lo</strong>ader (**LILO**) is older and obsol
 
 **Das U-Boot** is the most popular loader for embedded Linux systems. Some other boot loaders, including **bareboot**. However, not really considering embedded space in this course.
 
-![boot_loaders_small](/images/boot_loaders_small.png) **Boot Loaders**
+![boot_loaders_small](../images/boot_loaders_small.png) **Boot Loaders**
 
 ## 37.7 Configuration Files in /etc
 Earlier, discussed about where Linux distributions cooperate, and hopefully follow agreed-upon standards to place certain kinds of files in standard places on system.
@@ -64,13 +64,13 @@ On RHEL 7 systems, files in `/etc/sysconfig` used when starting, stopping, confi
 ```shell
 $ ls /etc/sysconfig
 ```
-![etcsysconfig](/images/etcsysconfig.png)
+![etcsysconfig](../images/etcsysconfig.png)
 
 Can take a look at one file in screenshot here; this files reads and sets the **selinux** configuration at system startup.
 ```shell
 $ cat /etc/sysconfig/selinux
 ```
-![etcselinux](/images/etcselinux.png)
+![etcselinux](../images/etcselinux.png)
 
 ## 37.9 /etc/default
 Screenshot shows `/etc/default` directory on Ubuntu 17.04 system.
@@ -81,7 +81,7 @@ Use of this directory similar to that of Red Hat's `/etc/sysconfig`:
 
 Eg., file `/etc/default/useradd` sets defaults that are used when new user accounts are being created. As noted, RHEL 7 also has this directory as its use if becoming more universal.
 
-![ubuntuetcdefault](/images/ubuntuetcdefault.png)
+![ubuntuetcdefault](../images/ubuntuetcdefault.png)
 
 ## 37.10 Shutting Down and Rebooting
 **shutdown** used to bring system down in secure fashion, notifying all users that system is going down and then stopping it in a graceful and non-destructive way. After it is shutdown, system if either halted or rebooted. Can see some shutdown examples here:
@@ -93,7 +93,7 @@ $ sudo shutdown now
 ```
 Options can easily be listed by built-in help message.
 
-![shutdown](/images/shutdown.png)
+![shutdown](../images/shutdown.png)
 
 With no options (eg. `shutdown now`), default behavior is to power off the system completely. Some distributions, such as Ubuntu, violate this and go to single user mode instead.
 

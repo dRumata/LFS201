@@ -230,7 +230,7 @@ To force user to change password at next login:
 $ sudo chage -d 0 Username
 ```
 
-![chage](/images/chage.png)
+![chage](../images/chage.png)
 
 
 ## 30.14 Restricted shell

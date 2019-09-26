@@ -23,7 +23,7 @@ First flavor of containers: **OS container**. This type of container runs image 
 
 One example: LXC (Linux Containers)
 
-![virt-container](/images/virt-container.jpg)
+![virt-container](../images/virt-container.jpg)
 **Containers**
 
 
@@ -32,7 +32,7 @@ To further reduce overhead associated with virtual machines, **application virtu
 
 One such project: Docker
 
-![virt-docker](/images/virt-docker.jpg)
+![virt-docker](../images/virt-docker.jpg)
 
 
 ## 29.6 Containers vs. Virtual Machines

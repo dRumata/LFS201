@@ -48,7 +48,7 @@ In Debian packaging system, source package consists of at least three files:
 3. Second tarball containing any patches to upstream source + additional files created for package. Ends with name `.debian.tar.gz` or `.diff.gz` depending on distribution
 
 Eg. on Ubuntu system, can download source package, then see what files downloaded or created:
-![aptsource](/images/aptsource.png)
+![aptsource](../images/aptsource.png)
 
 
 ## 7.7 DPKG Queries

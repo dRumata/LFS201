@@ -30,7 +30,7 @@ $ sudo fdisk -l /dev/sda
 ```
 Note use of **`-l`** option, which simply lists partition table without entering interactive mode.
 
-![fdisk-pic](/images/fdisk-pic.png)
+![fdisk-pic](../images/fdisk-pic.png)
 
 Rotational disks composed of one or more platters, each read by one or more **heads**. Heads read circular **track** off platter as disk spins.
 
@@ -82,7 +82,7 @@ On Linux systems, beginning and ending address in CHS ignored.
 
 Note for curious: there are 2 more bytes at the end of the MBR known as the magic number, signature word, or end of sector marker, which always have the value **`0x55AA`**.
 
-![partition_table_small](/images/partition_table_small.png)
+![partition_table_small](../images/partition_table_small.png)
 **Disk Partition Table**
 
 Each entry in partition table -> 16 bytes long, describes one of the four possible primary partitions. Information for each:
@@ -106,7 +106,7 @@ There are two copies of the GPT header, at the beginning + at the end of the dis
 - Number of partitions
 - Size of partition entries. Each partition entry has minimum size of 128 bytes
 
-![GPT Layout](/images/GPT_Layout.png)
+![GPT Layout](../images/GPT_Layout.png)
 
 **blkid** utility (to be discussed later) show information about partitions.
 
@@ -176,13 +176,13 @@ $ sudo blkid
 $ sudo blkid -L root
 ```
 
-![blkid](/images/blkid.png)
+![blkid](../images/blkid.png)
 
 
 ## 17.13 lsblk
 **lsblk**: related utility which presents block device information in tree format, as shown below:
 
-![lsblk](/images/lsblk.png)
+![lsblk](../images/lsblk.png)
 
 
 ## 17.14 Sizing Up Partitions

@@ -42,7 +42,7 @@ $ sudo /sbin/rmmod module_name
 ```
 Note: not necessary to supply either full path name or **`.ko`** extension when removing module.
 
-![lsmod](/images/lsmod.png)
+![lsmod](../images/lsmod.png)
 
 Module loading/unloading must be done as root user. If full path name known, can always load module directly with:
 ```shell
@@ -82,7 +82,7 @@ Can see example below, which displays information about version, file name, whic
 
 Much information about modules also seen in `/sys` pseudo-filesystem directory tree. In example, would look under `/sys/module/e1000` and some, if not all parameters, can be read and/or written under `/sys/module/e1000/parameters`. Will show hot to set them next.
 
-![modinfo](/images/modinfo.png)
+![modinfo](../images/modinfo.png)
 
 
 ## 26.10 Module Parameters

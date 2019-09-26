@@ -86,7 +86,7 @@ Some of the main values of `OBJECT`:
   $ sudo ip route add 172.16.1.0/24 via 192.168.1.5
   ```
 
-![ipubuntu](/images/ipubuntu.png)
+![ipubuntu](../images/ipubuntu.png)
 
 
 ## 35.7 ifconfig
@@ -120,7 +120,7 @@ Some of the main values of `OBJECT`:
   $ sudo ifconfig eth0 mtu 1480
   ```
 
-![ifconfigrhel7](/images/ifconfigrhel7.png)
+![ifconfigrhel7](../images/ifconfigrhel7.png)
 
 
 ## 35.8 Problems with Network Device Names
@@ -222,12 +222,12 @@ If GUI properly done, should be able to accomplish any task using any of these t
 
 Besides activating/editing connections, also set system hostname. However, some operations, such as this, cannot be done by normal users, will be prompted for root password to go forward.
 
-![nmtui-main](/images/nmtui-main.png) **nmtui Main Screen**
+![nmtui-main](../images/nmtui-main.png) **nmtui Main Screen**
 
-![nmtui-edit](/images/nmtui-edit.png) **nmtui Edit Screen**
+![nmtui-edit](../images/nmtui-edit.png) **nmtui Edit Screen**
 
 ## 35.15 nmtui Wireless Configuration
-![nmtui-config](/images/nmtui-config.png) **nmtui Wireless Configuration**
+![nmtui-config](../images/nmtui-config.png) **nmtui Wireless Configuration**
 
 ## 35.16 nmcli
 **nmcli**: command line interface to **Network Manager**. Can issue direct commands, but also has interactive mode.
@@ -238,7 +238,7 @@ $ man nmcli-examples
 ```
 Will explore use of **nmcli** in lab exercises.
 
-![nmcli](/images/nmcli.png)
+![nmcli](../images/nmcli.png)
 
 ## 35.17 Routing
 **Routing**: process of selecting paths in network along which to send network traffic.
@@ -251,7 +251,7 @@ $ route -n
 $ ip route
 ```
 
-![routeubuntu](/images/routeubuntu.png)
+![routeubuntu](../images/routeubuntu.png)
 
 
 ## 35.18 Default Route
@@ -382,7 +382,7 @@ which:
 - Can specify particular domains to search
 - Defines a strict order of nameservers to query
 
-![DNS_zone_large](/images/DNS_zone_large.png) **DNS**
+![DNS_zone_large](../images/DNS_zone_large.png) **DNS**
 
 ## 35.23 Network Diagnostics
 Number of basic network utilities in every system administrator's toolbox, including:
@@ -412,13 +412,13 @@ $ mtr linuxfoundation.org
 ```
 
 ## 35.24 ping Example
-![pingrhel7](/images/pingrhel7.png)
+![pingrhel7](../images/pingrhel7.png)
 
 ## 35.25 traceroute Example
-![tracerouterhel7](/images/tracerouterhel7.png)
+![tracerouterhel7](../images/tracerouterhel7.png)
 
 ## 35.26 mtr Example
-![mtrhel7](/images/mtrhel7.png)
+![mtrhel7](../images/mtrhel7.png)
 
 
 

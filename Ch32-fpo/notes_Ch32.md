@@ -87,7 +87,7 @@ $ ls -l a_file
 
 Permissions can be represented either as a bitmap, usually written in octal, or in a symbolic form. Octal bitmaps usually look like **`0755`**, which symbolic representations look like **`u+rwx,g+rwx,o+rx`**.
 
-![chmodmint](/images/chmodmint.png)
+![chmodmint](../images/chmodmint.png)
 
 
 ## 32.9 chown and chgrp

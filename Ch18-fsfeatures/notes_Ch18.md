@@ -40,7 +40,7 @@ $ lsattr filename
 ## 18.5 Creating and Formatting Filesystems
 Every filesystem type has utility for **formatting** (making) filesystem on partition. Generic name for these utilities: **mkfs**. However, this is just frontend for filesystem-specific programs, each of which may have particular options.
 
-![mkfs](/images/mkfs.png)
+![mkfs](../images/mkfs.png)
 
 Thus, following two commands entirely equivalent:
 ```shell
@@ -61,7 +61,7 @@ Should look at **man** page for each of **mkfs.\*** programs to see details.
 ## 18.6 Checking an Repairing Filesystems
 Every filesystem type has utility designed to check for errors (and hopefully fix any that are found). Generic name for these utilities: **fsck**. However, just frontend for filesystem-specific programs.
 
-![fsck](/images/fsck.png)
+![fsck](../images/fsck.png)
 
 Thus, following two commands entirely equivalent:
 ```shell
@@ -146,7 +146,7 @@ An exampe of hot to get quick summary of mount options:
 $ mount --help
 ```
 
-![mounthelp](/images/mounthelp.png)
+![mounthelp](../images/mounthelp.png)
 
 
 ## 18.12 umount
@@ -205,7 +205,7 @@ During system initialization, the command **`mount -a`** executed. Mounts all fi
 
 File shows what filesystems may be automatically mounted at boot, and where they may be found on the local machine or network. Can specify who may mount them and with what permissions, and other relevant options. Some lines refer to special pseudo-filesystems such as **proc**, **sys**, **devpts**.
 
-![fstab](/images/fstab.png)
+![fstab](../images/fstab.png)
 
 Each record in `/etc/fstab` file contains white space separated fields of information about filesystem to be mounted:
 - Device node, label, or UUID
@@ -259,13 +259,13 @@ Example provided next mounts USB pen drive that is always plugged into system, o
 
 Note: device **may** be mounted during boot, but then should be unmounted after timeout specified. Below shows how device is only available one it is used.
 
-![automount](/images/automount.png)
+![automount](../images/automount.png)
 
 
 ## 18.17 Listing Currently Mounted Filesystems
 List of currently mounted filesystems can be seen by typing:
 
-![mountout](/images/mountout.png)
+![mountout](../images/mountout.png)
 
 
 ##

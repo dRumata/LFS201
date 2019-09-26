@@ -77,7 +77,7 @@ First implementations of virtualization on PC architecture -> through the use of
 
 Qemu -> one such emulator.
 
-![virt-emu](/images/virt-emu.jpg)
+![virt-emu](../images/virt-emu.jpg)
 **Emulator**
 
 
@@ -125,7 +125,7 @@ Going past emulation, merging of hypervisor program into specially-designed ligh
 
 VMware ESX (and related friends): an example of hypervisor embedded into operating system.
 
-![virt-hyper](/images/virt-hyper.jpg)
+![virt-hyper](../images/virt-hyper.jpg)
 **Dedicated Hypervisor**
 
 
@@ -134,7 +134,7 @@ The KVM project added hypervisor capabilities into the Linux kernel.
 
 As discussed, specific CPU chip functions and facilities were required and deployed for this type of virtualization.
 
-![virt-kvm](/images/virt-kvm.jpg)
+![virt-kvm](../images/virt-kvm.jpg)
 **Hypervisor in the Kernel**
 
 
@@ -164,7 +164,7 @@ Many utilities using **libvirt**. Exact list will depend on Linux distribution. 
 
 In this course, will work through the use of robust GUI, **virt-manager**, rather than make much use of command line utilities, which lead to more flexibility, as well as use on non-graphical servers.
 
-![virtprogs](/images/virtprogs.png)
+![virtprogs](../images/virtprogs.png)
 
 
 ## 28.15 What is QEMU?
@@ -249,7 +249,7 @@ Command line tools include: **virt-\*** and **qemu-\***. Graphical interfaces in
 
 As you develop more expertise, will become practiced in using them. But, for all basic operations, **virt-manager** will suffice and that is what we will use.
 
-![lsvirtqemu](/images/lsvirtqemu.png)
+![lsvirtqemu](../images/lsvirtqemu.png)
 
 
 ##

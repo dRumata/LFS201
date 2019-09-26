@@ -23,7 +23,7 @@ Variety of command line utilities tasked to create, delete, resize etc. physical
 
 LVM does impact performance. Definite additional cost that comes from overhead of LVM layer. However, even on non-RAID systems, if using **striping** (splitting of data to more than one disk), can achieve some parallelization improvements.
 
-![LVM_Components_large](/images/LVM_Components_large.png)
+![LVM_Components_large](../images/LVM_Components_large.png)
 **LVM Components**
 
 
@@ -66,7 +66,7 @@ $ ls -lF /sbin/lv*
 - These utilities are in `/sbin`, not `/usr/sbin`, as they may be needed either for boot or repair and recovery
 - Most of them symbolically linked to **lvm**, Swiss army knife program that does all the work, but figures out what is being asked to do based on name it is invoked with. Also true for most of **pv*** and **vg*** utilities, as can be verified easily
 
-![sbinlvm](/images/sbinlvm.png)
+![sbinlvm](../images/sbinlvm.png)
 
 
 ## 23.8 Creating Logical Volumes

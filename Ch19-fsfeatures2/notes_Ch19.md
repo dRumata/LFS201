@@ -26,7 +26,7 @@ $ cat /proc/swaps
 $ free -m
 ```
 
-![swapfree](/images/swapfree.png)
+![swapfree](../images/swapfree.png)
 
 Only commands involving swap:
 - **mkswap**: format a swap partition or file
@@ -201,7 +201,7 @@ $ sudo edquota -t
 ## 19.11 df: Filesystem Usage
 **df** (<strong>d</strong>isk <strong>f</strong>ree) utility examines filesystem capacity and usage. Below, **`-h`** option means "human-readable" (ie. in KB, MD, GB, not bytes) and **`-T`** shows filesystem type. Using **`-i`** option would show inode information instead of bytes.
 
-![dfh](/images/dfh.png)
+![dfh](../images/dfh.png)
 
 
 ## 19.12 du: Disk Usage
@@ -224,7 +224,7 @@ To display disk usage for specific directory:
 $ du -h somedir
 ```
 
-![du](/images/du.png)
+![du](../images/du.png)
 
 
 ##

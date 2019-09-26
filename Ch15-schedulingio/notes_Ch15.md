@@ -69,7 +69,7 @@ Can see actual tunables for disk using **CFQ** below.
 
 Will discuss some parameters shortly.
 
-![cfqio](/images/cfqio.png)
+![cfqio](../images/cfqio.png)
 
 
 ## 15.9 CFQ (Completely Fair Queue) Scheduler

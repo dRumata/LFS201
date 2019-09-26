@@ -68,7 +68,7 @@ Processes scheduled in and out when sharing CPU time with other (or put to sleep
 **ulimit**: built-in bash command, displays or sets a number of resource limits associated with processes running under shell.
 
 Screenshot: running **ulimit** with `-a` argument.
-![ulimit](/images/ulimit.png)
+![ulimit](../images/ulimit.png)
 
 If run as root, result in `Command not found`, since limits shell-specific.
 
@@ -132,7 +132,7 @@ Each user mode process -> own memory space, where parts may be shared with other
 
 Even process run by root user or as **setuid** program -> runs in user mode, *except* when jumping into system call. Has only limited ability to access hardware.
 
-![syscall](/images/syscall.png)
+![syscall](../images/syscall.png)
 
 
 ## 3.13 Kernel Mode
@@ -287,7 +287,7 @@ Program which uses shared libraries has to be able to find them at runtime.
 
 **ldd** can be used to ascertain which libraries required by executable. Shows **soname** of library and what files it points to.
 
-![lddvi](/images/lddvi.png)
+![lddvi](../images/lddvi.png)
 
 **ldconfig** generally run at boot time (but can be run anytime). Uses file `/etc/ld.so.conf` which lists directories searched for shared libraries. Must run **ldconfig** as root and shared libraries should be stored in system directories only when stable and useful.
 

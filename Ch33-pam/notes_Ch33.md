@@ -45,7 +45,7 @@ type control module-path module-arguments
 ```
 Example: screenshot here shows contents of `/etc/pam.d/su` on RHEL 7 system. Notice that there is a stack; **su** will require loading of **system-auth** etc.
 
-![pamsu](/images/pamsu.png)
+![pamsu](../images/pamsu.png)
 
 
 ## 33.7 PAM Rules

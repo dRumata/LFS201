@@ -43,7 +43,7 @@ Number of different types of signals, particular signal dispatched indicates typ
 
 TO see list of signals in Linus, along with numbers, do **`kill -l`**, as reflected in screenshot.
 
-![sigkill](/images/sigkill.png)
+![sigkill](../images/sigkill.png)
 
 Signals from **`SIGRTMIN`** on termed **real-time signals**, relatively recent addition. No predefined purpose, differ in some important ways from normal signals. Can be queued up and handled in **FIFO** (**F** irst **I** n **F** irst **O** ut) order.
 

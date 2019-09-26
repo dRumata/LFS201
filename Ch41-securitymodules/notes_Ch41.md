@@ -57,9 +57,9 @@ SELinux can be run under one of the three following modes:
 
 These modes are selected (and explained) in a file (usually `/etc/selinux/config`) whose location varies by distribution (it is often either at `/etc/sysconfig/selinux` or linked from there). The file is well self-documented. The **sestatus** utility can display the current mode and policy.
 
-![SELinus_Mode_Enforcing_large](/images/SELinus_Mode_Enforcing_large.png) **SELinux Enforcing Mode**
+![SELinus_Mode_Enforcing_large](../images/SELinus_Mode_Enforcing_large.png) **SELinux Enforcing Mode**
 
-![SELinus_Mode_Permissive_large](/images/SELinus_Mode_Permissive_large.png) **SELinux Permissive Mode**
+![SELinus_Mode_Permissive_large](../images/SELinus_Mode_Permissive_large.png) **SELinux Permissive Mode**
 
 To examine or set current mode, one can use **getenforce** and **setenforce**:
 ```shell
@@ -118,7 +118,7 @@ $ chcon --reference somefile so
 ## 41.10 SELinux and Standard Command Line Tools]
 Many standard command line commands, such as **ls** and **ps**, were extended to support SELinux, and corresponding sections were added to their **man** pages explaining the details. Often the parameter **`z`** is passed to standard command line tools as in:
 
-![selinux_command_line](/images/selinux_command_line.PNG)
+![selinux_command_line](../images/selinux_command_line.PNG)
 
 Other tools that were extended to support SELinux include **cp**, **mv**, and **mkdir**.
 
@@ -129,21 +129,21 @@ Newly created files inherit the context from their parent directory, but when mo
 
 Continuing the previous example, can see the context of `tmpfile` not changed by moving the file from `/tmp` to `/home/peter`:
 
-![selinux_command_line_context](/images/selinux_command_line_context.PNG)
+![selinux_command_line_context](../images/selinux_command_line_context.PNG)
 
 Classical example in which moving files creates a SELinux issue is moving files to the `DocumentRoot` directory of the **httpd** server. On SELinux-enabled systems, the web server can only access files with the correct context labels. Creating a file in `/tmp`, and then moving it to the `DocumentRoot` directory, will make the file unaccessible to the **httpd** server until the SELinux context of the file is adjusted.
 
 ## 41.12 restorecon
 **restorecon** resets files contexts, based on parent directory settings. In the following example, **restorecon** resets the default label recursively for all files at the home directory:
 
-![restorecon](/images/restorecon.PNG)
+![restorecon](../images/restorecon.PNG)
 
 Note: context for `tmpfile` has been reset to the default context for files created at the home directory. Type was changed from **`user_tmp_t`** to **`user_home_t`**.
 
 ## 41.13 semanage
 Another issue is how to configure the default context for a newly created directory. **semanage fcontext** (provided by the **policycoreutils-python** package) can change and display the default context of files and directories. Note: **semanage fcontext** only changes the default settings; does not apply them to existing objects. This requires calling **restorecon** afterwards. For example:
 
-![semanage](/images/semanage.PNG)
+![semanage](../images/semanage.PNG)
 
 The context change from **`default_t`** to **`httpd_sys_content_t`** is thus only applied after the call to **restorecon**.
 
@@ -155,7 +155,7 @@ SELinux policy behavior can be configured at runtime without rewriting policy. A
 
 Can see what needs to be done to list all booleans of current policy, including current status and short description, below.
 
-![semanage_screenshot](/images/semanage_screenshot.png)
+![semanage_screenshot](../images/semanage_screenshot.png)
 
 ## 41.15 getsebool and setsebool
 Alternative for displaying boolean information with simpler output: **getsebool -a**, which prints only the boolean name and its current status.
@@ -164,18 +164,18 @@ Alternative for displaying boolean information with simpler output: **getsebool 
 
 An example of non-persistent change using **setsebool**:
 
-![setsebool_non-persistent](/images/setsebool_non-persistent.PNG)
+![setsebool_non-persistent](../images/setsebool_non-persistent.PNG)
 
 An example of persistent change using **setsebool -P**:
 
-![setsebool_persistent](/images/setsebool_persistent.PNG)
+![setsebool_persistent](../images/setsebool_persistent.PNG)
 
 ## 41.16 Troubleshooting Tools
 SELinux comes with a set of tools that collect issues at run time, log these issues, and propose solutions to prevent same issues from happening again. These utilities are provided by the **setroubleshoot-server** package. An example of their use:
 
-![setroubleshoot1](/images/setroubleshoot1.PNG)
-![setroubleshoot2](/images/setroubleshoot2.PNG)
-![setroubleshoot3](/images/setroubleshoot3.PNG)
+![setroubleshoot1](../images/setroubleshoot1.PNG)
+![setroubleshoot2](../images/setroubleshoot2.PNG)
+![setroubleshoot3](../images/setroubleshoot3.PNG)
 
 Note: on RHEL 7, the suggestion is to run:
 ```shell
@@ -185,7 +185,7 @@ $ grep httpd /var/log/audit/audit.log |  audit2allow -M mypol
 
 Next example shows how to solve this issue using the **restorecon** tool which was described earlier. Feel free to try both approaches for fixing the SELinux issue.
 
-![setroubleshoot_eg](/images/setroubleshoot_eg.PNG)
+![setroubleshoot_eg](../images/setroubleshoot_eg.PNG)
 
 ## 41.17 Additional Online Resources
 This section has covered the basics and most common system administration tasks related to SELinux. There are freely available online resources for SELinux advanced topics, including:
@@ -252,18 +252,18 @@ When installing new software, new profiles can be created specific to any execut
 
 Exactly what AppArmor profiles are installed on your system depends on your selection of software packages. For example, on one particular Ubuntu system:
 
-![apparmor_profiles](/images/apparmor_profiles.PNG)
+![apparmor_profiles](../images/apparmor_profiles.PNG)
 
 Full documentation on what can go in these files can be obtained by doing **man apparmor.d**.
 
 ## 41.21 AppArmor Utilities
 AppArmor has quite a few administrative utilities for monitoring and control. For example, on an OpenSUSE system:
 
-![apparmor_utilities1](/images/apparmor_utilities1.PNG)
+![apparmor_utilities1](../images/apparmor_utilities1.PNG)
 
 Note: many of these utilities can be invoked with either their short or long names:
 
-![apparmor_utilities2](/images/apparmor_utilities2.PNG)
+![apparmor_utilities2](../images/apparmor_utilities2.PNG)
 
 **AppArmor Utilities**
 

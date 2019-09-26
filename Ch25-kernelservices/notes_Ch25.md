@@ -98,7 +98,7 @@ $ sudo sysctl net.ipv4.ip_forward=1
 ```
 where second form used to set value with **sysctl** command line interface. Do not leave spaces around **`=`** sign in this command. Note: in first form, cannot just use simple **sudo** with **echo**; command must be done in complicated way shown, or executed as root.
 
-![sysctl](/images/sysctl.png)
+![sysctl](../images/sysctl.png)
 
 Browsing through pseudofiles under `/proc/sys` will render same information as **`sysctl -a`**. Can get full details on how to use **sysctl** by doing **man 8 sysctl**. To get information about using **`sysctl()`** function from programs to do the same operations, do **man 2 sysctl**.
 

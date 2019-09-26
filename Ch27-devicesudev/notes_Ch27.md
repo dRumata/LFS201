@@ -32,7 +32,7 @@ For example:
 mknod -m 666 /dev/mycdrv c 254 1
 ```
 
-![device_node_large](/images/device_node_large.png)
+![device_node_large](../images/device_node_large.png)
 **Device nodes**
 
 
@@ -102,7 +102,7 @@ These rules are completely customizable.
 
 By default, when **udev** reads the rules files, looks for files that have suffix of **`.rules`**. If it finds more than one file, reads them one by one, lexicographically, ie. in ascending alphabetical order. Standard rule file name: generally a two digit number followed by descriptive name (for the rules), folowed by **`.rules`** suffix.
 
-![udev_rule_large](/images/udev_rule_large.png)
+![udev_rule_large](../images/udev_rule_large.png)
 **udev Rule**
 
 

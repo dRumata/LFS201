@@ -93,13 +93,13 @@ After boot block, there is a series of **block groups**, each of which is same s
 
 **ext2/3/4 Filesystem Layout**
 
-![ext2 filesystem](/images/ext2_filesystem.png)
+![ext2 filesystem](../images/ext2_filesystem.png)
 
 First and second block groups same in every block group, comprise **Superblock** and **Group Descriptors**. Under normal circumstances, only those in first block group used by kernel; duplicate copies only referenced when filesystem being checked. If everything OK, kernel merely copies them over from the first block group. If there is problem with master copies, goes to next and so on until healthy one found and filesystem structure is rebuilt. This redundancy makes it very difficult to thoroughly fry **ext2/3/4** filesystem, as long as filesystem checks run periodically.
 
 In early incarnations of **ext** filesystem family, each block group contained group descriptors for every block group + copy of superblock. As optimization today, not all block groups have copy of superblock + group descriptors. Too see what you have, could examine it as shown below (putting in appropriate device node) to see precise locations. Happens when filesystem created with **`sparse-super`** option, which is default.
 
-![dumpe2fs](/images/dumpe2fs.png)
+![dumpe2fs](../images/dumpe2fs.png)
 
 Number of block groups constrained by fact that the **block bitmap**, which identifies used and free blocks within group, has to fit in single block. Thus, if block 4096 bytes in size, a block group can contain no more than 32 K blocks, or 128 MB. If we take pargest possible block group size, 10 GB partition would thus have to have at least 80 block groups.
 

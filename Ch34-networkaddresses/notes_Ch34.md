@@ -51,7 +51,7 @@ Certain addresses and address ranges are reserved for special purposes:
 
 Can see long list of reserved addresses for both IPv4 and IPv6 on the [Reserved IP addresses Wikipedia page](https://en.wikipedia.org/wiki/Reserved_IP_addresses).
 
-![ID_addresses_large](/images/ID_addresses_large.png)
+![ID_addresses_large](../images/ID_addresses_large.png)
 **Private vs. Public IP addresses**
 
 
@@ -137,7 +137,7 @@ Current value always stored in `/etc/hostname` on most Linux distributions.
 
 Changing hostname in this fashion -> not persistent; when system rebooted, reverts to value before modification. As usual, making persistent changes involves changing configuration files in `/etc` directory tree. Best done by using **hostnamectl** facility, which arises from **systemd** infrastructure.
 
-![hostnamectl](/images/hostnamectl.png)
+![hostnamectl](../images/hostnamectl.png)
 
 Changing hostname persistently (surviving reboot):
 ```shell

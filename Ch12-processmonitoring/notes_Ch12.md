@@ -51,7 +51,7 @@ Having all these possible options can make life rather confusing. Most system ad
 ## 12.6 BSD Option Format for ps
 Can see typical usage with BSD option format below, where **`aux`** option shows all processes. Commands surrounded by square brackets (as in **`[ksoftirqd/0]`**) -> threads that exist totally within kernel. If there is one for each CPU, command followed by **`integer`** specifying CPU it is running on.
 
-![psaux](/images/psaux.png)
+![psaux](../images/psaux.png)
 
 
 ## 12.7 ps Output Fields
@@ -70,14 +70,14 @@ Adding **`f`** option will show how processes connect by ancestry:
 ```shell
 $ ps auxf
 ```
-![psauxf](/images/psauxf.png)
+![psauxf](../images/psauxf.png)
 
 
 ## 12.8 UNIX Option Format for ps
 Can see typical usage with UNIX option format below. Note: now showing **Parent Process ID** (**`PPID`**) and the niceness (**`NI`**). May observe that many processes show **`PPID=2`**, in this screenshot (taken from RHEL 7, using systemd)
 an internal kernel process **`kthreadd`** (designed to adopt children when parent process dies). In older kernels/systems, would see **`PPID=1`** for **sbin**/**init**, but really same thing going on.
 
-![pself](/images/pself.png)
+![pself](../images/pself.png)
 
 Some common selection options in UNIX format:
 - **`-A`** or **`-e`**: Select all processes
@@ -97,7 +97,7 @@ If you use **`-o`** option, followed by comma-separated list of field identifier
 
 Can see example below. Can consult **ps man** page for many other output options.
 
-![psopt](/images/psopt.png)
+![psopt](../images/psopt.png)
 
 
 ## 12.10 Using pstree
@@ -132,13 +132,13 @@ When want to know what system spending time on, first tool often used is **top**
 
 BY default, **top** refreshes every 3.0 seconds.
 
-![top1](/images/top1.png)
+![top1](../images/top1.png)
 
 
 ## 12.12 top Options
 **top**: ancient utility and has tons of options, as well as interactive commands triggered when certain keys pressed. Eg. if hit **`1`**, each CPU shown separately, if hit **`i`** only active processes shown. Can see what doing both gives you below.
 
-![top2](/images/top2.png)
+![top2](../images/top2.png)
 
 Have lot of control over how processes sorted, which fields displayed. Many others besides defaults. Eg. hitting **`h`** or **`?`** gives brief list of interactive commands, **`q`** quits.
 
