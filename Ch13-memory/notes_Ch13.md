@@ -108,7 +108,7 @@ If no other arguments given, can see what **vmstat** displays, where first line 
 $ vmstat 2 4
 ```
 
-![vmstat](/images/vmstat.png)
+![vmstat](../images/vmstat.png)
 
 Fields shown are:
 
@@ -142,15 +142,15 @@ $ vmstat -a 2 4
 ```
 Memory can move back and forth between active and inactive lists, as they get newly referenced, or go a long time between uses.
 
-![vmstata](/images/vmstata.png)
+![vmstata](../images/vmstata.png)
 
 To get table of memory statistics and certain event counters, use **`-s`** option:
 
-![vmstats](/images/vmstats.png)
+![vmstats](../images/vmstats.png)
 
 To get table of disk statistics, use **`-d`** option:
 
-![vmstatd](/images/vmstatd.png)
+![vmstatd](../images/vmstatd.png)
 
 **vmstat Disk Fields**
 
@@ -167,13 +167,13 @@ I/O | sec | seconds spent for I/O
 
 If want to just get some quick statistics on only one partition, use **`-p`** option:
 
-![vmstatp](/images/vmstatp.png)
+![vmstatp](../images/vmstatp.png)
 
 
 ## 13.8 /proc/meminfo
 As noted earlier, relatively lengthy summary of memory statistics in `/proc/meminfo`:
 
-![procmeminfo](/images/procmeminfo.png)
+![procmeminfo](../images/procmeminfo.png)
 
 Worthwhile to go through listing and understand most of the entries:
 
