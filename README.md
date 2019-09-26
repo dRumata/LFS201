@@ -1,8 +1,8 @@
 # Linux Foundation LFS201 / Linux Foundation Certified System Administrator Exam Prep Course
 
-This repo contains all of the downloaded PDFs, some code, and my Markdown notes taken during the self-paced online LFS201 course hosted by the Linux Foundation. I hope to take the certification exam in early 2019.
+This repo contains all of the downloaded PDFs, some code, and my Markdown notes taken during the self-paced online LFS201 course hosted by the Linux Foundation. I hope to take the certification exam in October 2019.
 
-Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these documents are from the course materials, but some have been added by me. All screenshots are from course materials. I do not own the images.
+Disclaimer: Most emphasis (whether *italics* or **bold** type) used in these documents are from the course materials, but some have been added by me. All screenshots are from course materials. I do not own the images. PDFs are created from the Markdown notes, and as such the Markdown notes will (usually) be more current than the PDFs. The PDF containing all chapters *may* be updated periodically, but will usually be out of date if any changes are made to the Markdown notes.
 
 ## Table of Contents
 0. [Main Repository](https://github.com/schatto1/LFS201)
