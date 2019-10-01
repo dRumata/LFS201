@@ -2,7 +2,7 @@
 
 ---
 
-# Chapter 16 Title - Notes
+# Chapter 16 Linux Filesystems and the VFS - Notes
 
 ## 16.3 Learning Objectives:
 - Explain the basic filesystem organization.
