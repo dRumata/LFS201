@@ -42,7 +42,7 @@ Other topics necessary for system administrators, but not covered in course:
 - file utilities (find, locate, file, etc.)
 - printing (configuring printers, managing print jobs)
 - graphical interfaces and their administration
-- bach shell scripting
+- bash shell scripting
 - system installation
 
 Strong recommendation: at least take a look at LFS101x. If not completely familiar with some basic utilities and procedures used in LFS201, can probably find in LFS101x.
